@@ -1,3 +1,11 @@
+import { Button } from '@/components/ui/button'
+
 export function App() {
-  return <div>hello</div>
+  return (
+    <div>
+      <Button as={'a'} href={'https://google.com'}>
+        go to google
+      </Button>
+    </div>
+  )
 }
