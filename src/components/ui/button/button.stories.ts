@@ -42,7 +42,7 @@ export const Tertiary: Story = {
 export const Link: Story = {
   args: {
     variant: 'link',
-    children: 'Tertiary Button',
+    children: 'Button that looks like a link',
     disabled: false,
   },
 }

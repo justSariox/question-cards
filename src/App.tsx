@@ -4,7 +4,7 @@ export function App() {
   return (
     <div>
       <Card>
-        <Button as={'a'} href={'https://google.com'}>
+        <Button as={'a'} href={'https://google.com/'} variant={'link'}>
           go to google
         </Button>
         <div>fdikgdkfg</div>
