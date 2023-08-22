@@ -1,11 +1,9 @@
-import { Button } from '@/components/ui/button'
+import { TextField } from '@/components/ui/textField'
 
 export function App() {
   return (
     <div>
-      <Button as={'a'} href={'https://google.com'}>
-        go to google
-      </Button>
+      <TextField error={'error'} />
     </div>
   )
 }

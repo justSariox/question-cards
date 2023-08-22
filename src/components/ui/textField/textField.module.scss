@@ -1,0 +1,42 @@
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-family-primary);
+}
+
+.input {
+  all: unset;
+
+  width: 284px;
+  padding: 5px;
+
+  font-size: var(--font-size-m);
+
+  border: var(--color-dark-100) solid 1px;
+  border-radius: 2px;
+}
+
+.error {
+  color: var(--color-danger-500);
+  border: var(--color-danger-500) solid 1px;
+}
+
+.errorMessage {
+  color: var(--color-danger-500);
+}
+
+.label {
+  font-size: var(--font-size-xs);
+}
+
+.input:active {
+  border: var(--color-light-100) solid 1px;
+}
+
+.input:hover {
+  background-color: var(--color-dark-500);
+}
+
+.input:focus {
+  border: var(--color-info-100) solid 1px;
+}
