@@ -34,7 +34,7 @@
 
     width: 284px;
     height: 24px;
-    padding: 6px 10px;
+    padding: 6px 30px 6px 10px;
 
     border: var(--color-dark-100) solid 1px;
     border-radius: 2px;
@@ -82,7 +82,7 @@
 
     position: absolute;
     top: 33px;
-    left: 275px;
+    left: 300px;
 
     display: inline-block;
 
@@ -93,8 +93,13 @@
   }
 
   .error {
-    margin-top: 6px;
-    color: var(--color-danger-300);
+    all: unset;
+
+    width: 284px;
+    height: 24px;
+    padding: 6px 30px 6px 10px;
+
+    border-radius: 2px;
     border: var(--color-danger-300) solid 1px;
 
     &::placeholder {

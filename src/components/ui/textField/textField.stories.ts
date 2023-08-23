@@ -12,8 +12,16 @@ const meta = {
       control: { type: 'radio' },
     },
     error: {
-      options: ['Error!', 'Error message'],
+      options: [undefined, 'Error!', 'Error message'],
       control: { type: 'radio' },
+    },
+    label: {
+      options: ['Input'],
+      control: { type: 'text' },
+    },
+    value: {
+      options: ['Input'],
+      control: { type: 'text' },
     },
   },
 } satisfies Meta<typeof TextField>
@@ -23,23 +31,17 @@ type Story = StoryObj<typeof meta>
 
 export const Input: Story = {
   args: {
-    /*    variant: 'primary',
-        children: 'Primary TextField',
-        disabled: false,*/
+    type: 'text',
   },
 }
 
 export const Password: Story = {
   args: {
-    /*    variant: 'secondary',
-        children: 'Secondary TextField',
-        disabled: false,*/
+    type: 'password',
   },
 }
 export const Search: Story = {
   args: {
-    /*    variant: 'tertiary',
-        children: 'Tertiary TextField',
-        disabled: false,*/
+    type: 'search',
   },
 }

@@ -14,22 +14,28 @@ export type TextFieldProps = {
   value?: string
   label?: ReactNode
   error?: string
-  iconStart?: ReactNode
-  iconEnd?: ReactNode
   onEnter?: (e: KeyboardEvent<HTMLInputElement>) => void
   disabled?: boolean
 } & ComponentPropsWithoutRef<'input'>
 
-export const TextField: FC<TextFieldProps> = ({ type = 'text', label, error, disabled }) => {
-  const [value, setValue] = useState<string>('')
+export const TextField: FC<TextFieldProps> = ({
+  type = 'text',
+  label,
+  error,
+  disabled,
+  value,
+  ...rest
+}) => {
+  const [inputValue, setInputValue] = useState<string>('')
+  // без этого не работает тернарный оператор
   // eslint-disable-next-line no-nested-ternary
   const placeholderTextCheck = type === 'search' ? 'Input search' : error ? 'Error' : 'Input'
   // eslint-disable-next-line no-nested-ternary
   const labelText = type === 'search' ? '' : label ? label : 'Input'
   const searchIcon = type === 'search' && '🔍︎'
-
+  const startValue = value ? value : inputValue
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setValue(e.currentTarget.value)
+    setInputValue(e.currentTarget.value)
   }
 
   const showPassword = () => {
@@ -52,10 +58,11 @@ export const TextField: FC<TextFieldProps> = ({ type = 'text', label, error, dis
         id={'passwordInput'}
         placeholder={placeholderTextCheck}
         type={type}
-        className={`${s.input} ${error ? s.error : ''} ${type === 'search' ? s.searchInput : ''} `}
+        className={`${error ? s.error : s.input} ${type === 'search' ? s.searchInput : ''} `}
         onChange={onChangeHandler}
-        value={value}
+        value={startValue}
         disabled={disabled}
+        onKeyDown={rest.onEnter}
       />
       {type === 'password' && <a className={s.passwordControl} onClick={showPassword}></a>}
       {error && <span className={s.errorMessage}>{error}</span>}
