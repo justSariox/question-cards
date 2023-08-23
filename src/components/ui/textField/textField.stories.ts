@@ -11,6 +11,10 @@ const meta = {
       options: ['text', 'password', 'search'],
       control: { type: 'radio' },
     },
+    error: {
+      options: ['Error!', 'Error message'],
+      control: { type: 'radio' },
+    },
   },
 } satisfies Meta<typeof TextField>
 
