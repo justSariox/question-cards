@@ -7,9 +7,9 @@ const meta = {
   component: TextField,
   tags: ['autodocs'],
   argTypes: {
-    variant: {
-      /*      options: ['primary', 'secondary', 'tertiary', 'link'],
-            control: { type: 'radio' },*/
+    type: {
+      options: ['text', 'password', 'search'],
+      control: { type: 'radio' },
     },
   },
 } satisfies Meta<typeof TextField>

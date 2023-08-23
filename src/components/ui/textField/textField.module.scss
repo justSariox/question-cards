@@ -1,42 +1,110 @@
+@mixin typography($fS, $fW, $lH) {
+  font-size: $fS;
+  font-weight: $fW;
+  line-height: $lH;
+}
+
 .inputWrapper {
+  @include typography(var(--font-size-m), var(--font-weight-regular), var(--line-height-m));
+
+  position: relative;
+
   display: flex;
   flex-direction: column;
+
+  margin: 5px 0;
+
   font-family: var(--font-family-primary);
-}
 
-.input {
-  all: unset;
+  .label {
+    @include typography(var(--font-size-s), var(--font-weight-regular), var(--line-height-m));
 
-  width: 284px;
-  padding: 5px;
+    color: var(--color-dark-100);
+  }
 
-  font-size: var(--font-size-m);
+  .searchIcon {
+    position: absolute;
+    top: 18%;
+    left: 10px;
+    color: var(--color-dark-100);
+  }
 
-  border: var(--color-dark-100) solid 1px;
-  border-radius: 2px;
-}
+  .input {
+    all: unset;
 
-.error {
-  color: var(--color-danger-500);
-  border: var(--color-danger-500) solid 1px;
-}
+    width: 284px;
+    height: 24px;
+    padding: 6px 10px;
 
-.errorMessage {
-  color: var(--color-danger-500);
-}
+    border: var(--color-dark-100) solid 1px;
+    border-radius: 2px;
 
-.label {
-  font-size: var(--font-size-xs);
-}
+    &::-webkit-search-cancel-button {
+      content: url('../assets/svg/cross.svg');
+      width: 16px;
+      height: 16px;
+      appearance: none;
+    }
 
-.input:active {
-  border: var(--color-light-100) solid 1px;
-}
+    &[type='search'] {
+      padding: 6px 10px 6px 30px;
+    }
 
-.input:hover {
-  background-color: var(--color-dark-500);
-}
+    &:hover {
+      background-color: var(--color-dark-700);
+    }
 
-.input:focus {
-  border: var(--color-info-100) solid 1px;
+    &:focus {
+      border: var(--color-info-700) solid 2px;
+    }
+
+    &:active {
+      background-color: var(--color-dark-900);
+      border: var(--color-light-100) solid 1px;
+    }
+
+    &:active::placeholder {
+      color: var(--color-light-100);
+    }
+
+    &:disabled {
+      color: var(--color-dark-300);
+      border: var(--color-dark-300) solid 2px;
+    }
+
+    &:disabled::placeholder {
+      color: var(--color-dark-300);
+    }
+  }
+
+  .passwordControl {
+    cursor: pointer;
+
+    position: absolute;
+    top: 33px;
+    left: 275px;
+
+    display: inline-block;
+
+    width: 20px;
+    height: 20px;
+
+    background: url('../assets/svg/eye.svg') 0 0 no-repeat;
+  }
+
+  .error {
+    margin-top: 6px;
+    color: var(--color-danger-300);
+    border: var(--color-danger-300) solid 1px;
+
+    &::placeholder {
+      color: var(--color-danger-300);
+    }
+  }
+
+  .errorMessage {
+    @include typography(var(--font-size-xs), var(--font-weight-regular), var(--line-height-m));
+
+    color: var(--color-danger-300);
+  }
 }
