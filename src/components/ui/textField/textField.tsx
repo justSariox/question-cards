@@ -5,6 +5,7 @@ import {
   FC,
   useState,
   ChangeEvent,
+  useRef,
 } from 'react'
 
 import s from './textField.module.scss'
@@ -16,6 +17,9 @@ export type TextFieldProps = {
   error?: string
   onEnter?: (e: KeyboardEvent<HTMLInputElement>) => void
   disabled?: boolean
+  placeholder?: string
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void
+  name?: string
 } & ComponentPropsWithoutRef<'input'>
 
 export const TextField: FC<TextFieldProps> = ({
@@ -37,16 +41,14 @@ export const TextField: FC<TextFieldProps> = ({
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.currentTarget.value)
   }
-
+  const inputRef = useRef<HTMLInputElement | null>(null)
   const showPassword = () => {
-    let input = document.getElementById('passwordInput')
-
-    if (input?.getAttribute('type') == 'password') {
-      input.removeAttribute('type')
-      input.setAttribute('type', 'text')
+    if (inputRef.current?.getAttribute('type') == 'password') {
+      inputRef.current.removeAttribute('type')
+      inputRef.current.setAttribute('type', 'text')
     } else {
-      input?.removeAttribute('type')
-      input?.setAttribute('type', 'password')
+      inputRef.current?.removeAttribute('type')
+      inputRef.current?.setAttribute('type', 'password')
     }
   }
 
@@ -63,6 +65,7 @@ export const TextField: FC<TextFieldProps> = ({
         value={startValue}
         disabled={disabled}
         onKeyDown={rest.onEnter}
+        ref={inputRef}
       />
       {type === 'password' && <a className={s.passwordControl} onClick={showPassword}></a>}
       {error && <span className={s.errorMessage}>{error}</span>}
