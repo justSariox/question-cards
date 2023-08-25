@@ -15,6 +15,7 @@ export function App() {
         <br />
         <Button variant={'tertiary'}>go to home</Button>
         <br />
+        <Button>go away</Button>
       </Card>
     </div>
   )

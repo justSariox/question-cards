@@ -4,7 +4,7 @@
   cursor: pointer;
 
   display: flex;
-  gap: 10px;
+  gap: 5px;
   align-items: center;
   justify-content: center;
 
@@ -29,6 +29,16 @@
 
   &.fullWidth {
     width: 100%;
+  }
+
+  &.logout::before {
+    content: '';
+
+    width: 15px;
+    height: 20px;
+
+    background: url('./logout-svgrepo-com.svg') no-repeat;
+    background-size: 10px 20px;
   }
 }
 
