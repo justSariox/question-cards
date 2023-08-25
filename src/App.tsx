@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card/card.tsx'
+
 export function App() {
   return (
     <div>
@@ -7,10 +8,13 @@ export function App() {
         <Button as={'a'} href={'https://google.com/'} variant={'link'}>
           go to google
         </Button>
-        <div>fdikgdkfg</div>
-        <div>fdikgdkfg</div>
-        <div>fdikgdkfg</div>
-        <div>fdikgdkfg</div>
+        <br />
+        <Button>go to yandex</Button>
+        <br />
+        <Button variant={'secondary'}>go to yahoo</Button>
+        <br />
+        <Button variant={'tertiary'}>go to home</Button>
+        <br />
       </Card>
     </div>
   )
