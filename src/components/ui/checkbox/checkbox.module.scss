@@ -1,0 +1,91 @@
+.checkbox {
+  display: flex;
+  align-items: center;
+}
+
+.label {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+
+  &.disabled {
+    cursor: default;
+    opacity: 0.5;
+    background-color: inherit;
+  }
+}
+
+.root {
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 20px;
+  height: 20px;
+
+  background-color: var(--color-dark-900);
+  border: 1px solid var(--color-light-100);
+  border-radius: 4px;
+
+  transition: background-color 0.2s ease-in-out;
+
+  &:focus,
+  &:active {
+    background-color: var(--color-light-100);
+  }
+
+  &:disabled {
+    cursor: default;
+    opacity: 0.5;
+    background: none;
+  }
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+
+  border-radius: 50%;
+
+  &:disabled {
+    cursor: default;
+    opacity: 1;
+  }
+
+  &:focus-within {
+    background-color: var(--color-dark-500);
+  }
+
+  &:hover .root:not([data-state='checked']) {
+    background-color: var(--color-dark-500);
+  }
+
+  &:hover:not(.disabled) {
+    background-color: var(--color-dark-500);
+  }
+
+  &:active:not(.disabled) {
+    background-color: var(--color-dark-100);
+  }
+}
+
+.checked {
+  background-color: var(--color-light-100);
+}
+
+.indicator {
+  &:disabled {
+    cursor: default;
+  }
+
+  &.checkIcon {
+    width: 18px;
+    height: 18px;
+  }
+}
