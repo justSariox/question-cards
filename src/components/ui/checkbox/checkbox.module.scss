@@ -4,16 +4,14 @@
 }
 
 .label {
-  cursor: pointer;
-
   display: flex;
   flex-direction: row-reverse;
-  gap: 5px;
   align-items: center;
 
   &.disabled {
     cursor: default;
     opacity: 0.5;
+    background-color: inherit;
   }
 }
 
@@ -24,20 +22,24 @@
   align-items: center;
   justify-content: center;
 
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
 
   background-color: var(--color-dark-900);
-  border: 2px solid var(--color-light-100);
-  border-radius: 3px;
+  border: 1px solid var(--color-light-100);
+  border-radius: 4px;
+
+  transition: background-color 0.2s ease-in-out;
 
   &:focus,
   &:active {
-    background: var(--color-dark-100);
+    background-color: var(--color-light-100);
   }
 
-  &[data-state='checked']:disabled {
+  &:disabled {
     cursor: default;
+    opacity: 0.5;
+    background: none;
   }
 }
 
@@ -51,14 +53,20 @@
 
   border-radius: 50%;
 
-  &.disabled {
-    cursor: initial;
-    background: none;
+  &:disabled {
+    cursor: default;
+    opacity: 1;
   }
 
-  &:focus-within:not(.disabled),
-  &:hover:not(.disabled, :focus-within),
+  &:focus-within {
+    background-color: var(--color-dark-500);
+  }
+
   &:hover .root:not([data-state='checked']) {
+    background-color: var(--color-dark-500);
+  }
+
+  &:hover:not(.disabled) {
     background-color: var(--color-dark-500);
   }
 
@@ -67,7 +75,17 @@
   }
 }
 
+.checked {
+  background-color: var(--color-light-100);
+}
+
 .indicator {
-  width: 18px;
-  height: 18px;
+  &:disabled {
+    cursor: default;
+  }
+
+  &.checkIcon {
+    width: 18px;
+    height: 18px;
+  }
 }
