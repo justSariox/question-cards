@@ -1,7 +1,11 @@
-import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card/card.tsx'
-import { TextField } from '@/components/ui/textField'
-
+import { LoginForm } from '@/components/auth/login-form/login-form'
+import { Card } from '@/components/ui/card'
 export function App() {
-  return <div>hello</div>
+  return (
+    <div>
+      <Card>
+        <LoginForm />
+      </Card>
+    </div>
+  )
 }
