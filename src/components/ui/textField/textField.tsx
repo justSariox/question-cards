@@ -11,7 +11,7 @@ export type TextFieldProps = {
 } & ComponentPropsWithoutRef<'input'>
 
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
-  ({ onChangeValue, error, disabled, onChange, label, type, ...restProps }, ref) => {
+  ({ onChangeValue, value, error, disabled, onChange, label, type, ...restProps }, ref) => {
     const [visiblePassword, setVisiblePassword] = useState<boolean>(false)
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -31,6 +31,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           onChange={onChangeHandler}
           disabled={disabled}
           ref={ref}
+          value={value}
         />
         {type === 'password' && (
           <a

@@ -15,6 +15,7 @@ export const ControlledTextField = <TFieldValues extends FieldValues>({
   const {
     field,
     fieldState: { error },
+    formState: {},
   } = useController({
     name,
     control,
