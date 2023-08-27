@@ -1,6 +1,6 @@
-
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card/card.tsx'
+import { TextField } from '@/components/ui/textField'
 
 export function App() {
   return (
@@ -18,7 +18,11 @@ export function App() {
         <br />
         <Button>go away</Button>
       </Card>
+      <Card>
+        <TextField />
+        <TextField type={'password'} />
+        <TextField type={'search'} />
+      </Card>
     </div>
   )
 }
-
