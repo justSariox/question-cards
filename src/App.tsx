@@ -1,3 +1,4 @@
+import { LoginForm } from '@/components/auth/login-form/login-form.tsx'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card/card.tsx'
 import { TextField } from '@/components/ui/textField'
@@ -22,6 +23,9 @@ export function App() {
         <TextField />
         <TextField type={'password'} />
         <TextField type={'search'} />
+      </Card>
+      <Card>
+        <LoginForm />
       </Card>
     </div>
   )

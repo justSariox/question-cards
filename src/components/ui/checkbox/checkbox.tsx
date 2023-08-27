@@ -13,9 +13,10 @@ export type CheckboxProps = {
   required?: boolean
   onChange?: (checked: boolean) => void
   label?: string
+  id: string
 }
 export const Checkbox = (props: CheckboxProps) => {
-  const { checked, onChange, label, required, disabled, className } = props
+  const { checked, onChange, id, label, required, disabled, className } = props
 
   return (
     <div className={`${s.checkbox} ${className}`}>
@@ -28,6 +29,7 @@ export const Checkbox = (props: CheckboxProps) => {
             required={required}
             onCheckedChange={onChange}
             disabled={disabled}
+            id={id}
           >
             {checked && (
               <CheckboxRadix.Indicator className={s.indicator}>
