@@ -15,7 +15,7 @@ const loginSchema = z.object({
 
 type FormValues = z.infer<typeof loginSchema>
 export const LoginForm = () => {
-  const { handleSubmit, control } = useForm<FormValues>({
+  const { handleSubmit, control, reset } = useForm<FormValues>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
       rememberMe: false,
@@ -23,6 +23,7 @@ export const LoginForm = () => {
   })
 
   const onSubmit = (data: FormValues) => {
+    reset({ email: '', password: '', rememberMe: false })
     console.log(data, data.rememberMe)
   }
 
