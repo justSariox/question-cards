@@ -1,13 +1,16 @@
-import { CheckIcon } from '@radix-ui/react-icons'
 import * as SelectRadix from '@radix-ui/react-select'
 
-export const SelectItem = ({ children, value, ...props }) => {
+import s from '@/components/ui/select/select.module.scss'
+
+type PropsType = {
+  children: any
+  value: string
+}
+
+export const SelectItem = ({ children, value }: PropsType) => {
   return (
-    <SelectRadix.Item value={value} {...props}>
+    <SelectRadix.Item className={s.SelectItem} value={value}>
       <SelectRadix.ItemText>{children}</SelectRadix.ItemText>
-      <SelectRadix.ItemIndicator className="SelectItemIndicator">
-        <CheckIcon />
-      </SelectRadix.ItemIndicator>
     </SelectRadix.Item>
   )
 }

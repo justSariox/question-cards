@@ -1,52 +1,50 @@
-import { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react'
+import { useState } from 'react'
 
 import { ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons'
+import * as Label from '@radix-ui/react-label'
 import * as SelectRadix from '@radix-ui/react-select'
 
+import s from './select.module.scss'
+
 import { SelectItem } from '@/components/ui/select/selectItem.tsx'
-// import s from './select.module.scss'
 
-export type SelectProps<T extends ElementType = 'select'> = {
-  as?: T
-  children?: ReactNode
-  variant?: 'primary' | 'secondary' | 'tertiary' | 'link'
-  fullWidth?: boolean
-  className?: string
-} & ComponentPropsWithoutRef<T>
-
-export const Select = <T extends ElementType = 'select'>(
-  props: SelectProps<T> & Omit<ComponentPropsWithoutRef<T>, keyof SelectProps<T>>
-) => {
-  // const { ...rest } = props
+export const Select = () => {
+  const [upDownIcon, setUpDownIcon] = useState<boolean>(false)
 
   return (
-    <SelectRadix.Root>
-      <SelectRadix.Trigger>
-        <SelectRadix.Value />
-        <SelectRadix.Icon>
-          <ChevronDownIcon />
-        </SelectRadix.Icon>
-      </SelectRadix.Trigger>
-      <SelectRadix.Portal>
-        <SelectRadix.Content>
-          <SelectRadix.ScrollUpButton>
-            <ChevronUpIcon />
-          </SelectRadix.ScrollUpButton>
-          <SelectRadix.Viewport className="SelectViewport">
-            <SelectRadix.Group>
-              <SelectRadix.Label className="SelectLabel">Fruits</SelectRadix.Label>
-              <SelectItem value="apple">Apple</SelectItem>
-              <SelectItem value="banana">Banana</SelectItem>
-              <SelectItem value="blueberry">Blueberry</SelectItem>
-              <SelectItem value="grapes">Grapes</SelectItem>
-              <SelectItem value="pineapple">Pineapple</SelectItem>
-            </SelectRadix.Group>
-          </SelectRadix.Viewport>
-          <SelectRadix.ScrollDownButton className="SelectScrollButton">
-            <ChevronDownIcon />
-          </SelectRadix.ScrollDownButton>
-        </SelectRadix.Content>
-      </SelectRadix.Portal>
-    </SelectRadix.Root>
+    <div className={s.selectWrapper}>
+      <div>
+        <Label.Root className={s.LabelRoot} htmlFor="firstName">
+          First name
+        </Label.Root>
+      </div>
+      <div>
+        <SelectRadix.Root open={upDownIcon} onOpenChange={setUpDownIcon}>
+          <SelectRadix.Trigger className={s.SelectTrigger}>
+            <SelectRadix.Value placeholder="Select-box" />
+            <SelectRadix.Icon className={s.SelectDownIcon} asChild>
+              {upDownIcon ? (
+                <ChevronUpIcon />
+              ) : (
+                <ChevronDownIcon className={s.SelectChevron} aria-hidden />
+              )}
+            </SelectRadix.Icon>
+          </SelectRadix.Trigger>
+          <SelectRadix.Portal>
+            <SelectRadix.Content className={s.SelectContent} position="popper" sideOffset={-1}>
+              <SelectRadix.Viewport className={s.SelectViewport}>
+                <SelectRadix.Group>
+                  <SelectItem value="apple">Apple</SelectItem>
+                  <SelectItem value="banana">Banana</SelectItem>
+                  <SelectItem value="blueberry">Blueberry</SelectItem>
+                  <SelectItem value="grapes">Grapes</SelectItem>
+                  <SelectItem value="pineapple">Pineapple</SelectItem>
+                </SelectRadix.Group>
+              </SelectRadix.Viewport>
+            </SelectRadix.Content>
+          </SelectRadix.Portal>
+        </SelectRadix.Root>
+      </div>
+    </div>
   )
 }
