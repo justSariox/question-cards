@@ -8,12 +8,12 @@ import s from './select.module.scss'
 
 import { SelectItem } from '@/components/ui/select/selectItem.tsx'
 
-type SelectItemType = {
+export type SelectItemType = {
   id: string
   option: string
 }
 
-type SelectPropsType = {
+export type SelectPropsType = {
   label?: string
   selectItems: SelectItemType[]
 }
@@ -37,7 +37,7 @@ export const Select = ({ label, selectItems }: SelectPropsType) => {
       <div>
         <SelectRadix.Root open={upDownIcon} onOpenChange={setUpDownIcon}>
           <SelectRadix.Trigger className={s.SelectTrigger}>
-            <SelectRadix.Value placeholder="Select-box" />
+            <SelectRadix.Value placeholder={selectItems[0].option} />
             <SelectRadix.Icon className={s.SelectDownIcon} asChild>
               {upDownIcon ? (
                 <ChevronUpIcon />
