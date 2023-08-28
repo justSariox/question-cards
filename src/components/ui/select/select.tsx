@@ -8,14 +8,30 @@ import s from './select.module.scss'
 
 import { SelectItem } from '@/components/ui/select/selectItem.tsx'
 
-export const Select = () => {
+type SelectItemType = {
+  id: string
+  option: string
+}
+
+type SelectPropsType = {
+  label?: string
+  selectItems: SelectItemType[]
+}
+export const Select = ({ label, selectItems }: SelectPropsType) => {
   const [upDownIcon, setUpDownIcon] = useState<boolean>(false)
+  const selectItem = selectItems.map(i => {
+    return (
+      <SelectItem key={i.id} value={i.option}>
+        {i.option}
+      </SelectItem>
+    )
+  })
 
   return (
     <div className={s.selectWrapper}>
       <div>
         <Label.Root className={s.LabelRoot} htmlFor="firstName">
-          First name
+          {label}
         </Label.Root>
       </div>
       <div>
@@ -33,13 +49,7 @@ export const Select = () => {
           <SelectRadix.Portal>
             <SelectRadix.Content className={s.SelectContent} position="popper" sideOffset={-1}>
               <SelectRadix.Viewport className={s.SelectViewport}>
-                <SelectRadix.Group>
-                  <SelectItem value="apple">Apple</SelectItem>
-                  <SelectItem value="banana">Banana</SelectItem>
-                  <SelectItem value="blueberry">Blueberry</SelectItem>
-                  <SelectItem value="grapes">Grapes</SelectItem>
-                  <SelectItem value="pineapple">Pineapple</SelectItem>
-                </SelectRadix.Group>
+                <SelectRadix.Group>{selectItem}</SelectRadix.Group>
               </SelectRadix.Viewport>
             </SelectRadix.Content>
           </SelectRadix.Portal>
