@@ -1,0 +1,93 @@
+.selectWrapper {
+  display: flex;
+  flex-direction: column;
+
+  margin-left: 10px;
+
+  font-family: var(--font-family-primary);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-m);
+}
+
+.LabelRoot {
+  font-size: var(--font-size-s);
+  color: var(--color-dark-100);
+}
+
+button {
+  all: unset;
+  font-size: var(--font-size-m);
+  color: var(--color-light-100);
+}
+
+.SelectTrigger {
+  display: inline-flex;
+  gap: 5px;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 210px;
+  height: 36px;
+  padding: 0 15px;
+
+  background-color: var(--color-dark-900);
+  border: 1px solid var(--color-dark-300);
+  border-radius: 2px;
+  box-shadow: 0 2px 10px var(--black-a7);
+}
+
+.SelectTrigger:hover {
+  background-color: var(--color-dark-500);
+}
+
+.SelectTrigger:focus {
+  box-shadow: 0 0 0 1px var(--color-info-700);
+}
+
+.SelectDownIcon,
+.SelectUpIcon {
+  color: var(--color-light-100);
+}
+
+.SelectDownIcon[data-state='closed'] {
+  overflow: visible;
+}
+
+.SelectUpIcon[data-state='closed'] {
+  overflow: hidden;
+}
+
+.SelectContent {
+  overflow: hidden;
+
+  width: var(--radix-select-trigger-width);
+  max-height: var(--radix-select-content-available-height);
+
+  background-color: var(--color-dark-900);
+  border: 1px solid var(--color-dark-300);
+  border-radius: 2px;
+}
+
+.SelectItem {
+  display: flex;
+  align-items: center;
+
+  height: 36px;
+  padding: 0 35px 0 15px;
+
+  font-size: var(--font-size-m);
+  line-height: var(--line-height-m);
+  color: var(--color-light-100);
+
+  border-radius: 2px;
+
+  &:hover {
+    color: var(--color-accent-300);
+    background-color: var(--color-accent-900);
+    outline: none;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
