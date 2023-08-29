@@ -22,13 +22,15 @@ export type TableBodyProps = ComponentProps<'tbody'> & {
   className?: string
 }
 
-export const TableBody = ({ ...props }: TableBodyProps) => {
-  return <tbody {...props} />
+export const TableBody = ({ className, ...props }: TableBodyProps) => {
+  return <tbody className={` ${s.tablebody} ${className}`} {...props} />
 }
-export type TableRowProps = ComponentProps<'tr'>
+export type TableRowProps = ComponentProps<'tr'> & {
+  className?: string
+}
 
-export const TableRow = ({ ...props }: TableRowProps) => {
-  return <tr {...props} />
+export const TableRow = ({ className, ...props }: TableRowProps) => {
+  return <tr className={`${s.tablerow} ${className}`} {...props} />
 }
 
 export type TableCellProps<T extends ElementType> = {
@@ -41,7 +43,12 @@ export const TableCell = <T extends ElementType = 'th' | 'td'>({
   className,
   ...restProps
 }: TableCellProps<T> & Omit<ComponentProps<T>, keyof TableCellProps<T>>) => {
-  return <Component className={`${s.tablecell} ${className}`} {...restProps} />
+  return (
+    <Component
+      className={`${Component === 'th' ? s.tablecellhead : s.tablecellbody} ${className}`}
+      {...restProps}
+    />
+  )
 }
 
 export const Table = {
