@@ -1,6 +1,14 @@
-import { ComponentProps, ElementType } from 'react'
+import { ComponentProps, ComponentPropsWithoutRef, ElementType, FC } from 'react'
 
 import s from './table.module.scss'
+
+import { Sort } from '@/components/ui/table/table.stories.tsx'
+
+export type Column = {
+  title: string
+  key: string
+  sortable?: boolean
+}
 
 export type TableProps = ComponentProps<'table'> & {
   className?: string
@@ -51,10 +59,49 @@ export const TableCell = <T extends ElementType = 'th' | 'td'>({
   )
 }
 
+export const TableHeader: FC<
+  Omit<
+    ComponentPropsWithoutRef<'thead'> & {
+      columns: Column[]
+      sort?: Sort | null
+      onSort?: (sort: Sort | null) => void
+    },
+    'children'
+  >
+> = ({ columns, sort, onSort, ...restProps }) => {
+  const handleSort = (key: string, sortable?: boolean) => () => {
+    console.log(sort)
+    if (!onSort || !sortable) return
+
+    if (sort?.key !== key) return onSort({ key, direction: 'asc' })
+
+    if (sort.direction === 'desc') return onSort(null)
+
+    return onSort({
+      key,
+      direction: sort?.direction === 'asc' ? 'desc' : 'asc',
+    })
+  }
+
+  return (
+    <TableHead {...restProps}>
+      <TableRow>
+        {columns.map(({ title, key, sortable }) => (
+          <TableCell as={'th'} key={key} onClick={handleSort(key, sortable)}>
+            {title}
+            {sort && sort.key === key && <span>{sort.direction === 'asc' ? '▲' : '▼'}</span>}
+          </TableCell>
+        ))}
+      </TableRow>
+    </TableHead>
+  )
+}
+
 export const Table = {
   TableRoot,
   TableBody,
   TableHead,
   TableCell,
   TableRow,
+  TableHeader,
 }
