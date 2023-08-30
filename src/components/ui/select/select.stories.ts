@@ -7,8 +7,8 @@ const meta = {
   component: Select,
   tags: ['autodocs'],
   argTypes: {
-    variant: {
-      // options: ['primary', 'secondary', 'tertiary', 'link'],
+    isDisabled: {
+      options: [true, false],
       control: { type: 'radio' },
     },
   },
@@ -17,6 +17,4 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Secondary: Story = {
-  args: {},
-}
+export const Primary: Story = {}
