@@ -1,5 +1,7 @@
 import { ChangeEvent, ComponentPropsWithoutRef, forwardRef, useState } from 'react'
 
+import searchIcon from '../assets/svg/search-outline.svg'
+
 import s from './textField.module.scss'
 
 export type TextFieldProps = {
@@ -22,7 +24,11 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
     return (
       <div className={s.inputWrapper}>
         <label className={s.label}>{label}</label>
-        <span className={s.searchIcon}>{type === 'search' && '🔍︎'}</span>
+        {type === 'search' && (
+          <span className={s.searchIcon}>
+            <img src={searchIcon} />
+          </span>
+        )}
         <input
           id={restProps.id}
           placeholder={restProps.placeholder}
@@ -33,16 +39,9 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           ref={ref}
           value={value}
         />
-        {type === 'password' && visiblePassword ? (
+        {type === 'password' && (
           <a
-            className={`${s.passwordControl} ${s.showPassword}`}
-            onClick={() => {
-              setVisiblePassword(prevState => !prevState)
-            }}
-          ></a>
-        ) : (
-          <a
-            className={`${s.passwordControl} ${s.hidePassword}`}
+            className={`${s.passwordControl} ${visiblePassword ? s.showPassword : s.hidePassword}`}
             onClick={() => {
               setVisiblePassword(prevState => !prevState)
             }}
