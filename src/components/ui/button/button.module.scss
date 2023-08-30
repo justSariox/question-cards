@@ -51,7 +51,7 @@
 
   &:focus:enabled {
     background-color: var(--color-accent-500);
-    border: 2px solid var(--color-info-700);
+    outline: 2px solid var(--color-info-700);
   }
 
   &:hover:enabled {
@@ -77,7 +77,7 @@
 
   &:focus:enabled {
     background-color: var(--color-dark-300);
-    border: 2px solid var(--color-info-700);
+    outline: 2px solid var(--color-info-700);
   }
 
   &:hover:enabled {
@@ -102,7 +102,7 @@
   border: 1px solid var(--color-accent-500);
 
   &:focus:enabled {
-    border: 2px solid var(--color-accent-500);
+    outline: 2px solid var(--color-accent-500);
   }
 
   &:hover:enabled {
@@ -134,8 +134,8 @@
   }
 
   &:focus {
-    border: 2px solid var(--color-accent-700);
     border-radius: 130px;
+    outline: 2px solid var(--color-accent-700);
   }
 
   &:hover {
