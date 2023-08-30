@@ -33,9 +33,16 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           ref={ref}
           value={value}
         />
-        {type === 'password' && (
+        {type === 'password' && visiblePassword ? (
           <a
-            className={s.passwordControl}
+            className={`${s.passwordControl} ${s.showPassword}`}
+            onClick={() => {
+              setVisiblePassword(prevState => !prevState)
+            }}
+          ></a>
+        ) : (
+          <a
+            className={`${s.passwordControl} ${s.hidePassword}`}
             onClick={() => {
               setVisiblePassword(prevState => !prevState)
             }}

@@ -81,15 +81,21 @@
     cursor: pointer;
 
     position: absolute;
-    top: 33px;
-    left: 300px;
+    top: 7px;
+    left: 290px;
 
     display: inline-block;
 
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 19px;
+  }
 
-    background: url('../assets/svg/eye.svg') 0 0 no-repeat;
+  .hidePassword {
+    background: url('../assets/svg/eye-outline.svg') 0 0 no-repeat;
+  }
+
+  .showPassword {
+    background: url('../assets/svg/eye-off-outline.svg') 0 0 no-repeat;
   }
 
   .error {
@@ -99,8 +105,8 @@
     height: 24px;
     padding: 6px 30px 6px 10px;
 
-    border-radius: 2px;
     border: var(--color-danger-300) solid 1px;
+    border-radius: 2px;
 
     &::placeholder {
       color: var(--color-danger-300);
