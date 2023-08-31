@@ -4,7 +4,11 @@ import { z } from 'zod'
 
 import { Button } from '../../ui/button'
 
+import s from './forgot-password.module.css'
+
+import { Card } from '@/components/ui/card'
 import { ControlledTextField } from '@/components/ui/controlled/controlled-input/controlled-input.tsx'
+import { Typography } from '@/components/ui/typography'
 
 const forgotPasswordSchema = z.object({
   email: z.string().email({ message: 'incorrect email address ' }),
@@ -22,9 +26,26 @@ export const forgotPasswordForm = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <ControlledTextField name={'email'} control={control} label={'Email'} />
-      <Button type="submit">Send Instructions</Button>
-    </form>
+    <Card className={s.card}>
+      <Typography variant={'large'} as={'h1'} className={s.title}>
+        Forgot your password?
+      </Typography>
+      <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
+        <ControlledTextField name={'email'} control={control} label={'Email'} />
+        <Typography variant={'body2'} className={s.description}>
+          Enter your email address and we will send you further instructions
+        </Typography>
+        <Button type="submit" className={s.button}>
+          Send Instructions
+        </Button>
+        <Typography variant={'body2'} className={s.description}>
+          Did you remember your password?
+        </Typography>
+      </form>
+
+      <Button as={'a'} variant={'link'} className={s.button}>
+        Try logging in
+      </Button>
+    </Card>
   )
 }
