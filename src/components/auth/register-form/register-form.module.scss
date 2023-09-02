@@ -1,0 +1,41 @@
+.card {
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
+  padding: 1px 36px;
+}
+
+.title {
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.checkbox {
+  transform: translateY(-20px);
+}
+
+.forgotLink,
+.forgotLink:visited {
+  transform: translateY(-20px);
+
+  margin-bottom: 60px;
+
+  color: var(--color-light-100);
+  text-align: right;
+  text-decoration: none;
+}
+
+.caption {
+  margin-top: 20px;
+  color: var(--color-light-900);
+  text-align: center;
+}

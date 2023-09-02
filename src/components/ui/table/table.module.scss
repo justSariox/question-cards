@@ -1,0 +1,23 @@
+@mixin tablecell {
+  padding: 6px 24px;
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-m);
+}
+
+.table {
+  border-collapse: collapse;
+  border: 1px solid var(--color-dark-500);
+}
+
+.tablecellhead {
+  @include tablecell;
+
+  background-color: var(--color-dark-500);
+}
+
+.tablecellbody {
+  @include tablecell;
+
+  border-bottom: 1px solid var(--color-dark-500);
+}
