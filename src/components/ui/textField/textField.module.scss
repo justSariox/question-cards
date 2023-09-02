@@ -22,10 +22,18 @@
     color: var(--color-dark-100);
   }
 
+  .searchInput {
+    padding-left: 50px;
+  }
+
   .searchIcon {
     position: absolute;
     top: 18%;
     left: 10px;
+
+    width: 15px;
+    height: 15px;
+
     color: var(--color-dark-100);
   }
 
@@ -40,14 +48,14 @@
     border-radius: 2px;
 
     &::-webkit-search-cancel-button {
-      content: url('../assets/svg/cross.svg');
+      content: url('../assets/svg/close.svg');
       width: 16px;
       height: 16px;
       appearance: none;
     }
 
     &[type='search'] {
-      padding: 6px 10px 6px 30px;
+      padding: 6px 10px 6px 40px;
     }
 
     &:hover {
@@ -81,15 +89,22 @@
     cursor: pointer;
 
     position: absolute;
-    top: 34px;
+
+    top: 7px;
     left: 290px;
 
     display: inline-block;
 
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 19px;
+  }
 
-    background: url('../assets/svg/eye.svg') 0 0 no-repeat;
+  .hidePassword {
+    background: url('../assets/svg/eye-outline.svg') 0 0 no-repeat;
+  }
+
+  .showPassword {
+    background: url('../assets/svg/eye-off-outline.svg') 0 0 no-repeat;
   }
 
   .error {
