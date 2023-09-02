@@ -20,6 +20,8 @@ const loginSchema = z.object({
 
 type FormValues = z.infer<typeof loginSchema>
 export const EditProfile = () => {
+  const [editName, setEditName] = useState<boolean>(false)
+  const [name, setName] = useState<string>('Vasya')
   const { handleSubmit, control } = useForm<FormValues>({
     resolver: zodResolver(loginSchema),
   })
@@ -29,9 +31,6 @@ export const EditProfile = () => {
     setName(data.name)
     setEditName(!editName)
   }
-
-  const [editName, setEditName] = useState<boolean>(false)
-  const [name, setName] = useState<string>('Vasya')
 
   const onChangeName = () => {
     setEditName(!editName)
@@ -44,9 +43,9 @@ export const EditProfile = () => {
       </Typography>
       <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
         <div className={s.avatar}>
-          <img src={avatar} />
+          <img src={avatar} alt="avatar" />
           <div className={s.editIconAvatarWrapper}>
-            <img src={editIcon} className={s.editIconAvatar} />
+            <img src={editIcon} className={s.editIconAvatar} alt="Edit icon" />
           </div>
         </div>
         {editName ? (
@@ -60,7 +59,12 @@ export const EditProfile = () => {
               <Typography variant={'h1'} as={'span'}>
                 {name}
               </Typography>
-              <img src={editIcon} onClick={onChangeName} className={s.editNameIcon} />
+              <img
+                src={editIcon}
+                onClick={onChangeName}
+                className={s.editNameIcon}
+                alt="Edit icon"
+              />
             </div>
             <Typography variant={'body2'} className={s.email}>
               my@mail.com
