@@ -42,7 +42,7 @@ export const forgotPasswordForm = () => {
       <Typography variant={'body2'} className={s.rememberPassword}>
         Did you remember your password?
       </Typography>
-      <Button as={'a'} variant={'link'} className={s.button}>
+      <Button as={'a'} variant={'link'}>
         Try logging in
       </Button>
     </Card>
