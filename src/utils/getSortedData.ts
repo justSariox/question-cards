@@ -1,7 +1,6 @@
 import { Sort } from '@/components/ui/table/table.stories.tsx'
 
-type SortedDataType<T> = T
-export const getSortedData = (data: SortedDataType<any>, sort: Sort | null) => {
+export const getSortedData = (data: any, sort: Sort | null) => {
   if (!sort) return data
 
   const sortedData = [...data]
