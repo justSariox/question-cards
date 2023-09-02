@@ -1,4 +1,5 @@
 @mixin typography($fS, $fW, $lH) {
+  font-family: var(--font-family-primary);
   font-size: $fS;
   font-weight: $fW;
   line-height: $lH;
@@ -8,13 +9,9 @@
   @include typography(var(--font-size-m), var(--font-weight-regular), var(--line-height-m));
 
   position: relative;
-
   display: flex;
   flex-direction: column;
-
   margin: 5px 0;
-
-  font-family: var(--font-family-primary);
 
   .label {
     @include typography(var(--font-size-s), var(--font-weight-regular), var(--line-height-m));
