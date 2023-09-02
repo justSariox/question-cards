@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Select, SelectItemType } from './'
+import { Select } from './'
 
 const meta = {
   title: 'Components/Select',
@@ -13,24 +13,9 @@ const meta = {
       control: { type: 'radio' },
     },
   },
-
 } satisfies Meta<typeof Select>
-
-const selectItems: SelectItemType[] = [
-  { id: 'optinon1', option: 'option1' },
-  { id: 'optinon2', option: 'option2' },
-  { id: 'optinon3', option: 'option3' },
-]
 
 export default meta
 type Story = StoryObj<typeof meta>
 
 export const Primary: Story = {}
-
-export const Secondary: Story = {
-  args: {
-    label: 'test select',
-    selectItems: selectItems,
-  },
-}
-

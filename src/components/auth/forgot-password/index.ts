@@ -1,1 +1,1 @@
-export { forgotPasswordForm } from './forgot-password-form.tsx'
+export { ForgotPasswordForm } from './forgot-password-form.tsx'
