@@ -52,22 +52,24 @@ export const EditProfile = () => {
         {editName ? (
           <div className={s.changeName}>
             <ControlledTextField name={'name'} control={control} label={'Nickname'} />
-            <Button>Save Changes</Button>
+            <Button className={s.saveChangeButton}>Save Changes</Button>
           </div>
         ) : (
-          <div className={s.name}>
-            <Typography variant={'h1'} as={'span'}>
-              {name}
+          <div className={s.infoContainer}>
+            <div className={s.name}>
+              <Typography variant={'h1'} as={'span'}>
+                {name}
+              </Typography>
+              <img src={editIcon} onClick={onChangeName} className={s.editNameIcon} />
+            </div>
+            <Typography variant={'body2'} className={s.email}>
+              my@mail.com
             </Typography>
-            <img src={editIcon} onClick={onChangeName} className={s.editNameIcon} />
+            <Button type="submit" logout={true} variant={'secondary'}>
+              Logout
+            </Button>
           </div>
         )}
-        <Typography variant={'body2'} className={s.email}>
-          my@mail.com
-        </Typography>
-        <Button type="submit" logout={true} variant={'secondary'}>
-          Logout
-        </Button>
       </form>
     </Card>
   )
