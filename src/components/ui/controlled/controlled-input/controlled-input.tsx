@@ -10,16 +10,13 @@ export type ControlledTextFieldProps<TFieldsValues extends FieldValues> = {
 export const ControlledTextField = <TFieldValues extends FieldValues>({
   name,
   control,
+  error,
   ...restProps
 }: ControlledTextFieldProps<TFieldValues>) => {
-  const {
-    field,
-    fieldState: { error },
-    formState: {},
-  } = useController({
+  const { field } = useController({
     name,
     control,
   })
 
-  return <TextField {...restProps} {...field} error={error?.message} id={name} />
+  return <TextField {...restProps} {...field} error={error} id={name} />
 }
