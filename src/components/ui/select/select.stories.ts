@@ -6,7 +6,14 @@ const meta = {
   title: 'Components/Select',
   component: Select,
   tags: ['autodocs'],
-  argTypes: {},
+
+  argTypes: {
+    isDisabled: {
+      options: [true, false],
+      control: { type: 'radio' },
+    },
+  },
+
 } satisfies Meta<typeof Select>
 
 const selectItems: SelectItemType[] = [
@@ -18,9 +25,12 @@ const selectItems: SelectItemType[] = [
 export default meta
 type Story = StoryObj<typeof meta>
 
+export const Primary: Story = {}
+
 export const Secondary: Story = {
   args: {
     label: 'test select',
     selectItems: selectItems,
   },
 }
+

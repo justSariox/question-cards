@@ -8,36 +8,24 @@ import s from './select.module.scss'
 
 import { SelectItem } from '@/components/ui/select/selectItem.tsx'
 
-export type SelectItemType = {
-  id: string
-  option: string
+export type SelectProps = {
+  isDisabled?: boolean
 }
 
-export type SelectPropsType = {
-  label?: string
-  selectItems: SelectItemType[]
-}
-export const Select = ({ label, selectItems }: SelectPropsType) => {
+export const Select = ({ isDisabled }: SelectProps) => {
   const [upDownIcon, setUpDownIcon] = useState<boolean>(false)
-  const selectItem = selectItems.map(i => {
-    return (
-      <SelectItem key={i.id} value={i.option}>
-        {i.option}
-      </SelectItem>
-    )
-  })
 
   return (
     <div className={s.selectWrapper}>
       <div>
-        <Label.Root className={s.LabelRoot} htmlFor="firstName">
-          {label}
+        <Label.Root className={isDisabled ? s.LabelRootDisabled : s.LabelRoot} htmlFor="firstName">
+          First name
         </Label.Root>
       </div>
       <div>
-        <SelectRadix.Root open={upDownIcon} onOpenChange={setUpDownIcon}>
+        <SelectRadix.Root open={upDownIcon} onOpenChange={setUpDownIcon} disabled={isDisabled}>
           <SelectRadix.Trigger className={s.SelectTrigger}>
-            <SelectRadix.Value placeholder={selectItems[0].option} />
+            <SelectRadix.Value placeholder="Select-box" />
             <SelectRadix.Icon className={s.SelectDownIcon} asChild>
               {upDownIcon ? (
                 <ChevronUpIcon />
@@ -49,7 +37,13 @@ export const Select = ({ label, selectItems }: SelectPropsType) => {
           <SelectRadix.Portal>
             <SelectRadix.Content className={s.SelectContent} position="popper" sideOffset={-1}>
               <SelectRadix.Viewport className={s.SelectViewport}>
-                <SelectRadix.Group>{selectItem}</SelectRadix.Group>
+                <SelectRadix.Group>
+                  <SelectItem value="apple">Apple</SelectItem>
+                  <SelectItem value="banana">Banana</SelectItem>
+                  <SelectItem value="blueberry">Blueberry</SelectItem>
+                  <SelectItem value="grapes">Grapes</SelectItem>
+                  <SelectItem value="pineapple">Pineapple</SelectItem>
+                </SelectRadix.Group>
               </SelectRadix.Viewport>
             </SelectRadix.Content>
           </SelectRadix.Portal>
