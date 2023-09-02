@@ -38,11 +38,10 @@ export const forgotPasswordForm = () => {
         <Button type="submit" className={s.button}>
           Send Instructions
         </Button>
-        <Typography variant={'body2'} className={s.description}>
-          Did you remember your password?
-        </Typography>
       </form>
-
+      <Typography variant={'body2'} className={s.rememberPassword}>
+        Did you remember your password?
+      </Typography>
       <Button as={'a'} variant={'link'} className={s.button}>
         Try logging in
       </Button>
