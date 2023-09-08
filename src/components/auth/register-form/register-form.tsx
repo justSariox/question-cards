@@ -9,18 +9,22 @@ import s from './register-form.module.scss'
 import { Card } from '@/components/ui/card'
 import { ControlledTextField } from '@/components/ui/controlled/controlled-input/controlled-input.tsx'
 import { Typography } from '@/components/ui/typography'
+import { useSignUpMutation } from '@/services/auth/auth.ts'
 
 const registerSchema = z
   .object({
-    email: z.string().email({ message: 'incorrect email address ' }),
-    password: z.string().min(3, { message: 'password must be 3 character or more' }),
-    confirmPassword: z.string().min(3, { message: 'password must be 3 character or more' }),
+    email: z.string().email({ message: 'incorrect email address ' }).nonempty('Enter email'),
+    password: z
+      .string()
+      .nonempty('Enter password')
+      .min(3, { message: 'password must be 3 character or more' }),
+    confirmPassword: z.string().nonempty('Confirm your password'),
   })
   .superRefine(({ confirmPassword, password }, ctx) => {
     if (confirmPassword !== password) {
       ctx.addIssue({
         code: 'custom',
-        message: 'passwords did not match',
+        message: 'passwords do not match',
         path: ['confirmPassword'],
       })
     }
@@ -28,19 +32,37 @@ const registerSchema = z
     return { confirmPassword, password }
   })
 
-type RegisterFormProps = {
-  onSubmit: (data: FormValues) => void
-}
-
 type FormValues = z.infer<typeof registerSchema>
-export const RegisterForm = ({ onSubmit }: RegisterFormProps) => {
-  const { handleSubmit, control } = useForm<FormValues>({
+
+export const RegisterForm = () => {
+  const [signUp, { error }] = useSignUpMutation()
+
+  const { handleSubmit, control, setError } = useForm<FormValues>({
     mode: 'onSubmit',
     resolver: zodResolver(registerSchema),
     defaultValues: {},
   })
 
-  const onSubmitHandler = handleSubmit(onSubmit)
+  const onSubmitHandler = handleSubmit(data => signUp(omit(data, ['passwordConfirmation'])))
+
+  if (error) {
+    if (
+      'status' in error &&
+      'data' in error &&
+      error.status === 400 &&
+      typeof error.data === 'object' &&
+      error.data &&
+      'errorMessages' in error.data
+    ) {
+      // @ts-ignore
+      error.data.errorMessages.forEach((errorMessage: any) => {
+        setError(errorMessage.field, {
+          type: 'custom',
+          message: errorMessage.message,
+        })
+      })
+    }
+  }
 
   return (
     <Card className={s.card}>
