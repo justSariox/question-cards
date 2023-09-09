@@ -1,5 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
+import { Link } from 'react-router-dom'
 import { omit } from 'remeda'
 import { z } from 'zod'
 
@@ -91,7 +92,7 @@ export const RegisterForm = () => {
       <Typography className={s.caption} variant={'caption'}>
         {'Already have an account?'}
       </Typography>
-      <Button variant={'link'} fullWidth as={'a'} href={'/sign-in'}>
+      <Button variant={'link'} fullWidth as={Link} to={'/sign-in'}>
         Sign in
       </Button>
     </Card>
