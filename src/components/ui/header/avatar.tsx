@@ -11,7 +11,7 @@ export const Avatar = (props: AvatarProps) => {
 
   return (
     <div className={s.block}>
-      <span>{name}</span>
+      <span className={s.editName}>{name}</span>
       <img alt={'Avatar'} src={AvatarIcon} className={s.avatar} />
     </div>
   )
