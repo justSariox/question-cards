@@ -1,5 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
+import { omit } from 'remeda'
 import { z } from 'zod'
 
 import { Button } from '../../ui/button'
@@ -43,7 +44,7 @@ export const RegisterForm = () => {
     defaultValues: {},
   })
 
-  const onSubmitHandler = handleSubmit(data => signUp(omit(data, ['passwordConfirmation'])))
+  const onSubmitHandler = handleSubmit(data => signUp(omit(data, ['confirmPassword'])))
 
   if (error) {
     if (
