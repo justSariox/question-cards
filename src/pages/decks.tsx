@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 import { Edit, PlayCircle, Trash } from '@/components/ui/assets/svg'
 import { Button } from '@/components/ui/button'
+import { Loader } from '@/components/ui/loader'
 import { Column, Table } from '@/components/ui/table'
 import { Sort } from '@/components/ui/table/table.stories.tsx'
 import { Toggle } from '@/components/ui/tabs/tabs.tsx'
@@ -15,11 +16,11 @@ import {
 } from '@/services/decks/decks.ts'
 
 export const Decks = () => {
-  const { data: user } = useGetMeQuery()
+  const { data: user, isLoading: getMeIsLoading } = useGetMeQuery()
   const [showUserDecks, setShowUserDecks] = useState<boolean>(false)
   const [sort, setSort] = useState<Sort | null>({ key: 'updated', direction: 'desc' })
   const sortString = sort ? `${sort.key}-${sort.direction}` : null
-  const [search, setSearch] = useState('')
+  const [search, setSearch] = useState<string>('')
   const decks = useGetDecksQuery({
     name: search,
     itemsPerPage: 10,
@@ -36,28 +37,21 @@ export const Decks = () => {
     { title: 'Actions', key: 'actions', sortable: false },
   ]
 
-  if (decks.isLoading) return <div>Loading</div>
+  if (decks.isLoading) return <Loader />
   if (decks.isError) return <div>Error</div>
+  if (getMeIsLoading) return <Loader />
+  const createDeckHandler = () => {
+    createDeck({ name: 'New Deck' })
+  }
 
   return (
     <div style={{ margin: '0 auto', width: '1400px' }}>
       <Typography variant={'large'}>Packs list</Typography>
-      <Button
-        onClick={() => {
-          createDeck({ name: 'test deck' })
-        }}
-      >
-        Create deck
-      </Button>
+      <Button onClick={createDeckHandler}>Create deck</Button>
       <label>
         Show only my decks <Toggle checked={showUserDecks} onCheckedChange={setShowUserDecks} />
       </label>
-      <TextField
-        type={'search'}
-        value={search}
-        onChangeValue={setSearch}
-        placeholder={'Search'}
-      ></TextField>
+      <TextField type={'search'} value={search} onChangeValue={setSearch} placeholder={'Search'} />
       <Table.TableRoot width={'100%'} style={{ textAlign: 'left' }}>
         <Table.TableHeader columns={columns} sort={sort} onSort={setSort} />
 
