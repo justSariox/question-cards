@@ -6,10 +6,11 @@ export type MainPaginationButtonsProps = {
   paginationRange: (number | string)[]
   currentPage: number
   onClick: (pageNumber: number) => () => void
+  className: string
 }
 
 export const MainPaginationButtons = (props: MainPaginationButtonsProps) => {
-  const { onClick, currentPage, paginationRange } = props
+  const { onClick, currentPage, paginationRange, className } = props
   const Dots: FC = () => {
     return <span className={s.dots}>&#8230;</span>
   }
@@ -24,7 +25,11 @@ export const MainPaginationButtons = (props: MainPaginationButtonsProps) => {
         }
 
         return (
-          <button key={index} onClick={onClick(page)} className={isSelected ? s.selectedPage : ''}>
+          <button
+            key={index}
+            onClick={onClick(page)}
+            className={`${isSelected ? s.selectedPage : ''} ${className}`}
+          >
             {page}
           </button>
         )

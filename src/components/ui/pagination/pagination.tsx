@@ -12,7 +12,6 @@ import { usePagination } from '@/components/ui/pagination/usePagination.ts'
 import { Select } from '@/components/ui/select'
 
 export type PaginationProps = {
-  currentPage: number
   count: number
   page: number
   onChange: (page: number) => void
@@ -37,13 +36,7 @@ type CardProps = {
   body: string
 }
 
-export const Pagination: FC<PaginationProps> = ({
-  onChange,
-  count,
-  page,
-  siblings,
-  currentPage,
-}) => {
+export const Pagination: FC<PaginationProps> = ({ onChange, count, page, siblings }) => {
   const {
     paginationRange,
     isLastPage,
@@ -63,7 +56,7 @@ export const Pagination: FC<PaginationProps> = ({
   // const [currentPage] = useState(1)
   const [cardsPerPage] = useState(10)
 
-  const indexOfLastCard = currentPage * cardsPerPage
+  const indexOfLastCard = page * cardsPerPage
   const indexOfFirstCard = indexOfLastCard - cardsPerPage
   const currentCards = cards.slice(indexOfFirstCard, indexOfLastCard)
 
@@ -82,10 +75,6 @@ export const Pagination: FC<PaginationProps> = ({
     return <h2>Loading...</h2>
   }
 
-  // const paginate = (pageNumber: number) => {
-  //   setCurrentPage(pageNumber)
-  // }
-
   return (
     <div className={s.root}>
       <div className={s.container}>
@@ -102,7 +91,7 @@ export const Pagination: FC<PaginationProps> = ({
           currentPage={page}
           onClick={handleMainPageClicked}
           paginationRange={paginationRange}
-          // cardsPerPage={cardsPerPage}
+          className={s.button}
         />
         <NextButton onClick={handleNextPageClicked} disabled={isLastPage} />
         <div className={s.selectBox}>

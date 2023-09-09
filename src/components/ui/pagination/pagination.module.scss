@@ -1,0 +1,122 @@
+.root {
+  gap: 25px;
+  margin: 15px;
+}
+
+.container {
+  display: flex;
+  gap: 12px;
+  list-style-type: none;
+}
+
+.selectedPage {
+  font-weight: bold;
+  color: var(--color-dark-900);
+  background-color: var(--color-light-100);
+}
+
+.button {
+  all: unset;
+
+  cursor: pointer;
+
+  width: 24px;
+  height: 24px;
+  padding: 0 0 0 10px;
+
+  color: var(--color-light-100);
+
+  background-color: var(--color-dark-900);
+  border-radius: 3px;
+
+  &:focus-visible {
+    outline: var(--color-info-900);
+  }
+
+  &:disabled {
+    cursor: initial;
+    opacity: 1;
+  }
+
+  &:hover:not(&:disabled) {
+    color: var(--color-light-100);
+    background-color: var(--color-dark-500);
+  }
+
+  &.selected {
+    color: var(--color-light-100);
+    background-color: var(--color-dark-900);
+  }
+}
+
+@mixin item {
+  all: unset;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 24px;
+  height: 24px;
+
+  color: var(--color-text-primary);
+
+  border-radius: var(--border-radius-s);
+}
+
+.item {
+  @include item;
+
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: var(--outline-focus);
+  }
+
+  &:disabled {
+    cursor: initial;
+    opacity: 1;
+  }
+
+  &:hover:not(&:disabled) {
+    background-color: var(--color-bg-focus);
+  }
+
+  &.selected {
+    color: var(--color-text-primary-contrast);
+    background-color: var(--color-bg-contrast);
+  }
+}
+
+.dots {
+  @include item;
+}
+
+.icon {
+  .item:disabled & {
+    // important because icons have style prop
+    color: blue !important;
+  }
+}
+
+.selectBox {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+
+  color: var(--color-light-100);
+  white-space: nowrap;
+}
+
+.select {
+  flex-shrink: 0;
+  gap: 2px;
+
+  width: 50px;
+  height: 24px;
+  margin: 0 5px;
+  padding: 0 2px 0 6px;
+
+  background-color: var(--color-dark-700);
+  border-radius: 2px;
+}
