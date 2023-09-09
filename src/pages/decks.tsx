@@ -69,7 +69,11 @@ export const Decks = () => {
                   <div>
                     <PlayCircle />
                     <Edit />
-                    <Button variant={'link'} onClick={() => deleteDeck({ id: deck.id })}>
+                    <Button
+                      disabled={deck.author.id !== user?.id}
+                      variant={'link'}
+                      onClick={() => deleteDeck({ id: deck.id })}
+                    >
                       <Trash />
                     </Button>
                   </div>
