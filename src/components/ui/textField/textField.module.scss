@@ -8,19 +8,112 @@
 .inputWrapper {
   @include typography(var(--font-size-m), var(--font-weight-regular), var(--line-height-m));
 
-  position: relative;
   display: flex;
   flex-direction: column;
   margin: 5px 0;
+
+  .inputContainer {
+    position: relative;
+
+    .searchInput {
+      padding-left: 50px;
+    }
+
+    .input {
+      all: unset;
+
+      width: 284px;
+      height: 24px;
+      padding: 6px 30px 6px 10px;
+
+      border: var(--color-dark-100) solid 1px;
+      border-radius: 2px;
+
+      &::-webkit-search-cancel-button {
+        content: url('../assets/svg/close.svg');
+        width: 16px;
+        height: 16px;
+        appearance: none;
+      }
+
+      &[type='search'] {
+        padding: 6px 10px 6px 40px;
+      }
+
+      &:hover {
+        background-color: var(--color-dark-700);
+      }
+
+      &:focus {
+        border: var(--color-info-700) solid 2px;
+      }
+
+      &:active {
+        background-color: var(--color-dark-900);
+        border: var(--color-light-100) solid 1px;
+      }
+
+      &:active::placeholder {
+        color: var(--color-light-100);
+      }
+
+      &:disabled {
+        color: var(--color-dark-300);
+        border: var(--color-dark-300) solid 2px;
+      }
+
+      &:disabled::placeholder {
+        color: var(--color-dark-300);
+      }
+    }
+
+    .error {
+      all: unset;
+
+      width: 284px;
+      height: 24px;
+      padding: 6px 30px 6px 10px;
+
+      border: var(--color-danger-300) solid 1px;
+      border-radius: 2px;
+
+      &::placeholder {
+        color: var(--color-danger-300);
+      }
+    }
+
+    .passwordControl {
+      cursor: pointer;
+
+      position: absolute;
+      top: 7px;
+      left: 290px;
+
+      display: inline-block;
+
+      width: 22px;
+      height: 19px;
+    }
+
+    .hidePassword {
+      background: url('../assets/svg/eye-outline.svg') 0 0 no-repeat;
+    }
+
+    .showPassword {
+      background: url('../assets/svg/eye-off-outline.svg') 0 0 no-repeat;
+    }
+
+    .errorMessage {
+      @include typography(var(--font-size-xs), var(--font-weight-regular), var(--line-height-m));
+
+      color: var(--color-danger-300);
+    }
+  }
 
   .label {
     @include typography(var(--font-size-s), var(--font-weight-regular), var(--line-height-m));
 
     color: var(--color-dark-100);
-  }
-
-  .searchInput {
-    padding-left: 50px;
   }
 
   .searchIcon {
@@ -32,96 +125,5 @@
     height: 15px;
 
     color: var(--color-dark-100);
-  }
-
-  .input {
-    all: unset;
-
-    width: 284px;
-    height: 24px;
-    padding: 6px 30px 6px 10px;
-
-    border: var(--color-dark-100) solid 1px;
-    border-radius: 2px;
-
-    &::-webkit-search-cancel-button {
-      content: url('../assets/svg/close.svg');
-      width: 16px;
-      height: 16px;
-      appearance: none;
-    }
-
-    &[type='search'] {
-      padding: 6px 10px 6px 40px;
-    }
-
-    &:hover {
-      background-color: var(--color-dark-700);
-    }
-
-    &:focus {
-      border: var(--color-info-700) solid 2px;
-    }
-
-    &:active {
-      background-color: var(--color-dark-900);
-      border: var(--color-light-100) solid 1px;
-    }
-
-    &:active::placeholder {
-      color: var(--color-light-100);
-    }
-
-    &:disabled {
-      color: var(--color-dark-300);
-      border: var(--color-dark-300) solid 2px;
-    }
-
-    &:disabled::placeholder {
-      color: var(--color-dark-300);
-    }
-  }
-
-  .passwordControl {
-    cursor: pointer;
-
-    position: absolute;
-
-    top: 7px;
-    left: 290px;
-
-    display: inline-block;
-
-    width: 22px;
-    height: 19px;
-  }
-
-  .hidePassword {
-    background: url('../assets/svg/eye-outline.svg') 0 0 no-repeat;
-  }
-
-  .showPassword {
-    background: url('../assets/svg/eye-off-outline.svg') 0 0 no-repeat;
-  }
-
-  .error {
-    all: unset;
-
-    width: 284px;
-    height: 24px;
-    padding: 6px 30px 6px 10px;
-
-    border: var(--color-danger-300) solid 1px;
-    border-radius: 2px;
-
-    &::placeholder {
-      color: var(--color-danger-300);
-    }
-  }
-
-  .errorMessage {
-    @include typography(var(--font-size-xs), var(--font-weight-regular), var(--line-height-m));
-
-    color: var(--color-danger-300);
   }
 }

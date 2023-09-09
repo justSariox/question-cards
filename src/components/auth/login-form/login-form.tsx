@@ -7,6 +7,7 @@ import { Button } from '../../ui/button'
 
 import { ControlledCheckbox } from '@/components/ui/controlled/controlled-checkbox/controlled-checkbox.tsx'
 import { ControlledTextField } from '@/components/ui/controlled/controlled-input/controlled-input.tsx'
+import { useLoginMutation } from '@/services/auth/auth.ts'
 
 const loginSchema = z.object({
   email: z.string().email({ message: 'incorrect email address ' }),
@@ -15,12 +16,15 @@ const loginSchema = z.object({
 })
 
 type FormValues = z.infer<typeof loginSchema>
+
 export const LoginForm = () => {
+  const [login, { error }] = useLoginMutation()
+
   const {
     handleSubmit,
     control,
-    reset,
     formState: { errors },
+    setError,
   } = useForm<FormValues>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -28,13 +32,21 @@ export const LoginForm = () => {
     },
   })
 
-  const onSubmit = (data: FormValues) => {
-    reset({ email: '', password: '', rememberMe: false })
-    console.log(data, data.rememberMe)
+  if (error) {
+    if (
+      'status' in error &&
+      typeof error.data === 'object' &&
+      error.data &&
+      'message' in error.data
+    )
+      setError('password', {
+        type: 'custom',
+        message: error.data.message as string,
+      })
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(login)}>
       <DevTool control={control} />
       <ControlledTextField
         name={'email'}

@@ -29,25 +29,30 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
             <img src={searchIcon} />
           </span>
         )}
-        <input
-          id={restProps.id}
-          placeholder={restProps.placeholder}
-          type={'password' && visiblePassword ? 'text' : type}
-          className={`${error ? s.error : s.input} ${type === 'search' ? s.searchInput : ''} `}
-          onChange={onChangeHandler}
-          disabled={disabled}
-          ref={ref}
-          value={value}
-        />
-        {type === 'password' && (
-          <a
-            className={`${s.passwordControl} ${visiblePassword ? s.showPassword : s.hidePassword}`}
-            onClick={() => {
-              setVisiblePassword(prevState => !prevState)
-            }}
-          ></a>
-        )}
-        {error && <span className={s.errorMessage}>{error}</span>}
+        <div className={s.inputContainer}>
+          <input
+            id={restProps.id}
+            placeholder={restProps.placeholder}
+            type={'password' && visiblePassword ? 'text' : type}
+            className={`${error ? s.error : s.input} ${type === 'search' ? s.searchInput : ''} `}
+            onChange={onChangeHandler}
+            disabled={disabled}
+            ref={ref}
+            value={value}
+          />
+          {type === 'password' && (
+            <a
+              className={`${s.passwordControl} ${
+                visiblePassword ? s.showPassword : s.hidePassword
+              }`}
+              onClick={() => {
+                setVisiblePassword(prevState => !prevState)
+              }}
+            ></a>
+          )}
+
+          {error && <span className={s.errorMessage}>{error}</span>}
+        </div>
       </div>
     )
   }
