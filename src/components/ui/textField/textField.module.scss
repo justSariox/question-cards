@@ -15,8 +15,15 @@
   .inputContainer {
     position: relative;
 
-    .searchInput {
-      padding-left: 50px;
+    .searchIcon {
+      position: absolute;
+      top: 8px;
+      left: 12px;
+
+      width: 20px;
+      height: 20px;
+
+      color: var(--color-dark-100);
     }
 
     .input {
@@ -112,17 +119,6 @@
 
   .label {
     @include typography(var(--font-size-s), var(--font-weight-regular), var(--line-height-m));
-
-    color: var(--color-dark-100);
-  }
-
-  .searchIcon {
-    position: absolute;
-    top: 18%;
-    left: 10px;
-
-    width: 15px;
-    height: 15px;
 
     color: var(--color-dark-100);
   }
