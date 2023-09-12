@@ -8,21 +8,21 @@ import s from './select.module.scss'
 
 import { SelectItem } from '@/components/ui/select/selectItem.tsx'
 
-export type SelectItemType = {
-  id: string
-  option: string
-}
+type SelectItemType = { label: string; value: string } | { label: number; value: string }
 
 export type SelectPropsType = {
-  label?: string
+  className?: string
+  value?: string | null
+  onChange?: (itemPerPage: string) => void
+  label?: string | number
   selectItems: SelectItemType[]
 }
-export const Select = ({ label, selectItems }: SelectPropsType) => {
+export const Select = ({ label, selectItems, onChange }: SelectPropsType) => {
   const [upDownIcon, setUpDownIcon] = useState<boolean>(false)
   const selectItem = selectItems.map(i => {
     return (
-      <SelectItem key={i.id} value={i.option}>
-        {i.option}
+      <SelectItem key={i.value} value={i.value}>
+        {i.label}
       </SelectItem>
     )
   })
@@ -35,9 +35,9 @@ export const Select = ({ label, selectItems }: SelectPropsType) => {
         </Label.Root>
       </div>
       <div>
-        <SelectRadix.Root open={upDownIcon} onOpenChange={setUpDownIcon}>
+        <SelectRadix.Root open={upDownIcon} onOpenChange={setUpDownIcon} onValueChange={onChange}>
           <SelectRadix.Trigger className={s.SelectTrigger}>
-            <SelectRadix.Value placeholder={selectItems[0].option} />
+            <SelectRadix.Value placeholder={selectItems[0].value} />
             <SelectRadix.Icon className={s.SelectDownIcon} asChild>
               {upDownIcon ? (
                 <ChevronUpIcon />
