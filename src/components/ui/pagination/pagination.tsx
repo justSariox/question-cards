@@ -8,8 +8,8 @@ import firstVectorLeft from '@/components/ui/assets/svg/firstVectorLeft.svg'
 import secondVectorLeft from '@/components/ui/assets/svg/secondVectorLeft.svg'
 import { MainPaginationButtons } from '@/components/ui/pagination/mainPaginationButtons.tsx'
 import { NextButton, PrevButton } from '@/components/ui/pagination/navigationButtons.tsx'
+import { PerPageSelect } from '@/components/ui/pagination/perPageSelect.tsx'
 import { usePagination } from '@/components/ui/pagination/usePagination.ts'
-import { Select } from '@/components/ui/select'
 
 export type PaginationProps = {
   count: number
@@ -17,17 +17,11 @@ export type PaginationProps = {
   onChange: (page: number) => void
   siblings?: number
   perPage?: number
-  perPageOptions?: number[]
+  perPageOptions?: number[] | string[]
   onPerPageChange?: (itemPerPage: number) => void
 }
 
-const selectItems = [
-  { id: '1', option: '10' },
-  { id: '2', option: '20' },
-  { id: '3', option: '30' },
-  { id: '4', option: '50' },
-  { id: '5', option: '100' },
-]
+const selectItems = ['10', '20', '30', '50', '100']
 
 type CardProps = {
   userId: number
@@ -53,8 +47,7 @@ export const Pagination: FC<PaginationProps> = ({ onChange, count, page, sibling
 
   const [cards, setCards] = useState([])
   const [loading, setLoading] = useState(false)
-  // const [currentPage] = useState(1)
-  const [cardsPerPage] = useState(10)
+  const [cardsPerPage, setCardsPerPage] = useState(10)
 
   const indexOfLastCard = page * cardsPerPage
   const indexOfFirstCard = indexOfLastCard - cardsPerPage
@@ -75,6 +68,10 @@ export const Pagination: FC<PaginationProps> = ({ onChange, count, page, sibling
     return <h2>Loading...</h2>
   }
 
+  const onPerPageChange = (itemPerPage: string) => {
+    setCardsPerPage(+itemPerPage)
+  }
+
   return (
     <div className={s.root}>
       <div className={s.container}>
@@ -91,14 +88,13 @@ export const Pagination: FC<PaginationProps> = ({ onChange, count, page, sibling
           currentPage={page}
           onClick={handleMainPageClicked}
           paginationRange={paginationRange}
-          className={s.button}
         />
         <NextButton onClick={handleNextPageClicked} disabled={isLastPage} />
-        <div className={s.selectBox}>
-          Показать
-          <Select selectItems={selectItems} />
-          на странице
-        </div>
+        <PerPageSelect
+          perPage={null}
+          perPageOptions={selectItems}
+          onPerPageChange={onPerPageChange}
+        />
       </div>
       <div>
         <ul>
