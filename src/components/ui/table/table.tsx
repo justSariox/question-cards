@@ -70,7 +70,6 @@ export const TableHeader: FC<
   >
 > = ({ columns, sort, onSort, ...restProps }) => {
   const handleSort = (key: string, sortable?: boolean) => () => {
-    console.log(sort)
     if (!onSort || !sortable) return
 
     if (sort?.key !== key) return onSort({ key, direction: 'asc' })
