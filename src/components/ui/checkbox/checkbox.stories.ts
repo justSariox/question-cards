@@ -13,7 +13,7 @@ type Story = StoryObj<typeof meta>
 
 export const DefaultCheckbox: Story = {
   args: {
-    label: 'click',
+    label: 'Click',
     disabled: false,
   },
 }

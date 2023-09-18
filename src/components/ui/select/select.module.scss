@@ -14,6 +14,11 @@
   color: var(--color-dark-100);
 }
 
+.LabelRootDisabled {
+  font-size: var(--font-size-s);
+  color: var(--color-dark-300);
+}
+
 button {
   all: unset;
   font-size: var(--font-size-m);
@@ -42,6 +47,14 @@ button {
 
 .SelectTrigger:focus {
   box-shadow: 0 0 0 1px var(--color-info-700);
+}
+
+.SelectTrigger:disabled {
+  color: var(--color-dark-300);
+
+  .LabelRoot {
+    color: var(--color-dark-300);
+  }
 }
 
 .SelectDownIcon,

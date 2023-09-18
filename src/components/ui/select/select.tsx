@@ -8,6 +8,7 @@ import s from './select.module.scss'
 
 import { SelectItem } from '@/components/ui/select/selectItem.tsx'
 
+
 type SelectItemType = { label: string; value: string } | { label: number; value: string }
 
 export type SelectPropsType = {
@@ -27,11 +28,12 @@ export const Select = ({ label, selectItems, onChange }: SelectPropsType) => {
     )
   })
 
+
   return (
     <div className={s.selectWrapper}>
       <div>
-        <Label.Root className={s.LabelRoot} htmlFor="firstName">
-          {label}
+        <Label.Root className={isDisabled ? s.LabelRootDisabled : s.LabelRoot} htmlFor="firstName">
+          First name
         </Label.Root>
       </div>
       <div>
@@ -49,7 +51,13 @@ export const Select = ({ label, selectItems, onChange }: SelectPropsType) => {
           <SelectRadix.Portal>
             <SelectRadix.Content className={s.SelectContent} position="popper" sideOffset={-1}>
               <SelectRadix.Viewport className={s.SelectViewport}>
-                <SelectRadix.Group>{selectItem}</SelectRadix.Group>
+                <SelectRadix.Group>
+                  <SelectItem value="apple">Apple</SelectItem>
+                  <SelectItem value="banana">Banana</SelectItem>
+                  <SelectItem value="blueberry">Blueberry</SelectItem>
+                  <SelectItem value="grapes">Grapes</SelectItem>
+                  <SelectItem value="pineapple">Pineapple</SelectItem>
+                </SelectRadix.Group>
               </SelectRadix.Viewport>
             </SelectRadix.Content>
           </SelectRadix.Portal>
