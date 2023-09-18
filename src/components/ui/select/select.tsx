@@ -8,17 +8,17 @@ import s from './select.module.scss'
 
 import { SelectItem } from '@/components/ui/select/selectItem.tsx'
 
-
 type SelectItemType = { label: string; value: string } | { label: number; value: string }
 
 export type SelectPropsType = {
   className?: string
-  value?: string | null
+  value?: string | number | null
   onChange?: (itemPerPage: string) => void
   label?: string | number
   selectItems: SelectItemType[]
+  isDisabled?: boolean
 }
-export const Select = ({ label, selectItems, onChange }: SelectPropsType) => {
+export const Select = ({ label, selectItems, onChange, isDisabled }: SelectPropsType) => {
   const [upDownIcon, setUpDownIcon] = useState<boolean>(false)
   const selectItem = selectItems.map(i => {
     return (
@@ -28,12 +28,11 @@ export const Select = ({ label, selectItems, onChange }: SelectPropsType) => {
     )
   })
 
-
   return (
     <div className={s.selectWrapper}>
       <div>
         <Label.Root className={isDisabled ? s.LabelRootDisabled : s.LabelRoot} htmlFor="firstName">
-          First name
+          {label}{' '}
         </Label.Root>
       </div>
       <div>
@@ -51,13 +50,7 @@ export const Select = ({ label, selectItems, onChange }: SelectPropsType) => {
           <SelectRadix.Portal>
             <SelectRadix.Content className={s.SelectContent} position="popper" sideOffset={-1}>
               <SelectRadix.Viewport className={s.SelectViewport}>
-                <SelectRadix.Group>
-                  <SelectItem value="apple">Apple</SelectItem>
-                  <SelectItem value="banana">Banana</SelectItem>
-                  <SelectItem value="blueberry">Blueberry</SelectItem>
-                  <SelectItem value="grapes">Grapes</SelectItem>
-                  <SelectItem value="pineapple">Pineapple</SelectItem>
-                </SelectRadix.Group>
+                <SelectRadix.Group>{selectItem}</SelectRadix.Group>
               </SelectRadix.Viewport>
             </SelectRadix.Content>
           </SelectRadix.Portal>

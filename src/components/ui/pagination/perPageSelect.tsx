@@ -4,7 +4,7 @@ import s from '@/components/ui/pagination/pagination.module.scss'
 import { Select } from '@/components/ui/select'
 
 export type PerPageSelectProps = {
-  perPage: string | null
+  perPage: number | null
   perPageOptions: string[]
   onPerPageChange?: (itemPerPage: string) => void
 }

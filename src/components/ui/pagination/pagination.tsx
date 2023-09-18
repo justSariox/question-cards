@@ -1,6 +1,6 @@
-import { FC, useEffect, useState } from 'react'
+import { FC, ReactNode } from 'react'
 
-import axios from 'axios'
+// import axios from 'axios'
 
 import s from './pagination.module.scss'
 
@@ -16,21 +16,23 @@ export type PaginationProps = {
   page: number
   onChange: (page: number) => void
   siblings?: number
-  perPage?: number
+  perPage: number
   perPageOptions?: number[] | string[]
-  onPerPageChange?: (itemPerPage: number) => void
+  onPerPageChange: (perPage: number) => void
+  children: ReactNode
 }
 
 const selectItems = ['10', '20', '30', '50', '100']
 
-type CardProps = {
-  userId: number
-  id: number
-  title: string
-  body: string
-}
-
-export const Pagination: FC<PaginationProps> = ({ onChange, count, page, siblings }) => {
+export const Pagination: FC<PaginationProps> = ({
+  onChange,
+  count,
+  page,
+  siblings,
+  children,
+  perPage,
+  onPerPageChange,
+}) => {
   const {
     paginationRange,
     isLastPage,
@@ -45,31 +47,31 @@ export const Pagination: FC<PaginationProps> = ({ onChange, count, page, sibling
     siblings,
   })
 
-  const [cards, setCards] = useState([])
-  const [loading, setLoading] = useState(false)
-  const [cardsPerPage, setCardsPerPage] = useState(10)
+  // const [cards, setCards] = useState([])
+  // const [loading, setLoading] = useState(false)
+  // const [cardsPerPage, setCardsPerPage] = useState(10)
 
-  const indexOfLastCard = page * cardsPerPage
-  const indexOfFirstCard = indexOfLastCard - cardsPerPage
-  const currentCards = cards.slice(indexOfFirstCard, indexOfLastCard)
+  // const indexOfLastCard = page * cardsPerPage
+  // const indexOfFirstCard = indexOfLastCard - cardsPerPage
+  // const currentCards = cards.slice(indexOfFirstCard, indexOfLastCard)
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      const res = await axios.get('https://jsonplaceholder.typicode.com/posts')
+  // useEffect(() => {
+  //   const fetchPosts = async () => {
+  //     const res = await axios.get('https://jsonplaceholder.typicode.com/posts')
+  //
+  //     setCards(res.data)
+  //     setLoading(false)
+  //   }
+  //
+  //   fetchPosts()
+  // }, [])
 
-      setCards(res.data)
-      setLoading(false)
-    }
+  // if (loading) {
+  //   return <h2>Loading...</h2>
+  // }
 
-    fetchPosts()
-  }, [])
-
-  if (loading) {
-    return <h2>Loading...</h2>
-  }
-
-  const onPerPageChange = (itemPerPage: string) => {
-    setCardsPerPage(+itemPerPage)
+  const onPerPageChangeHandler = (value: string) => {
+    onPerPageChange(+value)
   }
 
   return (
@@ -91,18 +93,12 @@ export const Pagination: FC<PaginationProps> = ({ onChange, count, page, sibling
         />
         <NextButton onClick={handleNextPageClicked} disabled={isLastPage} />
         <PerPageSelect
-          perPage={null}
+          perPage={perPage}
           perPageOptions={selectItems}
-          onPerPageChange={onPerPageChange}
+          onPerPageChange={onPerPageChangeHandler}
         />
       </div>
-      <div>
-        <ul>
-          {currentCards.map((card: CardProps) => {
-            return <li key={card.id}>{card.title}</li>
-          })}
-        </ul>
-      </div>
+      <div>{children}</div>
     </div>
   )
 }
