@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { Edit, PlayCircle, Trash } from '@/components/ui/assets/svg'
 import { Button } from '@/components/ui/button'
 import { Loader } from '@/components/ui/loader'
+import { Slider } from '@/components/ui/slider'
 import { Column, Table } from '@/components/ui/table'
 import { Sort } from '@/components/ui/table/table.stories.tsx'
 import { Toggle } from '@/components/ui/tabs/tabs.tsx'
@@ -21,11 +22,14 @@ export const Decks = () => {
   const [sort, setSort] = useState<Sort | null>({ key: 'updated', direction: 'desc' })
   const sortString = sort ? `${sort.key}-${sort.direction}` : null
   const [search, setSearch] = useState<string>('')
+  const [range, setRange] = useState<Array<number>>([0, 100])
   const decks = useGetDecksQuery({
     name: search,
     itemsPerPage: 10,
     orderBy: sortString,
     authorId: showUserDecks ? user?.id : undefined,
+    minCardsCount: range[0],
+    maxCardsCount: range[1],
   })
   const [createDeck] = useCreateDeckMutation()
   const [deleteDeck] = useRemoveDeckMutation()
@@ -52,6 +56,7 @@ export const Decks = () => {
         Show only my decks <Toggle checked={showUserDecks} onCheckedChange={setShowUserDecks} />
       </label>
       <TextField type={'search'} value={search} onChangeValue={setSearch} placeholder={'Search'} />
+      <Slider range={range} onRangeChange={setRange} />
       <Table.TableRoot width={'100%'} style={{ textAlign: 'left' }}>
         <Table.TableHeader columns={columns} sort={sort} onSort={setSort} />
 

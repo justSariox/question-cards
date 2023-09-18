@@ -1,25 +1,24 @@
-import { useState } from 'react'
-
 import * as SliderRadix from '@radix-ui/react-slider'
 
 import s from './slider.module.scss'
 
-export type SliderProps = {}
+export type SliderProps = {
+  range: Array<number>
+  onRangeChange: (range: Array<number>) => void
+}
 
-export const Slider = ({}: SliderProps) => {
-  const [value, setValue] = useState([30, 50])
-
-  const changeValueHandler = (value: number[]) => {
-    setValue(value)
+export const Slider = ({ range, onRangeChange }: SliderProps) => {
+  const changeValueHandler = (value: Array<number>) => {
+    onRangeChange(value)
   }
 
   return (
     <form className={s.SliderForm}>
-      <div className={s.SliderBoxValue}>{value[0]}</div>
+      <div className={s.SliderBoxValue}>{range[0]}</div>
       <SliderRadix.Root
         className={s.SliderRoot}
-        defaultValue={value}
-        value={value}
+        defaultValue={range}
+        value={range}
         onValueChange={changeValueHandler}
         max={100}
         step={1}
@@ -31,7 +30,7 @@ export const Slider = ({}: SliderProps) => {
         <SliderRadix.Thumb className={s.SliderThumb} aria-label="Volume" />
         <SliderRadix.Thumb className={s.SliderThumb} aria-label="Nevolume" />
       </SliderRadix.Root>
-      <div className={s.SliderBoxValue}>{value[1]}</div>
+      <div className={s.SliderBoxValue}>{range[1]}</div>
     </form>
   )
 }
