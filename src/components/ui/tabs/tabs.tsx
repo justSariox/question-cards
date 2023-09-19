@@ -1,16 +1,44 @@
-import * as React from 'react'
+import { ReactNode } from 'react'
 
-import * as SwitchPrimitives from '@radix-ui/react-switch'
+import * as TabsRadix from '@radix-ui/react-tabs'
 
-import s from './tabs.module.scss'
+import s from './tabs.module.css'
 
-export const Toggle = React.forwardRef<
-  React.ElementRef<typeof SwitchPrimitives.Root>,
-  React.ComponentPropsWithoutRef<typeof SwitchPrimitives.Root>
->(({ className, ...props }, ref) => {
+export type TabType = {
+  value: string
+  title: string
+  disabled?: boolean
+}
+
+type PropsType = {
+  tabs: TabType[]
+  value?: string
+  defaultValue?: string
+  onValueChange: (value: string) => void
+  children: ReactNode
+}
+
+export const Tabs = ({ tabs, value, defaultValue, onValueChange, children }: PropsType) => {
   return (
-    <SwitchPrimitives.Root className={`${s.root} ${className}`} {...props} ref={ref}>
-      <SwitchPrimitives.Thumb className={s.thumb} />
-    </SwitchPrimitives.Root>
+    <TabsRadix.Root
+      className={s.TabsRoot}
+      value={value}
+      defaultValue={defaultValue}
+      onValueChange={onValueChange}
+    >
+      <TabsRadix.List className={s.TabsList} aria-label="Manage your choice">
+        {tabs.map(tab => (
+          <TabsRadix.Trigger
+            key={tab.value}
+            className={s.TabsTrigger}
+            value={tab.value}
+            disabled={tab.disabled}
+          >
+            {tab.title}
+          </TabsRadix.Trigger>
+        ))}
+      </TabsRadix.List>
+      {children}
+    </TabsRadix.Root>
   )
-})
+}
