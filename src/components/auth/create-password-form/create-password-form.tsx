@@ -22,7 +22,6 @@ export const CreatePasswordForm = () => {
 
   const onSubmitHandler = (data: FormValue) => {
     reset({ password: '' })
-    console.log(data.password)
   }
 
   return (

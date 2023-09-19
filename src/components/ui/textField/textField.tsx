@@ -24,17 +24,18 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
     return (
       <div className={s.inputWrapper}>
         <label className={s.label}>{label}</label>
-        {type === 'search' && (
-          <span className={s.searchIcon}>
-            <img src={searchIcon} />
-          </span>
-        )}
+
         <div className={s.inputContainer}>
+          {type === 'search' && (
+            <span>
+              <img src={searchIcon} className={s.searchIcon} alt={'search icon'} />
+            </span>
+          )}
           <input
             id={restProps.id}
             placeholder={restProps.placeholder}
             type={'password' && visiblePassword ? 'text' : type}
-            className={`${error ? s.error : s.input} ${type === 'search' ? s.searchInput : ''} `}
+            className={`${error ? s.error : s.input}`}
             onChange={onChangeHandler}
             disabled={disabled}
             ref={ref}

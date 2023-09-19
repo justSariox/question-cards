@@ -27,7 +27,6 @@ export const EditProfile = () => {
   })
 
   const onSubmit = (data: FormValues) => {
-    console.log(data, data.name)
     setName(data.name)
     setEditName(!editName)
   }

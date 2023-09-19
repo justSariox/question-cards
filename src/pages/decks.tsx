@@ -4,6 +4,7 @@ import { Edit, PlayCircle, Trash } from '@/components/ui/assets/svg'
 import { Button } from '@/components/ui/button'
 import { Loader } from '@/components/ui/loader'
 import { Pagination } from '@/components/ui/pagination'
+import { Slider } from '@/components/ui/slider'
 import { Column, Table } from '@/components/ui/table'
 import { Sort } from '@/components/ui/table/table.stories.tsx'
 import { TextField } from '@/components/ui/textField'
@@ -22,6 +23,7 @@ export const Decks = () => {
   const [sort, setSort] = useState<Sort | null>({ key: 'updated', direction: 'desc' })
   const sortString = sort ? `${sort.key}-${sort.direction}` : null
   const [search, setSearch] = useState<string>('')
+  const [range, setRange] = useState<Array<number>>([0, 100])
   const [page, setPage] = useState<number>(1)
   const [perPage, setPerPage] = useState<number>(10)
 
@@ -34,6 +36,8 @@ export const Decks = () => {
     itemsPerPage: perPage,
     orderBy: sortString,
     authorId: showUserDecks ? user?.id : undefined,
+    minCardsCount: range[0],
+    maxCardsCount: range[1],
     currentPage: page,
   })
   const [createDeck] = useCreateDeckMutation()
@@ -63,6 +67,7 @@ export const Decks = () => {
         Show only my decks <Toggle checked={showUserDecks} onCheckedChange={setShowUserDecks} />
       </label>
       <TextField type={'search'} value={search} onChangeValue={setSearch} placeholder={'Search'} />
+      <Slider range={range} onRangeChange={setRange} />
       <Pagination
         count={decks?.pagination?.totalPages || 1}
         page={page}
@@ -72,7 +77,6 @@ export const Decks = () => {
       >
         <Table.TableRoot width={'100%'} style={{ textAlign: 'left' }}>
           <Table.TableHeader columns={columns} sort={sort} onSort={setSort} />
-
           <Table.TableBody>
             {decks?.items?.map((deck: any) => {
               return (

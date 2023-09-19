@@ -27,8 +27,6 @@ const publicRoutes: RouteObject[] = [
 const Component = () => {
   const { data } = useGetDecksQuery()
 
-  console.log(data)
-
   return <div>2</div>
 }
 
@@ -61,7 +59,6 @@ export const Router = () => {
 
 function PrivateRoutes() {
   const { data } = useGetMeQuery()
-  const isAuthenticated = data
 
-  return isAuthenticated ? <Outlet /> : <Navigate to="/sign-in" />
+  return data ? <Outlet /> : <Navigate to="/sign-in" />
 }
