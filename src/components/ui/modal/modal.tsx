@@ -1,7 +1,8 @@
 import { ReactNode } from 'react'
 
 import * as Dialog from '@radix-ui/react-dialog'
-import { Cross2Icon } from '@radix-ui/react-icons'
+
+import closeIcon from '../assets/svg/close.svg'
 
 import s from './modal.module.scss'
 
@@ -9,8 +10,9 @@ type PropsType = {
   open: boolean
   className?: ReactNode
   title?: string
-  children: ReactNode
+  children?: ReactNode
   onClose?: () => void
+  isDisabled?: boolean
 }
 
 export const Modal = ({ title = 'Title', children, onClose, open = true }: PropsType) => {
@@ -28,11 +30,11 @@ export const Modal = ({ title = 'Title', children, onClose, open = true }: Props
           <Dialog.Portal>
             <Dialog.Overlay className={s.DialogOverlay} />
             <Dialog.Content className={s.DialogContent}>
-              <header>
+              <header className={s.modalHeader}>
                 <Dialog.Title className={s.DialogTitle}>{title}</Dialog.Title>
                 <Dialog.Close asChild>
-                  <button className={s.IconButton} aria-label="Close">
-                    <Cross2Icon />
+                  <button className={s.Button} aria-label="Close">
+                    <img src={closeIcon} alt="close" className={s.IconButton} />
                   </button>
                 </Dialog.Close>
               </header>
