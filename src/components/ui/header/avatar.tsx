@@ -8,12 +8,8 @@ export const Avatar = () => {
 
   return (
     <div className={s.block}>
-      <span>{data?.name}</span>
-      <img
-        alt={'Avatar'}
-        src={data?.avatar === '' ? data?.avatar : AvatarIcon}
-        className={s.avatar}
-      />
+      <span className={s.editName}>{data?.name}</span>
+      <img alt={'Avatar'} src={AvatarIcon} className={s.avatar} />
     </div>
   )
 }

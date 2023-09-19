@@ -27,8 +27,6 @@ const publicRoutes: RouteObject[] = [
 const Component = () => {
   const { data } = useGetDecksQuery()
 
-  console.log(data)
-
   return <div>2</div>
 }
 
