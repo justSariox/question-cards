@@ -1,10 +1,10 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import { Meta, StoryObj } from '@storybook/react'
 
-import { Loader } from './'
+import { Slider } from './slider.tsx'
 
 const meta = {
-  title: 'Components/Loader',
-  component: Loader,
+  title: 'Components/Slider',
+  component: Slider,
   tags: ['autodocs'],
 
   argTypes: {
@@ -13,7 +13,7 @@ const meta = {
       control: { type: 'radio' },
     },
   },
-} satisfies Meta<typeof Loader>
+} satisfies Meta<typeof Slider>
 
 export default meta
 type Story = StoryObj<typeof meta>

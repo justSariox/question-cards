@@ -122,8 +122,6 @@ export const WithSort = {
       return `${sort.key}-${sort.direction}`
     }, [sort])
 
-    console.log(sortedString)
-
     const sortedData = useMemo(() => {
       if (!sort) return data
 

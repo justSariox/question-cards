@@ -22,7 +22,6 @@ export const ForgotPasswordForm = () => {
 
   const onSubmit = (data: FormValues) => {
     reset({ email: '' })
-    console.log(data.email)
   }
 
   return (
