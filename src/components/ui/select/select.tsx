@@ -15,7 +15,7 @@ export type SelectPropsType = {
   value?: string | number | null
   onChange?: (itemPerPage: string) => void
   label?: string | number
-  selectItems: SelectItemType[]
+  selectItems?: SelectItemType[]
   isDisabled?: boolean
 }
 export const Select = ({ label, selectItems, onChange, isDisabled }: SelectPropsType) => {
