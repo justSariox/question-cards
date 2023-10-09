@@ -20,6 +20,12 @@ type Story = StoryObj<typeof meta>
 
 export const Primary: Story = {
   args: {
+    selectItems: [
+      { label: 'Apple', value: 'Apple' },
+      { label: 'Lenovo', value: 'Lenovo' },
+      { label: 'Asus', value: 'Asus' },
+      { label: 'Sony', value: 'Sony' },
+    ],
     isDisabled: false,
   },
 }
