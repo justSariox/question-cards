@@ -40,7 +40,12 @@ export const EditProfile = () => {
       <Typography variant={'large'} as={'h1'}>
         Personal Information
       </Typography>
-      <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className={s.form}
+        encType="multipart/form-data"
+        method="post"
+      >
         <div className={s.avatar}>
           <img src={avatar} alt="avatar" />
           <div className={s.editIconAvatarWrapper}>
@@ -68,12 +73,14 @@ export const EditProfile = () => {
             <Typography variant={'body2'} className={s.email}>
               my@mail.com
             </Typography>
-            <Button type="submit" logout={true} variant={'secondary'}>
-              Logout
-            </Button>
           </div>
         )}
       </form>
+      {!editName && (
+        <Button type="submit" logout={true} variant={'secondary'}>
+          Logout
+        </Button>
+      )}
     </Card>
   )
 }

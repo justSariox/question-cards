@@ -27,8 +27,8 @@ export const Slider = ({ range, onRangeChange }: SliderProps) => {
         <SliderRadix.Track className={s.SliderTrack}>
           <SliderRadix.Range className={s.SliderRange} />
         </SliderRadix.Track>
-        <SliderRadix.Thumb className={s.SliderThumb} aria-label="Volume" />
-        <SliderRadix.Thumb className={s.SliderThumb} aria-label="Nevolume" />
+        <SliderRadix.Thumb className={s.SliderThumb} aria-label="rangeMin" />
+        <SliderRadix.Thumb className={s.SliderThumb} aria-label="rangeMax" />
       </SliderRadix.Root>
       <div className={s.SliderBoxValue}>{range[1]}</div>
     </form>
