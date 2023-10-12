@@ -68,12 +68,14 @@ export const EditProfile = () => {
             <Typography variant={'body2'} className={s.email}>
               my@mail.com
             </Typography>
-            <Button type="submit" logout={true} variant={'secondary'}>
-              Logout
-            </Button>
           </div>
         )}
       </form>
+      {!editName && (
+        <Button type="submit" logout={true} variant={'secondary'}>
+          Logout
+        </Button>
+      )}
     </Card>
   )
 }

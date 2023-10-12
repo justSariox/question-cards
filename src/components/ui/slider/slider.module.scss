@@ -11,8 +11,14 @@
 }
 
 .SliderBoxValue {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 50px;
   margin: 0 12px;
   padding: 6px 14px;
+
   border: 1px solid var(--color-dark-300);
   border-radius: 2px;
 }
@@ -57,10 +63,6 @@
   background-color: white;
   border-radius: 10px;
   box-shadow: 0 0 0 4px var(--color-accent-500);
-}
-
-.SliderThumb:hover {
-  background-color: var(--violet-3);
 }
 
 .SliderThumb:focus {

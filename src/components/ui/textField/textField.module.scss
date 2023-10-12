@@ -52,7 +52,7 @@
       }
 
       &:focus {
-        border: var(--color-info-700) solid 2px;
+        outline: var(--color-info-700) solid 2px;
       }
 
       &:active {

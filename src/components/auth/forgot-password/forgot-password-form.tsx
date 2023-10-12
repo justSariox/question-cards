@@ -41,7 +41,7 @@ export const ForgotPasswordForm = () => {
       <Typography variant={'body2'} className={s.rememberPassword}>
         Did you remember your password?
       </Typography>
-      <Button as={'a'} variant={'link'}>
+      <Button as={'a'} variant={'link'} className={s.buttonTryLoggingIn}>
         Try logging in
       </Button>
     </Card>

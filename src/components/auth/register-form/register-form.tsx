@@ -92,7 +92,7 @@ export const RegisterForm = () => {
       <Typography className={s.caption} variant={'caption'}>
         {'Already have an account?'}
       </Typography>
-      <Button variant={'link'} fullWidth as={Link} to={'/sign-in'}>
+      <Button variant={'link'} fullWidth as={Link} to={'/sign-in'} className={s.buttonSignIn}>
         Sign in
       </Button>
     </Card>

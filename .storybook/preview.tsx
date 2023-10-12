@@ -3,6 +3,9 @@ import '@fontsource/roboto/700.css'
 
 import '../src/styles/index.scss'
 import type { Preview } from '@storybook/react'
+import { Provider } from 'react-redux'
+import { store } from '../src/services/store'
+import { BrowserRouter } from 'react-router-dom'
 
 const preview: Preview = {
   parameters: {
@@ -15,5 +18,15 @@ const preview: Preview = {
     },
   },
 }
+
+export const decorators = [
+  Story => (
+    <BrowserRouter>
+      <Provider store={store}>
+        <Story />
+      </Provider>
+    </BrowserRouter>
+  ),
+]
 
 export default preview
