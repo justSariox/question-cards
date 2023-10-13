@@ -2,10 +2,9 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import { Button } from '../../ui/button'
-
 import s from './forgot-password.module.css'
 
+import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { ControlledTextField } from '@/components/ui/controlled/controlled-input/controlled-input.tsx'
 import { Typography } from '@/components/ui/typography'
@@ -36,7 +35,7 @@ export const ForgotPasswordForm = () => {
         <Typography variant={'body2'} className={s.description}>
           Enter your email address and we will send you further instructions
         </Typography>
-        <Button type="submit" className={s.button}>
+        <Button type={'submit'} className={s.button}>
           Send Instructions
         </Button>
       </form>

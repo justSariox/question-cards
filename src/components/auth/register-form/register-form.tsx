@@ -69,14 +69,14 @@ export const RegisterForm = () => {
   return (
     <Card className={s.card}>
       <Typography variant={'large'} className={s.title}>
-        Sign in
+        Sign Up
       </Typography>
       <form onSubmit={onSubmitHandler} className={s.loginForm}>
-        <ControlledTextField name={'email'} control={control} label={'email'} />
+        <ControlledTextField name={'email'} control={control} label={'Email'} />
         <ControlledTextField
           name={'password'}
           control={control}
-          label={'password'}
+          label={'Password'}
           type={'password'}
         />
         <ControlledTextField
@@ -85,15 +85,15 @@ export const RegisterForm = () => {
           label={'Confirm Password'}
           type={'password'}
         />
-        <Button type="submit" fullWidth>
-          Sign up
+        <Button type="submit" fullWidth className={s.buttonSignUp}>
+          Sign Up
         </Button>
       </form>
-      <Typography className={s.caption} variant={'caption'}>
+      <Typography className={s.caption} variant={'body2'}>
         {'Already have an account?'}
       </Typography>
-      <Button variant={'link'} fullWidth as={Link} to={'/sign-in'}>
-        Sign in
+      <Button className={s.buttonSignIn} variant={'link'} fullWidth as={Link} to={'/sign-in'}>
+        Sign In
       </Button>
     </Card>
   )

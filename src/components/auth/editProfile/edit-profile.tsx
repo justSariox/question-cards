@@ -48,9 +48,11 @@ export const EditProfile = () => {
       >
         <div className={s.avatar}>
           <img src={avatar} alt="avatar" />
-          <div className={s.editIconAvatarWrapper}>
-            <img src={editIcon} className={s.editIconAvatar} alt="Edit icon" />
-          </div>
+          {!editName && (
+            <div className={s.editIconAvatarWrapper}>
+              <img src={editIcon} className={s.editIconAvatar} alt="Edit icon" />
+            </div>
+          )}
         </div>
         {editName ? (
           <div className={s.changeName}>

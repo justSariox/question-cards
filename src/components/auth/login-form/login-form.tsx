@@ -52,40 +52,47 @@ export const LoginForm = () => {
   return (
     <Card className={s.card}>
       <Typography variant={'large'} className={s.title}>
-        Sign in
+        Sign In
       </Typography>
       <form onSubmit={handleSubmit(login)} className={s.loginForm}>
         <DevTool control={control} />
         <ControlledTextField
           name={'email'}
           control={control}
-          label={'email'}
+          label={'Email'}
           error={errors.email?.message}
         />
         <ControlledTextField
           name={'password'}
           control={control}
-          label={'password'}
+          label={'Password'}
           type={'password'}
           error={errors.password?.message}
         />
-        <ControlledCheckbox
-          className={s.checkbox}
-          name={'rememberMe'}
-          control={control}
-          label={'remember me'}
-        />
-        <Typography variant={'body2'} as={Link} to={'/recover'} className={s.forgotLink}>
-          Forgot your password?
-        </Typography>
-
-        <Button type="submit">Sign In</Button>
+        <div className={s.checkboxAndLinkWrapper}>
+          <div className={s.checkboxWrapper}>
+            <ControlledCheckbox
+              className={s.checkbox}
+              name={'rememberMe'}
+              control={control}
+              label={'remember me'}
+            />
+          </div>
+          <div className={s.linkWrapper}>
+            <Typography variant={'body2'} as={Link} to={'/recover'} className={s.forgotLink}>
+              Forgot password?
+            </Typography>
+          </div>
+        </div>
+        <Button type="submit" className={s.buttonSignIn}>
+          Sign In
+        </Button>
       </form>
-      <Typography className={s.caption} variant={'caption'}>
+      <Typography variant={'body2'} className={s.caption}>
         {"Don't have an account?"}
       </Typography>
-      <Button variant={'link'} fullWidth as={Link} to={'/sign-up'}>
-        Sign up
+      <Button className={s.buttonSignUp} variant={'link'} fullWidth as={Link} to={'/sign-up'}>
+        Sign Up
       </Button>
     </Card>
   )
