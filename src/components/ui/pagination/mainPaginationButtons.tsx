@@ -28,7 +28,7 @@ export const MainPaginationButtons = (props: MainPaginationButtonsProps) => {
           <button
             key={index}
             onClick={onClick(page)}
-            className={`${isSelected ? s.selectedPage : ''} ${s.button} `}
+            className={`${s.item} ${isSelected ? s.selectedPage : ''}  `}
           >
             {page}
           </button>
