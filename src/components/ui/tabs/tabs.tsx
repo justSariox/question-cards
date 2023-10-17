@@ -15,14 +15,13 @@ type PropsType = {
   value?: string
   defaultValue?: string
   onValueChange: (value: string) => void
-  children: ReactNode
+  children?: ReactNode
 }
 
-export const Tabs = ({ tabs, value, defaultValue, onValueChange, children }: PropsType) => {
+export const Tabs = ({ tabs, defaultValue, onValueChange, children }: PropsType) => {
   return (
     <TabsRadix.Root
       className={s.TabsRoot}
-      value={value}
       defaultValue={defaultValue}
       onValueChange={onValueChange}
     >

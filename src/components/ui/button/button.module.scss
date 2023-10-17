@@ -40,6 +40,16 @@
     background: url('../assets/svg/log-out.svg') no-repeat;
     background-size: 15px 15px;
   }
+
+  &.remove::before {
+    content: '';
+
+    width: 18px;
+    height: 19px;
+
+    background: url('../assets/svg/trash.svg') no-repeat;
+    background-size: 15px 15px;
+  }
 }
 
 .primary {

@@ -20,7 +20,7 @@ export const Slider = ({ range, onRangeChange }: SliderProps) => {
         defaultValue={range}
         value={range}
         onValueChange={changeValueHandler}
-        max={100}
+        max={range[1]}
         step={1}
         minStepsBetweenThumbs={1}
       >
