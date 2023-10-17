@@ -1,26 +1,34 @@
 .card {
-  width: 100%;
-  max-width: 400px;
-  margin: auto;
-  padding: 1px 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 420px;
+  min-height: 528px;
+  padding-top: 33px;
+
+  border-radius: 4px;
 }
 
 .title {
-  margin-bottom: 10px;
+  padding-bottom: 27px;
   text-align: center;
 }
 
 .loginForm {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
 
-  width: 100%;
-  margin-bottom: 12px;
+  width: 325px;
+  margin-bottom: 20px;
 }
 
 .checkbox {
   transform: translateY(-20px);
+  margin: 12px 0 6px;
 }
 
 .forgotLink,
@@ -35,11 +43,31 @@
 }
 
 .caption {
-  margin-top: 20px;
+  margin-bottom: 11px;
   color: var(--color-light-900);
   text-align: center;
+}
+
+.buttonSignIn {
+  width: 100%;
 }
 
 .buttonSignUp {
   text-decoration: underline;
 }
+
+.checkboxAndLinkWrapper {
+  margin-bottom: 66px;
+}
+
+.checkboxWrapper {
+  height: 10px;
+  margin-bottom: 6px;
+  padding-right: 217px;
+}
+
+.linkWrapper {
+  height: 10px;
+  padding-left: 210px;
+}
+
