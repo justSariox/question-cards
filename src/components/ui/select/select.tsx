@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { ComponentPropsWithoutRef, useState } from 'react'
 
 import { ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons'
 import * as Label from '@radix-ui/react-label'
@@ -15,10 +15,17 @@ export type SelectPropsType = {
   value?: string | number | null
   onChange?: (itemPerPage: string) => void
   label?: string | number
-  selectItems?: SelectItemType[]
+  selectItems: SelectItemType[]
   isDisabled?: boolean
-}
-export const Select = ({ label, selectItems, onChange, isDisabled }: SelectPropsType) => {
+} & ComponentPropsWithoutRef<'select'>
+
+export const Select = ({
+  label,
+  selectItems,
+  onChange,
+  isDisabled,
+  ...restProps
+}: SelectPropsType) => {
   const [upDownIcon, setUpDownIcon] = useState<boolean>(false)
   const selectItem = selectItems.map(i => {
     return (
@@ -31,8 +38,12 @@ export const Select = ({ label, selectItems, onChange, isDisabled }: SelectProps
   return (
     <div className={s.selectWrapper}>
       <div>
-        <Label.Root className={isDisabled ? s.LabelRootDisabled : s.LabelRoot} htmlFor="firstName">
-          {label}{' '}
+        <Label.Root
+          className={isDisabled ? s.LabelRootDisabled : s.LabelRoot}
+          htmlFor="firstName"
+          id={restProps.id}
+        >
+          {label}
         </Label.Root>
       </div>
       <div>
