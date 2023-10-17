@@ -1,5 +1,8 @@
 import { ComponentProps, ComponentPropsWithoutRef, ElementType, FC } from 'react'
 
+import arrowDown from '../assets/svg/arrow-down.svg'
+import arrowUp from '../assets/svg/arrow-up.svg'
+
 import s from './table.module.scss'
 
 import { Sort } from '@/components/ui/table/table.stories.tsx'
@@ -88,7 +91,15 @@ export const TableHeader: FC<
         {columns.map(({ title, key, sortable }) => (
           <TableCell as={'th'} key={key} onClick={handleSort(key, sortable)}>
             {title}
-            {sort && sort.key === key && <span>{sort.direction === 'asc' ? '▲' : '▼'}</span>}
+            {sort && sort.key === key && (
+              <span>
+                {sort.direction === 'asc' ? (
+                  <img src={arrowUp} className={s.arrow} />
+                ) : (
+                  <img src={arrowDown} className={s.arrow} />
+                )}
+              </span>
+            )}
           </TableCell>
         ))}
       </TableRow>

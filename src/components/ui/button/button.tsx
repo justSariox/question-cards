@@ -10,6 +10,7 @@ export type ButtonProps<T extends ElementType = 'button'> = {
   className?: string
   disabled?: boolean
   logout?: boolean
+  remove?: boolean
 } & ComponentPropsWithoutRef<T>
 
 export const Button = <T extends ElementType = 'button'>(
@@ -21,14 +22,14 @@ export const Button = <T extends ElementType = 'button'>(
     className,
     as: Component = 'button',
     logout,
+    remove,
     ...rest
   } = props
 
   return (
     <Component
-      className={`${s[variant]} ${fullWidth ? s.fullWidth : ''} ${
-        logout ? s.logout : ''
-      } ${className}`}
+      className={`${s[variant]} ${fullWidth ? s.fullWidth : ''} 
+      ${logout ? s.logout : ''} ${remove ? s.remove : ''} ${className}`}
       {...rest}
     />
   )
