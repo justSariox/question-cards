@@ -57,17 +57,19 @@
 }
 
 .checkboxAndLinkWrapper {
-  margin-bottom: 66px;
+  width: 100%;
+  margin: 12px 0 66px;
 }
 
 .checkboxWrapper {
+  display: flex;
   height: 10px;
   margin-bottom: 6px;
-  padding-right: 217px;
+  margin-left: -9px;
 }
 
 .linkWrapper {
+  display: flex;
+  justify-content: flex-end;
   height: 10px;
-  padding-left: 210px;
 }
-

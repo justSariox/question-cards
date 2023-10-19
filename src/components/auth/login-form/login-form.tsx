@@ -75,12 +75,12 @@ export const LoginForm = () => {
               className={s.checkbox}
               name={'rememberMe'}
               control={control}
-              label={'remember me'}
+              label={'Remember me'}
             />
           </div>
           <div className={s.linkWrapper}>
             <Typography variant={'body2'} as={Link} to={'/recover'} className={s.forgotLink}>
-              Forgot password?
+              Forgot Password?
             </Typography>
           </div>
         </div>

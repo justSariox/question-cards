@@ -1,5 +1,7 @@
 import { useState } from 'react'
 
+import { useNavigate } from 'react-router-dom'
+
 import s from './decks.module.css'
 
 import { Edit, PlayCircle, Trash } from '@/components/ui/assets/svg'
@@ -25,7 +27,8 @@ export const Decks = () => {
   const [sort, setSort] = useState<Sort | null>({ key: 'updated', direction: 'desc' })
   const sortString = sort ? `${sort.key}-${sort.direction}` : null
   const [search, setSearch] = useState<string>('')
-  const [range, setRange] = useState<Array<number>>([0, 10])
+  const [range, setRange] = useState<Array<number>>([0, 100])
+  const navigate = useNavigate()
   /*  const [page, setPage] = useState<number>(1)
   const [perPage, setPerPage] = useState<number>(10)*/
 
@@ -67,6 +70,16 @@ export const Decks = () => {
     setShowUserDecks(!showUserDecks)
   }
 
+  const clearFilters = () => {
+    setRange([0, 100])
+    changeAuthor()
+    setSearch('')
+  }
+
+  const deckInfoHandler = (deckId: string) => {
+    navigate('/deck/' + deckId)
+  }
+
   return (
     <div className={s.mainContainer}>
       <div className={s.titleAndButtonWrapper}>
@@ -86,12 +99,12 @@ export const Decks = () => {
         />
         <Tabs
           tabs={cardsOption}
-          value={showUserDecks ? user?.id : undefined}
+          value={showUserDecks ? 'All Cards' : 'My Cards'}
           defaultValue={'All Cards'}
           onValueChange={changeAuthor}
         />
         <Slider range={range} onRangeChange={setRange} />
-        <Button onClick={() => {}} variant={'secondary'} remove={true}>
+        <Button onClick={clearFilters} variant={'secondary'} remove={true}>
           Clear Filter
         </Button>
       </div>
@@ -116,7 +129,7 @@ export const Decks = () => {
                 <Table.TableCell as={'td'}>{deck.author.name}</Table.TableCell>
                 <Table.TableCell as={'td'}>
                   <div className={s.actions}>
-                    <PlayCircle />
+                    <PlayCircle className={s.playCircle} onClick={() => deckInfoHandler(deck.id)} />
                     <Edit />
                     <Button
                       disabled={deck.author.id !== user?.id}

@@ -26,8 +26,15 @@ export const decksApi = baseApi.injectEndpoints({
         }),
         invalidatesTags: ['Decks'],
       }),
+      getDeck: builder.query<any, { id: string }>({
+        query: ({ id }) => ({
+          url: `v1/decks/${id}`,
+        }),
+        providesTags: ['Decks'],
+      }),
     }
   },
 })
 
-export const { useGetDecksQuery, useCreateDeckMutation, useRemoveDeckMutation } = decksApi
+export const { useGetDecksQuery, useCreateDeckMutation, useRemoveDeckMutation, useGetDeckQuery } =
+  decksApi

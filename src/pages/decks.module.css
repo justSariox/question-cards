@@ -1,6 +1,5 @@
 .mainContainer {
-  width: 1400px;
-  margin: 0 auto;
+  margin: 0 150px;
 }
 
 .titleAndButtonWrapper {
@@ -33,4 +32,8 @@
 
 .trashButton {
   padding: 0;
+}
+
+.playCircle {
+  cursor: pointer;
 }

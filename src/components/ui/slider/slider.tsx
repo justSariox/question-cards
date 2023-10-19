@@ -18,9 +18,7 @@ export const Slider = ({ range, onRangeChange }: SliderProps) => {
       <SliderRadix.Root
         className={s.SliderRoot}
         defaultValue={range}
-        value={range}
         onValueChange={changeValueHandler}
-        max={range[1]}
         step={1}
         minStepsBetweenThumbs={1}
       >

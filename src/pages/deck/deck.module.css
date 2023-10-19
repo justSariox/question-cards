@@ -1,0 +1,38 @@
+.mainContainer {
+  margin: 0 150px;
+}
+
+.arrowBackIcon {
+  width: 12px;
+  height: 12px;
+  margin-right: 6px;
+}
+
+.backToDecksList {
+  cursor: pointer;
+
+  margin: 24px 0 33px;
+
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-m);
+  color: var(--color-light-100);
+}
+
+.descriptionDeckWrapper {
+  display: flex;
+  justify-content: center;
+  margin: 69px 0 30px;
+}
+
+.descriptionDeck {
+  font-size: var(--font-size-m);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-m);
+  color: var(--color-dark-100);
+}
+
+.addNewCardWrapper {
+  display: flex;
+  justify-content: center;
+}

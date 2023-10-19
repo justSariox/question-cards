@@ -5,7 +5,6 @@ import s from './header.module.scss'
 import AvatarIcon from '@/assets/avatar.png'
 import Logo from '@/assets/logo.png'
 import { Button } from '@/components/ui/button'
-// import { Avatar } from '@/components/ui/header/avatar'
 import { useGetMeQuery } from '@/services/auth/auth.ts'
 
 export type HeaderProps = {
@@ -18,8 +17,11 @@ export const Avatar = () => {
 
   return (
     <div className={s.block}>
-      <span className={s.editName}>{data?.name}</span>
-      <img alt={'Avatar'} src={AvatarIcon} className={s.avatar} />
+      <div className={s.editName}>{data?.name}</div>
+
+      <div>
+        <img alt={'Avatar'} src={AvatarIcon} className={s.avatar} />
+      </div>
     </div>
   )
 }
