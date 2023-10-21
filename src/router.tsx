@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom'
 
 import { Layout } from '@/components/ui/layout/Layout.tsx'
+import { Deck } from '@/pages/deck/deck.tsx'
 import { Decks } from '@/pages/decks.tsx'
 import { SignInPage } from '@/pages/sign-in.tsx'
 import { SignUpPage } from '@/pages/sign-up.tsx'
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
           {
             path: '/',
             element: <Decks />,
+          },
+          {
+            path: '/deck/*',
+            element: <Deck />,
           },
           {
             path: '/2',

@@ -14,7 +14,7 @@ type PropsType = {
   tabs: TabType[]
   value?: string
   defaultValue?: string
-  onValueChange: (value: string) => void
+  onValueChange: () => void
   children?: ReactNode
 }
 

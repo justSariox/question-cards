@@ -18,11 +18,10 @@ img {
 
 .block {
   display: flex;
-  gap: 32px;
+  gap: 14px;
   align-items: center;
   justify-content: space-between;
 
-  width: 81px;
   height: 36px;
 }
 
@@ -32,11 +31,8 @@ img {
 }
 
 .editName {
-  width: 33px;
-
   font-size: var(--font-size-m);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-m);
-
   border-bottom: 1px dashed var(--color-light-100);
 }
