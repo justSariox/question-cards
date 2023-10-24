@@ -56,7 +56,7 @@ export const TableCell = <T extends ElementType = 'th' | 'td'>({
 }: TableCellProps<T> & Omit<ComponentProps<T>, keyof TableCellProps<T>>) => {
   return (
     <Component
-      className={`${Component === 'th' ? s.tablecellhead : s.tablecellbody} ${className}`}
+      className={`${className} ${Component === 'th' ? s.tablecellhead : s.tablecellbody} `}
       {...restProps}
     />
   )

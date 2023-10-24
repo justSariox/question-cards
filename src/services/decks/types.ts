@@ -41,3 +41,43 @@ export type DecksParams = {
   currentPage?: number
   itemsPerPage?: number
 } | void
+
+export type CardType = {
+  id: string
+  question: string
+  answer: string
+  deckId: string
+  questionImg?: any
+  answerImg?: any
+  questionVideo?: any
+  answerVideo?: any
+  created: string
+  updated: string
+  shots: number
+  grade: number
+  userId: string
+}
+
+export type CardsParams = {
+  id: string
+  question?: string
+  answer?: string
+  orderBy?: string
+  currentPage?: number
+  itemsPerPage?: number
+}
+
+export type DeckResponseType = {
+  id: string
+  userId: string
+  name: string
+  isPrivate: boolean
+  shots: number
+  cover?: any
+  rating: number
+  isDeleted?: any
+  isBlocked?: any
+  created: string
+  updated: string
+  cardsCount: number
+}

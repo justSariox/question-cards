@@ -5,6 +5,7 @@ import s from './slider.module.scss'
 export type SliderProps = {
   range: Array<number>
   onRangeChange: (range: Array<number>) => void
+  value: Array<number>
 }
 
 export const Slider = ({ range, onRangeChange }: SliderProps) => {
@@ -17,7 +18,7 @@ export const Slider = ({ range, onRangeChange }: SliderProps) => {
       <div className={s.SliderBoxValue}>{range[0]}</div>
       <SliderRadix.Root
         className={s.SliderRoot}
-        defaultValue={range}
+        value={range}
         onValueChange={changeValueHandler}
         step={1}
         minStepsBetweenThumbs={1}

@@ -20,6 +20,7 @@ import {
   useGetDecksQuery,
   useRemoveDeckMutation,
 } from '@/services/decks/decks.ts'
+import { Deck } from '@/services/decks/types.ts'
 
 export const Decks = () => {
   const { data: user, isLoading: getMeIsLoading } = useGetMeQuery()
@@ -29,9 +30,10 @@ export const Decks = () => {
   const [search, setSearch] = useState<string>('')
   const [range, setRange] = useState<Array<number>>([0, 100])
   const navigate = useNavigate()
+
   /*  const [page, setPage] = useState<number>(1)
   const [perPage, setPerPage] = useState<number>(10)*/
-
+  console.log(user)
   const {
     data: decks,
     isLoading,
@@ -45,6 +47,7 @@ export const Decks = () => {
     /*    itemsPerPage: perPage,
         currentPage: page,*/
   })
+
   const [createDeck] = useCreateDeckMutation()
   const [deleteDeck] = useRemoveDeckMutation()
   const columns: Column[] = [
@@ -72,12 +75,12 @@ export const Decks = () => {
 
   const clearFilters = () => {
     setRange([0, 100])
-    changeAuthor()
+    setShowUserDecks(false)
     setSearch('')
   }
 
   const deckInfoHandler = (deckId: string) => {
-    navigate('/deck/' + deckId)
+    navigate('/decks/' + deckId)
   }
 
   return (
@@ -99,11 +102,11 @@ export const Decks = () => {
         />
         <Tabs
           tabs={cardsOption}
-          value={showUserDecks ? 'All Cards' : 'My Cards'}
-          defaultValue={'All Cards'}
+          value={showUserDecks ? cardsOption[0].value : cardsOption[1].value}
+          defaultValue={cardsOption[1].value}
           onValueChange={changeAuthor}
         />
-        <Slider range={range} onRangeChange={setRange} />
+        <Slider range={range} onRangeChange={setRange} value={range} />
         <Button onClick={clearFilters} variant={'secondary'} remove={true}>
           Clear Filter
         </Button>
@@ -118,15 +121,21 @@ export const Decks = () => {
       <Table.TableRoot width={'100%'} style={{ textAlign: 'left' }}>
         <Table.TableHeader columns={columns} sort={sort} onSort={setSort} />
         <Table.TableBody>
-          {decks?.items?.map((deck: any) => {
+          {decks?.items?.map((deck: Deck) => {
             return (
               <Table.TableRow key={deck.id}>
-                <Table.TableCell as={'td'}>{deck.name}</Table.TableCell>
-                <Table.TableCell as={'td'}>{deck.cardsCount}</Table.TableCell>
-                <Table.TableCell as={'td'}>
+                <Table.TableCell as={'td'} className={s.tableCellName}>
+                  {deck.name}
+                </Table.TableCell>
+                <Table.TableCell as={'td'} className={s.tableCellCardsCount}>
+                  {deck.cardsCount}
+                </Table.TableCell>
+                <Table.TableCell as={'td'} className={s.tableCellDate}>
                   {new Date(deck.updated).toLocaleDateString('ru-RU')}
                 </Table.TableCell>
-                <Table.TableCell as={'td'}>{deck.author.name}</Table.TableCell>
+                <Table.TableCell as={'td'} className={s.tableCellAuthorName}>
+                  {deck.author.name}
+                </Table.TableCell>
                 <Table.TableCell as={'td'}>
                   <div className={s.actions}>
                     <PlayCircle className={s.playCircle} onClick={() => deckInfoHandler(deck.id)} />
