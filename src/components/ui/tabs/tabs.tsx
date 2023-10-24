@@ -18,12 +18,13 @@ type PropsType = {
   children?: ReactNode
 }
 
-export const Tabs = ({ tabs, defaultValue, onValueChange, children }: PropsType) => {
+export const Tabs = ({ tabs, defaultValue, onValueChange, children, value }: PropsType) => {
   return (
     <TabsRadix.Root
       className={s.TabsRoot}
       defaultValue={defaultValue}
       onValueChange={onValueChange}
+      value={value}
     >
       <TabsRadix.List className={s.TabsList} aria-label="Manage your choice">
         {tabs.map(tab => (

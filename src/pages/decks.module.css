@@ -37,3 +37,13 @@
 .playCircle {
   cursor: pointer;
 }
+
+.tableCellName,
+.tableCellCardsCount,
+.tableCellDate {
+  width: 300px;
+}
+
+.tableCellAuthorName {
+  width: 200px;
+}

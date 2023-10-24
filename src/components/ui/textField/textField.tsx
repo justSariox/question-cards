@@ -10,10 +10,14 @@ export type TextFieldProps = {
   disabled?: boolean
   label?: string
   type?: 'text' | 'password' | 'search'
+  className?: string
 } & ComponentPropsWithoutRef<'input'>
 
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
-  ({ onChangeValue, value, error, disabled, onChange, label, type, ...restProps }, ref) => {
+  (
+    { onChangeValue, value, error, disabled, onChange, label, type, className, ...restProps },
+    ref
+  ) => {
     const [visiblePassword, setVisiblePassword] = useState<boolean>(false)
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -35,7 +39,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
             id={restProps.id}
             placeholder={restProps.placeholder}
             type={'password' && visiblePassword ? 'text' : type}
-            className={`${error ? s.error : s.input}`}
+            className={`${className} ${error ? s.error : s.input}`}
             onChange={onChangeHandler}
             disabled={disabled}
             ref={ref}

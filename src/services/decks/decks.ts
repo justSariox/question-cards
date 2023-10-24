@@ -1,5 +1,10 @@
 import { baseApi } from '@/services/base-api.ts'
-import { DecksParams, DecksResponseType } from '@/services/decks/types.ts'
+import {
+  CardsParams,
+  DeckResponseType,
+  DecksParams,
+  DecksResponseType,
+} from '@/services/decks/types.ts'
 
 export const decksApi = baseApi.injectEndpoints({
   endpoints: builder => {
@@ -26,15 +31,36 @@ export const decksApi = baseApi.injectEndpoints({
         }),
         invalidatesTags: ['Decks'],
       }),
-      getDeck: builder.query<any, { id: string }>({
+      getDeckById: builder.query<DeckResponseType, { id: string }>({
         query: ({ id }) => ({
           url: `v1/decks/${id}`,
         }),
         providesTags: ['Decks'],
       }),
+      getDeckCards: builder.query<any, CardsParams>({
+        query: ({ id, ...restProps }) => ({
+          url: `v1/decks/${id}/cards`,
+          params: restProps,
+        }),
+        providesTags: ['Decks'],
+      }),
+      createCard: builder.mutation<any, { id: string; question: string; answer: string }>({
+        query: ({ id, ...restProps }) => ({
+          url: `v1/decks/${id}/cards`,
+          method: 'POST',
+          body: { question: restProps.question, answer: restProps.answer },
+        }),
+        invalidatesTags: ['Decks'],
+      }),
     }
   },
 })
 
-export const { useGetDecksQuery, useCreateDeckMutation, useRemoveDeckMutation, useGetDeckQuery } =
-  decksApi
+export const {
+  useGetDecksQuery,
+  useCreateDeckMutation,
+  useRemoveDeckMutation,
+  useGetDeckByIdQuery,
+  useGetDeckCardsQuery,
+  useCreateCardMutation,
+} = decksApi

@@ -28,7 +28,7 @@ const publicRoutes: RouteObject[] = [
 const Component = () => {
   const { data } = useGetDecksQuery()
 
-  return <div>2</div>
+  return <div>{data ? data.maxCardsCount : 2}</div>
 }
 
 const router = createBrowserRouter([
@@ -44,7 +44,7 @@ const router = createBrowserRouter([
             element: <Decks />,
           },
           {
-            path: '/deck/*',
+            path: '/decks/:deckId',
             element: <Deck />,
           },
           {
