@@ -7,7 +7,9 @@ import s from './deck.module.css'
 import { Edit, Trash } from '@/components/ui/assets/svg'
 import arrowBack from '@/components/ui/assets/svg/arrow-back.svg'
 import { Button } from '@/components/ui/button'
+import { Grade } from '@/components/ui/grade/grade.tsx'
 import { Loader } from '@/components/ui/loader'
+import { Pagination } from '@/components/ui/pagination'
 import { Column, Table } from '@/components/ui/table'
 import { Sort } from '@/components/ui/table/table.stories.tsx'
 import { TextField } from '@/components/ui/textField'
@@ -27,12 +29,17 @@ export const Deck = () => {
   const sortString = sort ? `${sort.key}-${sort.direction}` : undefined
   const [search, setSearch] = useState<string>('')
   const { data: deck, isLoading, isError } = useGetDeckByIdQuery({ id: deckId || '' })
+  const [page, setPage] = useState<number>(1)
+  const [perPage, setPerPage] = useState<number>(10)
   const { data: deckCards, isLoading: getDeckCardsLoading } = useGetDeckCardsQuery({
     id: deckId || '',
     question: search,
     answer: search,
     orderBy: sortString,
+    currentPage: page,
+    itemsPerPage: perPage,
   })
+
   const [createCard] = useCreateCardMutation()
 
   const columns: Column[] = [
@@ -75,14 +82,17 @@ export const Deck = () => {
         <div>
           <div className={s.descriptionDeckWrapper}>
             <Typography variant={'body2'} className={s.descriptionDeck}>
-              This pack is empty. Click add new card to fill this pack
+              This pack is empty.
+              {user?.id === deck.userId && 'Click add new card to fill this pack'}
             </Typography>
           </div>
-          <div className={s.addNewCardWrapper}>
-            <Button onClick={createCardHandler} className={s.buttonAddCard}>
-              Add New Card
-            </Button>
-          </div>
+          {user?.id === deck.userId && (
+            <div className={s.addNewCardWrapper}>
+              <Button onClick={createCardHandler} className={s.buttonAddCard}>
+                Add New Card
+              </Button>
+            </div>
+          )}
         </div>
       )}
       {deck?.cardsCount > 0 && (
@@ -95,6 +105,15 @@ export const Deck = () => {
               onChangeValue={setSearch}
             />
           </div>
+          <Pagination
+            count={deckCards?.pagination?.totalPages || 1}
+            page={page}
+            onChange={setPage}
+            perPage={perPage}
+            onPerPageChange={setPerPage}
+          >
+            {' '}
+          </Pagination>
           <Table.TableRoot width={'100%'} style={{ textAlign: 'left' }}>
             <Table.TableHeader columns={columns} sort={sort} onSort={setSort} />
             <Table.TableBody>
@@ -111,7 +130,7 @@ export const Deck = () => {
                       {new Date(card.updated).toLocaleDateString('ru-RU')}
                     </Table.TableCell>
                     <Table.TableCell as={'td'} className={s.tableCellGrade}>
-                      {card.grade}
+                      <Grade gradeValue={card.grade} />
                     </Table.TableCell>
                     <Table.TableCell as={'td'}>
                       <div className={`${user?.id === deck?.userId ? s.actions : s.actionsHide}`}>

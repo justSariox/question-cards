@@ -4,7 +4,7 @@ import s from '@/components/ui/pagination/pagination.module.scss'
 import { Select } from '@/components/ui/select'
 
 export type PerPageSelectProps = {
-  perPage: number | null
+  perPage: number | undefined
   perPageOptions: string[]
   onPerPageChange?: (itemPerPage: string) => void
 }
@@ -27,6 +27,7 @@ export const PerPageSelect: FC<PerPageSelectProps> = ({
         value={perPage}
         selectItems={selectOptions}
         onChange={onPerPageChange}
+        isPagination={true}
       />
       на странице
     </div>

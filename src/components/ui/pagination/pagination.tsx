@@ -4,8 +4,6 @@ import { FC, ReactNode } from 'react'
 
 import s from './pagination.module.scss'
 
-import firstVectorLeft from '@/components/ui/assets/svg/firstVectorLeft.svg'
-import secondVectorLeft from '@/components/ui/assets/svg/secondVectorLeft.svg'
 import { MainPaginationButtons } from '@/components/ui/pagination/mainPaginationButtons.tsx'
 import { NextButton, PrevButton } from '@/components/ui/pagination/navigationButtons.tsx'
 import { PerPageSelect } from '@/components/ui/pagination/perPageSelect.tsx'
@@ -77,15 +75,7 @@ export const Pagination: FC<PaginationProps> = ({
   return (
     <div className={s.root}>
       <div className={s.container}>
-        {isFirstPage ? (
-          <PrevButton
-            onClick={handlePreviousPageClicked}
-            disabled={isFirstPage}
-            image={firstVectorLeft}
-          />
-        ) : (
-          <PrevButton onClick={handlePreviousPageClicked} image={secondVectorLeft} />
-        )}
+        <PrevButton onClick={handlePreviousPageClicked} disabled={isFirstPage} />
         <MainPaginationButtons
           currentPage={page}
           onClick={handleMainPageClicked}
