@@ -1,3 +1,6 @@
 export { default as PlayCircle } from './play-circle'
 export { default as Trash } from './trash'
 export { default as Edit } from './edit'
+export { default as More } from './more.tsx'
+export { default as LogOut } from './logout.tsx'
+export { default as Person } from './person.tsx'
