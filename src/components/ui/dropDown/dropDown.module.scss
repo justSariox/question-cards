@@ -1,0 +1,222 @@
+@import '@radix-ui/colors/black-alpha.css';
+@import '@radix-ui/colors/mauve.css';
+@import '@radix-ui/colors/violet.css';
+
+button {
+  all: unset;
+}
+
+.mainContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.DropdownMenuContent {
+  margin-left: 15px;
+  padding: 5px;
+
+  background-color: var(--color-dark-700);
+  border: 1px solid var(--color-dark-500);
+  border-radius: 4px;
+}
+
+.DropdownMenuContent[data-side='top'] {
+  animation-name: slideDownAndFade;
+}
+
+.DropdownMenuContent[data-side='right'] {
+  animation-name: slideLeftAndFade;
+}
+
+.DropdownMenuContent[data-side='bottom'] {
+  animation-name: slideUpAndFade;
+}
+
+.DropdownMenuContent[data-side='left'] {
+  animation-name: slideRightAndFade;
+}
+
+.DropdownMenuItem {
+  user-select: none;
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  padding: 12px;
+
+  font-size: 13px;
+  line-height: 1;
+  color: var(--color-light-100);
+
+  border-radius: 3px;
+  outline: none;
+}
+
+.DropdownMenuItem {
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-s);
+}
+
+.DropdownMenuItem[data-disabled] {
+  pointer-events: none;
+  color: var(--mauve-8);
+}
+
+.DropdownMenuItem[data-highlighted] {
+  color: var(--violet-1);
+  background-color: var(--violet-9);
+}
+
+.DropdownMenuLabel {
+  padding: 12px;
+  font-size: 12px;
+  line-height: 25px;
+  color: var(--mauve-11);
+}
+
+.DropdownMenuSeparator {
+  height: 1px;
+  margin: 5px;
+  background-color: var(--color-dark-500);
+}
+
+.DropdownMenuItemIndicator {
+  position: absolute;
+  left: 0;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 25px;
+}
+
+.DropdownMenuArrow {
+  //fill: var(--color-dark-700);
+  fill: var(--color-dark-500);
+}
+
+.IconButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  /*  width: 36px;
+  height: 36px; */
+
+  font-family: inherit;
+  color: var(--violet-11);
+
+  background-color: black;
+  border-radius: 100%;
+  box-shadow: 0 2px 10px var(--black-a7);
+}
+
+.IconButton:hover {
+  cursor: pointer;
+}
+
+.IconButton:focus {
+  box-shadow: 0 0 0 2px black;
+}
+
+.RightSlot {
+  margin-left: auto;
+  padding-left: 20px;
+  color: var(--mauve-11);
+}
+
+[data-highlighted] > .RightSlot {
+  color: white;
+}
+
+[data-disabled] .RightSlot {
+  color: var(--mauve-8);
+}
+
+@keyframes slideUpAndFade {
+  from {
+    transform: translateY(2px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideRightAndFade {
+  from {
+    transform: translateX(-2px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideDownAndFade {
+  from {
+    transform: translateY(-2px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideLeftAndFade {
+  from {
+    transform: translateX(2px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.avatarIcon {
+  width: 36px;
+  height: 36px;
+}
+
+.profileInfo {
+  display: flex;
+}
+
+.profileName {
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-m);
+  color: var(--color-light-100);
+}
+
+.profileMail {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-s);
+}
+
+.profileNameAndMailWrapper {
+  margin-left: 8px;
+}
+
+.optionName {
+  margin-left: 6px;
+}
+
+.optionSetting {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

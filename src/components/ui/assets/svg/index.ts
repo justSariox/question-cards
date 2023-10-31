@@ -5,3 +5,7 @@ export { default as Star } from './star.tsx'
 export { default as StarOutline } from './star-outline.tsx'
 export { default as ArrowLeft } from './arrow-left.tsx'
 export { default as ArrowRight } from './arrow-right.tsx'
+export { default as More } from './more.tsx'
+export { default as LogOut } from './logout.tsx'
+export { default as Person } from './person.tsx'
+
