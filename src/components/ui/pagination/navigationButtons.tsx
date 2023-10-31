@@ -1,18 +1,17 @@
 import { FC } from 'react'
 
-import vectorRight from '@/components/ui/assets/svg/vectorRight.svg'
+import { ArrowLeft, ArrowRight } from '@/components/ui/assets/svg'
 import s from '@/components/ui/pagination/pagination.module.scss'
 
 export type NavigationButtonProps = {
   onClick: () => void
   disabled?: boolean
-  image?: string
 }
 
-export const PrevButton: FC<NavigationButtonProps> = ({ onClick, disabled, image }) => {
+export const PrevButton: FC<NavigationButtonProps> = ({ onClick, disabled }) => {
   return (
     <button className={s.item} onClick={onClick} disabled={disabled}>
-      <img src={image} alt={''} className={s.icon} />
+      <ArrowLeft fill={disabled ? 'gray' : 'white'} />
     </button>
   )
 }
@@ -20,7 +19,7 @@ export const PrevButton: FC<NavigationButtonProps> = ({ onClick, disabled, image
 export const NextButton: FC<NavigationButtonProps> = ({ onClick, disabled }) => {
   return (
     <button className={s.item} onClick={onClick} disabled={disabled}>
-      <img src={vectorRight} alt={'vectorRight'} />
+      <ArrowRight fill={disabled ? 'gray' : 'white'} />
     </button>
   )
 }

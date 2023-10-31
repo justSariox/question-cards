@@ -7,7 +7,7 @@ import s from './decks.module.css'
 import { Edit, PlayCircle, Trash } from '@/components/ui/assets/svg'
 import { Button } from '@/components/ui/button'
 import { Loader } from '@/components/ui/loader'
-// import { Pagination } from '@/components/ui/pagination'
+import { Pagination } from '@/components/ui/pagination'
 import { Slider } from '@/components/ui/slider'
 import { Column, Table } from '@/components/ui/table'
 import { Sort } from '@/components/ui/table/table.stories.tsx'
@@ -31,9 +31,8 @@ export const Decks = () => {
   const [range, setRange] = useState<Array<number>>([0, 100])
   const navigate = useNavigate()
 
-  /*  const [page, setPage] = useState<number>(1)
-  const [perPage, setPerPage] = useState<number>(10)*/
-  console.log(user)
+  const [page, setPage] = useState<number>(1)
+  const [perPage, setPerPage] = useState<number>(10)
   const {
     data: decks,
     isLoading,
@@ -44,8 +43,8 @@ export const Decks = () => {
     authorId: showUserDecks ? user?.id : undefined,
     minCardsCount: range[0],
     maxCardsCount: range[1],
-    /*    itemsPerPage: perPage,
-        currentPage: page,*/
+    itemsPerPage: perPage,
+    currentPage: page,
   })
 
   const [createDeck] = useCreateDeckMutation()
@@ -111,13 +110,7 @@ export const Decks = () => {
           Clear Filter
         </Button>
       </div>
-      {/*        <Pagination
-          count={decks?.pagination?.totalPages || 1}
-          page={page}
-          onChange={setPage}
-          perPage={perPage}
-          onPerPageChange={setPerPage}
-        >*/}
+
       <Table.TableRoot width={'100%'} style={{ textAlign: 'left' }}>
         <Table.TableHeader columns={columns} sort={sort} onSort={setSort} />
         <Table.TableBody>
@@ -155,7 +148,15 @@ export const Decks = () => {
           })}
         </Table.TableBody>
       </Table.TableRoot>
-      {/*</Pagination>*/}
+      <Pagination
+        count={decks?.pagination?.totalPages || 1}
+        page={page}
+        onChange={setPage}
+        perPage={perPage}
+        onPerPageChange={setPerPage}
+      >
+        {' '}
+      </Pagination>
     </div>
   )
 }

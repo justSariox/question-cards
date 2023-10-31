@@ -17,6 +17,7 @@ export type SelectPropsType = {
   label?: string | number
   selectItems: SelectItemType[]
   isDisabled?: boolean
+  isPagination?: boolean
 } & ComponentPropsWithoutRef<'select'>
 
 export const Select = ({
@@ -24,6 +25,8 @@ export const Select = ({
   selectItems,
   onChange,
   isDisabled,
+  className,
+  isPagination = false,
   ...restProps
 }: SelectPropsType) => {
   const [upDownIcon, setUpDownIcon] = useState<boolean>(false)
@@ -48,7 +51,9 @@ export const Select = ({
       </div>
       <div>
         <SelectRadix.Root open={upDownIcon} onOpenChange={setUpDownIcon} onValueChange={onChange}>
-          <SelectRadix.Trigger className={s.SelectTrigger}>
+          <SelectRadix.Trigger
+            className={` ${isPagination ? '' : s.selectSize} ${s.SelectTrigger}`}
+          >
             <SelectRadix.Value placeholder={selectItems[0].value} />
             <SelectRadix.Icon className={s.SelectDownIcon} asChild>
               {upDownIcon ? (
@@ -61,7 +66,7 @@ export const Select = ({
           <SelectRadix.Portal>
             <SelectRadix.Content className={s.SelectContent} position="popper" sideOffset={-1}>
               <SelectRadix.Viewport className={s.SelectViewport}>
-                <SelectRadix.Group>{selectItem}</SelectRadix.Group>
+                <SelectRadix.Group className={s.selectItem}>{selectItem}</SelectRadix.Group>
               </SelectRadix.Viewport>
             </SelectRadix.Content>
           </SelectRadix.Portal>
