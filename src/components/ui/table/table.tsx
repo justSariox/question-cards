@@ -77,8 +77,6 @@ export const TableHeader: FC<
 
     if (sort?.key !== key) return onSort({ key, direction: 'asc' })
 
-    if (sort.direction === 'desc') return onSort(null)
-
     return onSort({
       key,
       direction: sort?.direction === 'asc' ? 'desc' : 'asc',
@@ -91,7 +89,7 @@ export const TableHeader: FC<
         {columns.map(({ title, key, sortable }) => (
           <TableCell as={'th'} key={key} onClick={handleSort(key, sortable)}>
             {title}
-            {sort && sort.key === key && (
+            {sort && sortable && (
               <span>
                 {sort.direction === 'asc' ? (
                   <img src={arrowUp} className={s.arrow} />
