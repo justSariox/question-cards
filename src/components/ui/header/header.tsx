@@ -5,6 +5,7 @@ import s from './header.module.scss'
 import AvatarIcon from '@/assets/avatar.png'
 import Logo from '@/assets/logo.png'
 import { Button } from '@/components/ui/button'
+import { DropDown } from '@/components/ui/dropDown'
 import { useGetMeQuery } from '@/services/auth/auth.ts'
 
 export type HeaderProps = {
@@ -36,7 +37,13 @@ export const Header = (props: HeaderProps) => {
       <a href={'/'}>
         <img alt={'Logo'} src={Logo} />
       </a>
-      {isLoggedIn ? <Avatar /> : <Button variant={'primary'}>Sign In</Button>}
+      {isLoggedIn ? (
+        <DropDown isProfile={true}>
+          <Avatar />
+        </DropDown>
+      ) : (
+        <Button variant={'primary'}>Sign In</Button>
+      )}
     </div>
   )
 }

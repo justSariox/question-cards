@@ -34,8 +34,33 @@
   padding: 0;
 }
 
-.playCircle {
+.playCircleButton {
   cursor: pointer;
+}
+
+.editIconButton,
+.playCircleButton {
+  padding: 0;
+}
+
+.editIconButton:disabled,
+.trashButton:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
+.playCircleButton:hover,
+.editIconButton:hover,
+.trashButton:hover {
+  background-color: var(--color-dark-300);
+  border-radius: 100px;
+  outline: 5px solid var(--color-dark-300);
+}
+
+.editIconButton:disabled:hover,
+.trashButton:disabled:hover {
+  background-color: inherit;
+  outline: none;
 }
 
 .tableCellName,

@@ -41,10 +41,18 @@
   justify-content: center;
 }
 
-.typographyAndButton {
+.deckInfo {
   display: flex;
   justify-content: space-between;
   margin-bottom: 24px;
+}
+
+.typographyAndDropdown {
+  display: flex;
+}
+
+.titleDeck {
+  padding: 0 10px 2px 0;
 }
 
 .inputSearchWrapper {

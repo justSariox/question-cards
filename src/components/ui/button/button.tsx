@@ -23,6 +23,7 @@ export const Button = <T extends ElementType = 'button'>(
     as: Component = 'button',
     logout,
     remove,
+    children,
     ...rest
   } = props
 
@@ -31,6 +32,8 @@ export const Button = <T extends ElementType = 'button'>(
       className={`${s[variant]} ${fullWidth ? s.fullWidth : ''} 
       ${logout ? s.logout : ''} ${remove ? s.remove : ''} ${className}`}
       {...rest}
-    />
+    >
+      {children}
+    </Component>
   )
 }
