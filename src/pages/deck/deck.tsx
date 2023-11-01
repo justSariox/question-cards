@@ -7,6 +7,7 @@ import s from './deck.module.css'
 import { Edit, Trash } from '@/components/ui/assets/svg'
 import arrowBack from '@/components/ui/assets/svg/arrow-back.svg'
 import { Button } from '@/components/ui/button'
+import { DropDown } from '@/components/ui/dropDown'
 import { Grade } from '@/components/ui/grade/grade.tsx'
 import { Loader } from '@/components/ui/loader'
 import { Pagination } from '@/components/ui/pagination'
@@ -66,10 +67,13 @@ export const Deck = () => {
           Back to Packs List
         </Link>
       </div>
-      <div className={s.typographyAndButton}>
-        <Typography variant={'large'} className={s.titleDeck}>
-          {deck?.name}
-        </Typography>
+      <div className={s.deckInfo}>
+        <div className={s.typographyAndDropdown}>
+          <Typography variant={'large'} className={s.titleDeck}>
+            {deck?.name}
+          </Typography>
+          {user?.id === deck.userId && <DropDown />}
+        </div>
 
         {deck?.cardsCount > 0 && (
           <div className={s.learnToPackWrapper}>
@@ -105,15 +109,6 @@ export const Deck = () => {
               onChangeValue={setSearch}
             />
           </div>
-          <Pagination
-            count={deckCards?.pagination?.totalPages || 1}
-            page={page}
-            onChange={setPage}
-            perPage={perPage}
-            onPerPageChange={setPerPage}
-          >
-            {' '}
-          </Pagination>
           <Table.TableRoot width={'100%'} style={{ textAlign: 'left' }}>
             <Table.TableHeader columns={columns} sort={sort} onSort={setSort} />
             <Table.TableBody>
@@ -150,6 +145,15 @@ export const Deck = () => {
               })}
             </Table.TableBody>
           </Table.TableRoot>
+          <Pagination
+            count={deckCards?.pagination?.totalPages || 1}
+            page={page}
+            onChange={setPage}
+            perPage={perPage}
+            onPerPageChange={setPerPage}
+          >
+            {' '}
+          </Pagination>
         </div>
       )}
     </div>

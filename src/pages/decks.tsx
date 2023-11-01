@@ -131,8 +131,21 @@ export const Decks = () => {
                 </Table.TableCell>
                 <Table.TableCell as={'td'}>
                   <div className={s.actions}>
-                    <PlayCircle className={s.playCircle} onClick={() => deckInfoHandler(deck.id)} />
-                    <Edit />
+                    <Button
+                      variant={'link'}
+                      onClick={() => deckInfoHandler(deck.id)}
+                      className={s.playCircleButton}
+                    >
+                      <PlayCircle className={s.playCircle} />
+                    </Button>
+                    <Button
+                      disabled={deck.author.id !== user?.id}
+                      variant={'link'}
+                      onClick={() => {}}
+                      className={s.editIconButton}
+                    >
+                      <Edit className={s.editIcon} />
+                    </Button>
                     <Button
                       disabled={deck.author.id !== user?.id}
                       variant={'link'}

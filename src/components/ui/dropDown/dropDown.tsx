@@ -1,3 +1,5 @@
+import { ReactNode } from 'react'
+
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 
 import s from './dropDown.module.scss'
@@ -10,17 +12,19 @@ import PlayCircle from '@/components/ui/assets/svg/play-circle.tsx'
 export type DropDownProps = {
   className?: string
   onChange?: () => void
-  isProfile: boolean
+  isProfile?: boolean
+  children?: ReactNode
 }
 export const DropDown = (props: DropDownProps) => {
-  const { isProfile, className, onChange } = props
+  const { isProfile = false, onChange, children } = props
 
   return (
     <div className={s.mainContainer}>
       <DropdownMenu.Root>
         <DropdownMenu.Trigger asChild>
           <button className={s.IconButton} aria-label="Customise options">
-            {isProfile ? <img src={avatar} alt="avatar" className={s.avatarIcon} /> : <More />}
+            {/*{isProfile ? <img src={avatar} alt="avatar" className={s.avatarIcon} /> : <More />}*/}
+            {isProfile ? children : <More />}
           </button>
         </DropdownMenu.Trigger>
 
@@ -76,7 +80,11 @@ export const DropDown = (props: DropDownProps) => {
                 )}
               </div>
             </DropdownMenu.Item>
-            <DropdownMenu.Arrow className={s.DropdownMenuArrow} />
+            <DropdownMenu.Arrow
+              className={isProfile ? s.DropdownMenuArrowProfile : s.DropdownMenuArrow}
+              height={8}
+              width={16}
+            />
           </DropdownMenu.Content>
         </DropdownMenu.Portal>
       </DropdownMenu.Root>

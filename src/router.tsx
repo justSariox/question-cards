@@ -9,6 +9,7 @@ import {
 import { Layout } from '@/components/ui/layout/Layout.tsx'
 import { Deck } from '@/pages/deck/deck.tsx'
 import { Decks } from '@/pages/decks.tsx'
+import { NotFound } from '@/pages/not-found/not-found.tsx'
 import { SignInPage } from '@/pages/sign-in.tsx'
 import { SignUpPage } from '@/pages/sign-up.tsx'
 import { useGetMeQuery } from '@/services/auth/auth.ts'
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
           {
             path: '/2',
             element: <Component />,
+          },
+          {
+            path: '/*',
+            element: <NotFound />,
           },
         ],
       },
