@@ -1,0 +1,12 @@
+.modalContentContainer {
+  position: relative;
+  left: -83px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.buttonAddDeck {
+  margin: 36px 0;
+}

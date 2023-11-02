@@ -12,10 +12,6 @@
   margin: 33px 0;
 }
 
-.buttonAddDeck {
-  margin: 36px 0;
-}
-
 .decksWrapper {
   display: flex;
   align-items: center;
@@ -71,4 +67,8 @@
 
 .tableCellAuthorName {
   width: 200px;
+}
+
+.inputWidth {
+  width: 1000px;
 }

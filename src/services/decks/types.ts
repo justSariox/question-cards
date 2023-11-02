@@ -81,3 +81,9 @@ export type DeckResponseType = {
   updated: string
   cardsCount: number
 }
+
+export type CreateDeckParamsType = {
+  cover?: string
+  name: string
+  isPrivate?: boolean
+}

@@ -7,26 +7,22 @@ import closeIcon from '../assets/svg/close.svg'
 import s from './modal.module.scss'
 
 type PropsType = {
-  open: boolean
-  className?: ReactNode
   title?: string
   children?: ReactNode
-  onClose?: () => void
+  onClose: () => void
   isDisabled?: boolean
+  open: boolean
 }
 
-export const Modal = ({ title = 'Title', children, onClose, open = true }: PropsType) => {
+export const Modal = ({ title = 'Title', onClose, open, children }: PropsType) => {
   const handleModalClosed = () => {
-    onClose?.()
+    onClose()
   }
 
   return (
     <div className={s.modalWrapper}>
-      {open && (
-        <Dialog.Root open={open} onOpenChange={handleModalClosed}>
-          {/*          <Dialog.Trigger asChild>
-            <button className={`${s.Button} ${s.violet}`}>Edit profile</button>
-          </Dialog.Trigger>*/}
+      <Dialog.Root open={open} onOpenChange={handleModalClosed}>
+        {open && (
           <Dialog.Portal>
             <Dialog.Overlay className={s.DialogOverlay} />
             <Dialog.Content className={s.DialogContent}>
@@ -38,11 +34,26 @@ export const Modal = ({ title = 'Title', children, onClose, open = true }: Props
                   </button>
                 </Dialog.Close>
               </header>
-              <div className={s.contentBox}>{children}</div>
+              {children}
+              {/*              <div className={s.contentBox}>
+                {children}
+                <div className={s.buttonsContainer}>
+                  <div className={s.cancelButtonWrapper}>
+                    <Button variant={'secondary'} onClick={onClose}>
+                      Cancel
+                    </Button>
+                  </div>
+                  <div className={s.confirmButtonWrapper}>
+                    <Button variant={'primary'} onClick={onChange}>
+                      Save changes
+                    </Button>
+                  </div>
+                </div>
+              </div>*/}
             </Dialog.Content>
           </Dialog.Portal>
-        </Dialog.Root>
-      )}
+        )}
+      </Dialog.Root>
     </div>
   )
 }
