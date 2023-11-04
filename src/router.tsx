@@ -7,8 +7,8 @@ import {
 } from 'react-router-dom'
 
 import { Layout } from '@/components/ui/layout/Layout.tsx'
-import { Deck } from '@/pages/deck/deck.tsx'
-import { Decks } from '@/pages/decks.tsx'
+import { Deck } from '@/pages/decks/deck/deck.tsx'
+import { Decks } from '@/pages/decks/decks.tsx'
 import { NotFound } from '@/pages/not-found/not-found.tsx'
 import { SignInPage } from '@/pages/sign-in.tsx'
 import { SignUpPage } from '@/pages/sign-up.tsx'

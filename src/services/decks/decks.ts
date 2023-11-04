@@ -1,6 +1,7 @@
 import { baseApi } from '@/services/base-api.ts'
 import {
   CardsParams,
+  CreateDeckParamsType,
   DeckResponseType,
   DecksParams,
   DecksResponseType,
@@ -16,11 +17,11 @@ export const decksApi = baseApi.injectEndpoints({
         }),
         providesTags: ['Decks'],
       }),
-      createDeck: builder.mutation<any, { name: string }>({
-        query: ({ name }) => ({
+      createDeck: builder.mutation<any, CreateDeckParamsType>({
+        query: ({ name, isPrivate }) => ({
           url: 'v1/decks',
           method: 'POST',
-          body: { name },
+          body: { name, isPrivate },
         }),
         invalidatesTags: ['Decks'],
       }),

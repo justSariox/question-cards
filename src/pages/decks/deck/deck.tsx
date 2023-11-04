@@ -87,7 +87,7 @@ export const Deck = () => {
           <div className={s.descriptionDeckWrapper}>
             <Typography variant={'body2'} className={s.descriptionDeck}>
               This pack is empty.
-              {user?.id === deck.userId && 'Click add new card to fill this pack'}
+              {user?.id === deck.userId && ' Click add new card to fill this pack'}
             </Typography>
           </div>
           {user?.id === deck.userId && (

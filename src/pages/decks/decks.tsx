@@ -1,6 +1,9 @@
 import { useState } from 'react'
 
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
+import { z } from 'zod'
 
 import s from './decks.module.css'
 
@@ -14,13 +17,16 @@ import { Sort } from '@/components/ui/table/table.stories.tsx'
 import { Tabs } from '@/components/ui/tabs'
 import { TextField } from '@/components/ui/textField'
 import { Typography } from '@/components/ui/typography'
+import { ModalAddDeck } from '@/pages/decks/modals/modal-add-deck/modal-add-deck.tsx'
 import { useGetMeQuery } from '@/services/auth/auth.ts'
-import {
-  useCreateDeckMutation,
-  useGetDecksQuery,
-  useRemoveDeckMutation,
-} from '@/services/decks/decks.ts'
+import { useGetDecksQuery, useRemoveDeckMutation } from '@/services/decks/decks.ts'
 import { Deck } from '@/services/decks/types.ts'
+
+export type FormValues = z.infer<typeof addDeckSchema>
+const addDeckSchema = z.object({
+  name: z.string().max(30, { message: 'no more 30 symbols' }),
+  isPrivate: z.boolean().optional(),
+})
 
 export const Decks = () => {
   const { data: user, isLoading: getMeIsLoading } = useGetMeQuery()
@@ -30,9 +36,33 @@ export const Decks = () => {
   const [search, setSearch] = useState<string>('')
   const [range, setRange] = useState<Array<number>>([0, 100])
   const navigate = useNavigate()
-
   const [page, setPage] = useState<number>(1)
   const [perPage, setPerPage] = useState<number>(10)
+
+  const [deleteDeck] = useRemoveDeckMutation()
+
+  const columns: Column[] = [
+    { title: 'Name', key: 'name', sortable: true },
+    { title: 'Cards', key: 'cardsCount', sortable: true },
+    { title: 'Last Updated', key: 'updated', sortable: true },
+    { title: 'Created by', key: 'createdBy', sortable: false },
+    { title: '', key: 'actions', sortable: false },
+  ]
+  const cardsOption = [
+    { value: 'My Cards', title: 'My Cards' },
+    { value: 'All Cards', title: 'All Cards' },
+  ]
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<FormValues>({
+    resolver: zodResolver(addDeckSchema),
+    defaultValues: {
+      isPrivate: false,
+    },
+  })
+
   const {
     data: decks,
     isLoading,
@@ -46,27 +76,6 @@ export const Decks = () => {
     itemsPerPage: perPage,
     currentPage: page,
   })
-
-  const [createDeck] = useCreateDeckMutation()
-  const [deleteDeck] = useRemoveDeckMutation()
-  const columns: Column[] = [
-    { title: 'Name', key: 'name', sortable: true },
-    { title: 'Cards', key: 'cardsCount', sortable: true },
-    { title: 'Last Updated', key: 'updated', sortable: true },
-    { title: 'Created by', key: 'createdBy', sortable: false },
-    { title: '', key: 'actions', sortable: false },
-  ]
-  const cardsOption = [
-    { value: 'My Cards', title: 'My Cards' },
-    { value: 'All Cards', title: 'All Cards' },
-  ]
-
-  if (isLoading) return <Loader />
-  if (isError) return <div>Error</div>
-  if (getMeIsLoading) return <Loader />
-  const createDeckHandler = () => {
-    createDeck({ name: 'New Deck' })
-  }
 
   const changeAuthor = () => {
     setShowUserDecks(!showUserDecks)
@@ -82,15 +91,36 @@ export const Decks = () => {
     navigate('/decks/' + deckId)
   }
 
+  if (isLoading) return <Loader />
+  if (isError) return <div>Error</div>
+  if (getMeIsLoading) return <Loader />
+
   return (
     <div className={s.mainContainer}>
       <div className={s.titleAndButtonWrapper}>
         <Typography variant={'large'} className={s.titleDeck}>
           Decks list
         </Typography>
-        <Button onClick={createDeckHandler} className={s.buttonAddDeck}>
-          Add New Deck
-        </Button>
+        <ModalAddDeck handleSubmit={handleSubmit} control={control} errors={errors} />
+        {/*  <Modal open={open} onClose={onCancelButtonClick} title={'Add New Deck'}>
+            <form onSubmit={handleSubmit(createDeckHandler)}>
+              <ModalButtons ConfirmButtonTitle={'Save changes'} onClose={onCancelButtonClick}>
+                <div className={s.modalContentContainer}>
+                  <ControlledTextField
+                    name={'name'}
+                    control={control}
+                    error={errors.isPrivate?.message}
+                    label={'Name Deck'}
+                    className={s.inputWidth}
+                  />
+                  <ControlledCheckbox name={'isPrivate'} control={control} label={'Private deck'} />
+                </div>
+              </ModalButtons>
+            </form>
+          </Modal>
+          <Button className={s.buttonAddDeck} onClick={handleModalOpened}>
+            Add New Deck
+          </Button>*/}
       </div>
       <div className={s.decksWrapper}>
         <TextField
@@ -110,7 +140,6 @@ export const Decks = () => {
           Clear Filter
         </Button>
       </div>
-
       <Table.TableRoot width={'100%'} style={{ textAlign: 'left' }}>
         <Table.TableHeader columns={columns} sort={sort} onSort={setSort} />
         <Table.TableBody>
