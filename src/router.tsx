@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom'
 
 import { Layout } from '@/components/ui/layout/Layout.tsx'
+import { CardPage } from '@/pages/decks/deck/card/card.tsx'
 import { Deck } from '@/pages/decks/deck/deck.tsx'
 import { Decks } from '@/pages/decks/decks.tsx'
 import { NotFound } from '@/pages/not-found/not-found.tsx'
@@ -45,8 +46,12 @@ const router = createBrowserRouter([
             element: <Decks />,
           },
           {
-            path: '/decks/:deckId',
+            path: '/decks/:deckId/cards',
             element: <Deck />,
+          },
+          {
+            path: '/v1/decks/:deckId/learn',
+            element: <CardPage />,
           },
           {
             path: '/2',

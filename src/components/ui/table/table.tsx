@@ -90,7 +90,7 @@ export const TableHeader: FC<
           <TableCell as={'th'} key={key} onClick={handleSort(key, sortable)}>
             {title}
             {sort && sortable && (
-              <span>
+              <span className={s.tableCellArrow}>
                 {sort.direction === 'asc' ? (
                   <img src={arrowUp} className={s.arrow} />
                 ) : (

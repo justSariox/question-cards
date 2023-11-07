@@ -15,17 +15,12 @@ export type DropDownProps = {
   isProfile?: boolean
   children?: ReactNode
 }
-export const DropDown = (props: DropDownProps) => {
-  const { isProfile = false, onChange, children } = props
-
+export const DropDown = ({ isProfile = false, onChange, children }: DropDownProps) => {
   return (
     <div className={s.mainContainer}>
       <DropdownMenu.Root>
         <DropdownMenu.Trigger asChild>
-          <button className={s.IconButton} aria-label="Customise options">
-            {/*{isProfile ? <img src={avatar} alt="avatar" className={s.avatarIcon} /> : <More />}*/}
-            {isProfile ? children : <More />}
-          </button>
+          <button className={s.IconButton}>{isProfile ? children : <More />}</button>
         </DropdownMenu.Trigger>
 
         <DropdownMenu.Portal>

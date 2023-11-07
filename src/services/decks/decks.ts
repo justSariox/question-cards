@@ -1,10 +1,16 @@
 import { baseApi } from '@/services/base-api.ts'
 import {
   CardsParams,
+  CreateCardParams,
   CreateDeckParamsType,
-  DeckResponseType,
+  Deck,
   DecksParams,
   DecksResponseType,
+  DeleteDeckResponseType,
+  EditDeckParamsType,
+  GetLearnCardParams,
+  LearnCardResponse,
+  PostGradeCardParams,
 } from '@/services/decks/types.ts'
 
 export const decksApi = baseApi.injectEndpoints({
@@ -17,7 +23,7 @@ export const decksApi = baseApi.injectEndpoints({
         }),
         providesTags: ['Decks'],
       }),
-      createDeck: builder.mutation<any, CreateDeckParamsType>({
+      createDeck: builder.mutation<Deck, CreateDeckParamsType>({
         query: ({ name, isPrivate }) => ({
           url: 'v1/decks',
           method: 'POST',
@@ -25,31 +31,54 @@ export const decksApi = baseApi.injectEndpoints({
         }),
         invalidatesTags: ['Decks'],
       }),
-      removeDeck: builder.mutation<any, { id: string }>({
+      editDeck: builder.mutation<Deck, EditDeckParamsType>({
+        query: ({ id, ...restProps }) => ({
+          url: `v1/decks/${id}`,
+          method: 'PATCH',
+          body: restProps,
+        }),
+        invalidatesTags: ['Decks'],
+      }),
+      removeDeck: builder.mutation<DeleteDeckResponseType, { id: string }>({
         query: ({ id }) => ({
           url: `v1/decks/${id}`,
           method: 'DELETE',
         }),
         invalidatesTags: ['Decks'],
       }),
-      getDeckById: builder.query<DeckResponseType, { id: string }>({
+      getDeckById: builder.query<Deck, { id: string }>({
         query: ({ id }) => ({
           url: `v1/decks/${id}`,
         }),
         providesTags: ['Decks'],
       }),
-      getDeckCards: builder.query<any, CardsParams>({
+      getDeckCards: builder.query<DecksResponseType, CardsParams>({
         query: ({ id, ...restProps }) => ({
           url: `v1/decks/${id}/cards`,
           params: restProps,
         }),
         providesTags: ['Decks'],
       }),
-      createCard: builder.mutation<any, { id: string; question: string; answer: string }>({
+      createCard: builder.mutation<any, CreateCardParams>({
         query: ({ id, ...restProps }) => ({
           url: `v1/decks/${id}/cards`,
           method: 'POST',
           body: { question: restProps.question, answer: restProps.answer },
+        }),
+        invalidatesTags: ['Decks'],
+      }),
+      getCardForLearn: builder.query<LearnCardResponse, GetLearnCardParams>({
+        query: ({ id, previousCardId }) => ({
+          url: `v1/decks/${id}/learn`,
+          params: previousCardId ?? {},
+        }),
+        providesTags: ['Decks'],
+      }),
+      postGrade: builder.mutation<{}, PostGradeCardParams>({
+        query: ({ id, ...restProps }) => ({
+          url: `v1/decks/${id}/learn`,
+          method: 'POST',
+          body: restProps,
         }),
         invalidatesTags: ['Decks'],
       }),
@@ -64,4 +93,7 @@ export const {
   useGetDeckByIdQuery,
   useGetDeckCardsQuery,
   useCreateCardMutation,
+  useEditDeckMutation,
+  useGetCardForLearnQuery,
+  usePostGradeMutation,
 } = decksApi

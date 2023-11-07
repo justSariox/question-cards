@@ -6,17 +6,29 @@ import s from './textField.module.scss'
 
 export type TextFieldProps = {
   onChangeValue?: (value: string) => void
-  error?: string
+  error?: { message: string; type: string; ref: any }
   disabled?: boolean
   label?: string
   type?: 'text' | 'password' | 'search'
   className?: string
   value?: string
+  defaultValue?: string
 } & ComponentPropsWithoutRef<'input'>
 
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   (
-    { onChangeValue, value, error, disabled, onChange, label, type, className, ...restProps },
+    {
+      onChangeValue,
+      value,
+      error,
+      disabled,
+      onChange,
+      label,
+      type = 'text',
+      className,
+      defaultValue,
+      ...restProps
+    },
     ref
   ) => {
     const [visiblePassword, setVisiblePassword] = useState<boolean>(false)
@@ -44,7 +56,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
             onChange={onChangeHandler}
             disabled={disabled}
             ref={ref}
-            value={value}
+            defaultValue={defaultValue}
           />
           {type === 'password' && (
             <a
@@ -57,7 +69,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
             ></a>
           )}
 
-          {error && <span className={s.errorMessage}>{error}</span>}
+          {error && <span className={s.errorMessage}>{error.message}</span>}
         </div>
       </div>
     )

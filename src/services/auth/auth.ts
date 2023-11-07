@@ -1,3 +1,5 @@
+import { Login, SignUp, SignUpResponse, User } from './types.ts'
+
 import { baseApi } from '@/services/base-api.ts'
 
 const authApi = baseApi.injectEndpoints({
@@ -9,7 +11,7 @@ const authApi = baseApi.injectEndpoints({
           method: 'GET',
         }),
       }),
-      login: builder.mutation<any, { email: string; password: string }>({
+      login: builder.mutation<{ accessToken: string }, Login>({
         query: params => ({
           url: `v1/auth/login`,
           method: 'POST',
@@ -17,7 +19,7 @@ const authApi = baseApi.injectEndpoints({
         }),
       }),
 
-      signUp: builder.mutation<any, { email: string; password: string }>({
+      signUp: builder.mutation<SignUpResponse, SignUp>({
         query: params => ({
           url: 'v1/auth/sign-up',
           method: 'POST',
@@ -27,13 +29,5 @@ const authApi = baseApi.injectEndpoints({
     }
   },
 })
-
-export type User = {
-  avatar: string
-  id: string
-  email: string
-  isEmailVerified: boolean
-  name: string
-}
 
 export const { useLoginMutation, useSignUpMutation, useGetMeQuery } = authApi

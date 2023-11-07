@@ -6,7 +6,7 @@ import { Select } from '@/components/ui/select'
 export type PerPageSelectProps = {
   perPage: number | undefined
   perPageOptions: string[]
-  onPerPageChange?: (itemPerPage: string) => void
+  onPerPageChange?: any
 }
 
 export const PerPageSelect: FC<PerPageSelectProps> = ({
