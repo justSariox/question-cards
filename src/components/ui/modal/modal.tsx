@@ -35,21 +35,6 @@ export const Modal = ({ title = 'Title', onClose, open, children }: PropsType) =
                 </Dialog.Close>
               </header>
               {children}
-              {/*              <div className={s.contentBox}>
-                {children}
-                <div className={s.buttonsContainer}>
-                  <div className={s.cancelButtonWrapper}>
-                    <Button variant={'secondary'} onClick={onClose}>
-                      Cancel
-                    </Button>
-                  </div>
-                  <div className={s.confirmButtonWrapper}>
-                    <Button variant={'primary'} onClick={onChange}>
-                      Save changes
-                    </Button>
-                  </div>
-                </div>
-              </div>*/}
             </Dialog.Content>
           </Dialog.Portal>
         )}

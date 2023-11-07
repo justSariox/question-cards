@@ -8,6 +8,9 @@ export type ControlledSelectProps<TFieldValues extends FieldValues> =
 export const ControlledSelect = <TFieldValues extends FieldValues>({
   name,
   control,
+  selectItems,
+  defaultValue,
+  label,
   ...selectProps
 }: ControlledSelectProps<TFieldValues>) => {
   const {
@@ -15,7 +18,17 @@ export const ControlledSelect = <TFieldValues extends FieldValues>({
   } = useController({
     name,
     control,
+    defaultValue,
   })
 
-  return <Select {...selectProps} onChange={onChange} value={value} id={name} />
+  return (
+    <Select
+      {...selectProps}
+      selectItems={selectItems}
+      onChange={onChange}
+      value={value}
+      id={name}
+      label={label}
+    />
+  )
 }

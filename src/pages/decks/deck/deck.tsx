@@ -1,27 +1,36 @@
 import { useState } from 'react'
 
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
 import { Link, useParams } from 'react-router-dom'
+import { z } from 'zod'
 
 import s from './deck.module.css'
 
-import { Edit, Trash } from '@/components/ui/assets/svg'
 import arrowBack from '@/components/ui/assets/svg/arrow-back.svg'
 import { Button } from '@/components/ui/button'
 import { DropDown } from '@/components/ui/dropDown'
-import { Grade } from '@/components/ui/grade/grade.tsx'
 import { Loader } from '@/components/ui/loader'
 import { Pagination } from '@/components/ui/pagination'
 import { Column, Table } from '@/components/ui/table'
 import { Sort } from '@/components/ui/table/table.stories.tsx'
 import { TextField } from '@/components/ui/textField'
 import { Typography } from '@/components/ui/typography'
+import { TableRowCard } from '@/pages/decks/deck/table-row-card/table-row-card.tsx'
+import { ModalForCards } from '@/pages/decks/modals/modal-for-cards/modal-for-cards.tsx'
 import { useGetMeQuery } from '@/services/auth/auth.ts'
-import {
-  useCreateCardMutation,
-  useGetDeckByIdQuery,
-  useGetDeckCardsQuery,
-} from '@/services/decks/decks.ts'
+import { useGetDeckByIdQuery, useGetDeckCardsQuery } from '@/services/decks/decks.ts'
 import { CardType } from '@/services/decks/types.ts'
+
+export type FormValues = z.infer<typeof cardSchema>
+const cardSchema = z.object({
+  question: z.string().min(3, {
+    message: 'Question must be longer than or equal to 3 characters!',
+  }),
+  answer: z.string().min(3, {
+    message: 'Answer must be longer than or equal to 3 characters!',
+  }),
+})
 
 export const Deck = () => {
   const { data: user } = useGetMeQuery()
@@ -41,8 +50,6 @@ export const Deck = () => {
     itemsPerPage: perPage,
   })
 
-  const [createCard] = useCreateCardMutation()
-
   const columns: Column[] = [
     { title: 'Question', key: 'name', sortable: true },
     { title: 'Answer', key: 'cardsCount', sortable: true },
@@ -51,13 +58,17 @@ export const Deck = () => {
     { title: '', key: 'actions', sortable: false },
   ]
 
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<FormValues>({
+    resolver: zodResolver(cardSchema),
+  })
+
   if (isLoading) return <Loader />
   if (isError) return <div>Error</div>
   if (getDeckCardsLoading) return <Loader />
-
-  const createCardHandler = () => {
-    createCard({ id: deck.id, question: '123', answer: '456' })
-  }
 
   return (
     <div className={s.mainContainer}>
@@ -72,13 +83,27 @@ export const Deck = () => {
           <Typography variant={'large'} className={s.titleDeck}>
             {deck?.name}
           </Typography>
-          {user?.id === deck.userId && <DropDown />}
+          {user?.id === deck?.userId && <DropDown />}
         </div>
 
-        {deck?.cardsCount > 0 && (
+        {deck && deck.cardsCount > 0 && user?.id !== deck?.userId ? (
           <div className={s.learnToPackWrapper}>
-            <Button onClick={createCardHandler}>Learn to Pack</Button>
+            <Link to={`/v1/decks/${deck.id}/learn`} className={s.linkBackPacks}>
+              <Button>Learn to Deck</Button>
+            </Link>
           </div>
+        ) : (
+          <ModalForCards
+            handleSubmit={handleSubmit}
+            control={control}
+            errors={errors}
+            variant={'add'}
+            deck={deck}
+          >
+            <div className={s.addNewCardWrapper}>
+              <Button className={s.buttonAddCard}>Add New Card</Button>
+            </div>
+          </ModalForCards>
         )}
       </div>
 
@@ -90,16 +115,9 @@ export const Deck = () => {
               {user?.id === deck.userId && ' Click add new card to fill this pack'}
             </Typography>
           </div>
-          {user?.id === deck.userId && (
-            <div className={s.addNewCardWrapper}>
-              <Button onClick={createCardHandler} className={s.buttonAddCard}>
-                Add New Card
-              </Button>
-            </div>
-          )}
         </div>
       )}
-      {deck?.cardsCount > 0 && (
+      {deck && deck.cardsCount > 0 && (
         <div>
           <div className={s.inputSearchWrapper}>
             <TextField
@@ -107,6 +125,7 @@ export const Deck = () => {
               placeholder={'Search cards'}
               value={search}
               onChangeValue={setSearch}
+              className={s.inputWidth}
             />
           </div>
           <Table.TableRoot width={'100%'} style={{ textAlign: 'left' }}>
@@ -114,33 +133,15 @@ export const Deck = () => {
             <Table.TableBody>
               {deckCards.items.map((card: CardType) => {
                 return (
-                  <Table.TableRow key={card.id}>
-                    <Table.TableCell as={'td'} className={s.tableCellQuestion}>
-                      {card.question}
-                    </Table.TableCell>
-                    <Table.TableCell as={'td'} className={s.tableCellAnswer}>
-                      {card.answer}
-                    </Table.TableCell>
-                    <Table.TableCell as={'td'} className={s.tableCellDate}>
-                      {new Date(card.updated).toLocaleDateString('ru-RU')}
-                    </Table.TableCell>
-                    <Table.TableCell as={'td'} className={s.tableCellGrade}>
-                      <Grade gradeValue={card.grade} />
-                    </Table.TableCell>
-                    <Table.TableCell as={'td'}>
-                      <div className={`${user?.id === deck?.userId ? s.actions : s.actionsHide}`}>
-                        <Edit />
-                        <Button
-                          disabled={false}
-                          variant={'link'}
-                          onClick={() => {}}
-                          className={s.trashButton}
-                        >
-                          <Trash />
-                        </Button>
-                      </div>
-                    </Table.TableCell>
-                  </Table.TableRow>
+                  <TableRowCard
+                    key={card.id}
+                    card={card}
+                    user={user}
+                    deck={deck}
+                    handleSubmit={handleSubmit}
+                    control={control}
+                    errors={errors}
+                  />
                 )
               })}
             </Table.TableBody>

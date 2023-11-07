@@ -10,6 +10,8 @@ type PropsType = {
   onClose: () => void
   ConfirmButtonTitle: string
   CancelButtonTitle?: string
+  onChange: () => void
+  variant: 'add' | 'edit' | 'delete'
 }
 
 export const ModalButtons = ({
@@ -17,7 +19,13 @@ export const ModalButtons = ({
   onClose,
   CancelButtonTitle = 'Cancel',
   ConfirmButtonTitle,
+  onChange,
+  variant,
 }: PropsType) => {
+  const deleteButtonHandler = () => {
+    variant === 'delete' && onChange()
+  }
+
   return (
     <div className={s.contentBox}>
       {children}
@@ -27,7 +35,7 @@ export const ModalButtons = ({
             {CancelButtonTitle}
           </Button>
         </div>
-        <div className={s.confirmButtonWrapper}>
+        <div className={s.confirmButtonWrapper} onClick={deleteButtonHandler}>
           <Button variant={'primary'} type={'submit'}>
             {ConfirmButtonTitle}
           </Button>

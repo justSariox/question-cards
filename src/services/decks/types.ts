@@ -26,8 +26,21 @@ export type Deck = {
   author: Author
 }
 
+export type DeleteDeckResponseType = {
+  id: string
+  userId: string
+  name: string
+  isPrivate: boolean
+  shots: number
+  cover: string
+  rating: number
+  created: string
+  updated: string
+  cardsCount: number
+}
+
 export type DecksResponseType = {
-  maxCardsCount: number
+  maxCardsCount?: number
   pagination: Pagination
   items: Deck[]
 }
@@ -42,22 +55,6 @@ export type DecksParams = {
   itemsPerPage?: number
 } | void
 
-export type CardType = {
-  id: string
-  question: string
-  answer: string
-  deckId: string
-  questionImg?: any
-  answerImg?: any
-  questionVideo?: any
-  answerVideo?: any
-  created: string
-  updated: string
-  shots: number
-  grade: number
-  userId: string
-}
-
 export type CardsParams = {
   id: string
   question?: string
@@ -67,23 +64,52 @@ export type CardsParams = {
   itemsPerPage?: number
 }
 
-export type DeckResponseType = {
+export type CreateCardParams = {
   id: string
-  userId: string
+  question: string
+  answer: string
+  questionImg?: string
+  answerImg?: string
+  questionVideo?: string
+  answerVideo?: string
+}
+
+export type EditDeckParamsType = {
+  id: string
+  cover?: string
   name: string
   isPrivate: boolean
-  shots: number
-  cover?: any
-  rating: number
-  isDeleted?: any
-  isBlocked?: any
-  created: string
-  updated: string
-  cardsCount: number
 }
 
 export type CreateDeckParamsType = {
   cover?: string
   name: string
   isPrivate?: boolean
+}
+
+export type GetLearnCardParams = {
+  id: string
+  previousCardId?: string
+}
+
+export type PostGradeCardParams = {
+  id: string
+  cardId: string
+  grade: number
+}
+
+export type LearnCardResponse = {
+  id: string
+  deckId: string
+  userId: string
+  question: string
+  answer: string
+  shots: number
+  answerImg: string
+  questionImg: string
+  questionVideo: string
+  answerVideo: string
+  rating: number
+  created: string
+  updated: string
 }
