@@ -1,7 +1,8 @@
+import s from '../decks.module.css'
+
 import { Table } from '@/components/ui/table'
 import { Actions } from '@/pages/decks/actions/actions.tsx'
-import s from '@/pages/decks/deck/deck.module.css'
-import { User } from '@/services/auth/auth.ts'
+import { User } from '@/services/auth/types.ts'
 import { Deck } from '@/services/decks/types.ts'
 
 type PropsType = {
@@ -16,7 +17,10 @@ export const TableRowDeck = ({ user, deck, handleSubmit, errors, control }: Prop
   return (
     <Table.TableRow key={deck.id}>
       <Table.TableCell as={'td'} className={s.tableCellName}>
-        {deck.name}
+        <div className={s.tableCellNameContainer}>
+          {deck.cover && <img src={deck.cover} alt="deck cover" className={s.coverDeck} />}
+          {deck.name}
+        </div>
       </Table.TableCell>
       <Table.TableCell as={'td'} className={s.tableCellCardsCount}>
         {deck.cardsCount}

@@ -1,12 +1,14 @@
 import { Column, Table } from '@/components/ui/table'
+import { Sort } from '@/components/ui/table/table.stories.tsx'
 import { TableRowDeck } from '@/pages/decks/table-row-deck/table-row-deck.tsx'
-import { Deck } from '@/services/decks/types.ts'
+import { User } from '@/services/auth/types.ts'
+import { Deck, DecksResponseType } from '@/services/decks/types.ts'
 
 type PropsType = {
-  sort: any
-  setSort: any
-  decks: any
-  user: any
+  sort: Sort | null
+  setSort: (sort: Sort | null) => void
+  decks: DecksResponseType | undefined
+  user: User | undefined
   handleSubmit: any
   errors: any
   control: any
@@ -33,7 +35,7 @@ export const TableForDecks = ({
     <Table.TableRoot width={'100%'} style={{ textAlign: 'left' }}>
       <Table.TableHeader columns={columns} sort={sort} onSort={setSort} />
       <Table.TableBody>
-        {decks?.items?.map((deck: Deck) => {
+        {decks?.items.map((deck: Deck) => {
           return (
             <TableRowDeck
               key={deck.id}

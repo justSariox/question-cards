@@ -2,42 +2,46 @@ import * as RadioGroup from '@radix-ui/react-radio-group'
 
 import s from './radioGroup.module.scss'
 
-type RadioGroupProps = {
-  value?: string | number
-  onChange?: () => void
-  disabled?: boolean
-  name?: string
+type Option = {
+  label: string
+  value: string
 }
 
-export const Radio = ({ name = 'Radio', disabled }: RadioGroupProps) => {
+export type RadioGroupProps = {
+  onChange?: () => void
+  disabled?: boolean
+  options: Option[]
+  errors: any
+  value: string
+}
+
+export const Radio = ({ disabled = false, options, onChange, value }: RadioGroupProps) => {
   return (
     <form>
       <RadioGroup.Root
         className={s.RadioGroupRoot}
-        defaultValue="default"
-        aria-label="View density"
+        defaultValue={options[0].value}
+        value={value}
+        onValueChange={onChange}
       >
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <RadioGroup.Item className={s.RadioGroupItem} value="default" id="r1" disabled={disabled}>
-            <RadioGroup.Indicator className={s.RadioGroupIndicator} />
-          </RadioGroup.Item>
-          <label className={s.Label} htmlFor="r1">
-            {name}
-          </label>
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <RadioGroup.Item
-            className={s.RadioGroupItem}
-            value="comfortable"
-            id="r2"
-            disabled={disabled}
-          >
-            <RadioGroup.Indicator className={s.RadioGroupIndicator} />
-          </RadioGroup.Item>
-          <label className={s.Label} htmlFor="r2">
-            {name}
-          </label>
-        </div>
+        {options.map(option => {
+          return (
+            <div className={s.RadioGroupItemWrapper} key={option.value}>
+              <RadioGroup.Item
+                className={s.RadioGroupItem}
+                value={option.value}
+                id={option.value}
+                disabled={disabled}
+                key={option.value}
+              >
+                <RadioGroup.Indicator className={s.RadioGroupIndicator} />
+              </RadioGroup.Item>
+              <label className={s.Label} htmlFor={option.value}>
+                {option.label}
+              </label>
+            </div>
+          )
+        })}
       </RadioGroup.Root>
     </form>
   )

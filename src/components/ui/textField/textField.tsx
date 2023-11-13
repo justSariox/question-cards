@@ -6,7 +6,7 @@ import s from './textField.module.scss'
 
 export type TextFieldProps = {
   onChangeValue?: (value: string) => void
-  error?: { message: string; type: string; ref: any }
+  error?: any
   disabled?: boolean
   label?: string
   type?: 'text' | 'password' | 'search'
@@ -57,6 +57,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
             disabled={disabled}
             ref={ref}
             defaultValue={defaultValue}
+            autoComplete={'off'}
           />
           {type === 'password' && (
             <a

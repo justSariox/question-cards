@@ -24,7 +24,7 @@ const deckSchema = z.object({
 })
 
 export const Decks = () => {
-  const { data: user, isLoading: getMeIsLoading } = useGetMeQuery()
+  const { data: user, isLoading: getMeIsLoading, isError: getMeIsError } = useGetMeQuery()
   const [showUserDecks, setShowUserDecks] = useState<boolean>(false)
   const [sort, setSort] = useState<Sort | null>({ key: 'updated', direction: 'desc' })
   const sortString = sort ? `${sort.key}-${sort.direction}` : null
@@ -58,9 +58,8 @@ export const Decks = () => {
     currentPage: page,
   })
 
-  if (isLoading) return <Loader />
-  if (isError) return <div>Error</div>
-  if (getMeIsLoading) return <Loader />
+  if (isLoading || getMeIsLoading) return <Loader />
+  if (isError || getMeIsError) return <div>Error</div>
 
   return (
     <div className={s.mainContainer}>
@@ -95,7 +94,7 @@ export const Decks = () => {
         control={control}
       />
       <Pagination
-        count={decks?.pagination?.totalPages || 1}
+        count={decks?.pagination.totalPages || 1}
         page={page}
         onChange={setPage}
         perPage={perPage}

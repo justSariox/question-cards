@@ -4,7 +4,8 @@
   align-items: center;
 
   width: 420px;
-  min-height: 420px;
+  min-height: 350px;
+  margin: 40px auto;
   padding-top: 33px;
 
   border-radius: 4px;
@@ -20,6 +21,12 @@
     .avatar {
       position: relative;
       margin-bottom: 6px;
+
+      .avatarImg {
+        width: 96px;
+        height: 96px;
+        border-radius: 50px;
+      }
 
       .editIconAvatarWrapper {
         position: absolute;
@@ -76,6 +83,10 @@
     .saveChangeButton {
       width: 100%;
       margin-top: 36px;
+    }
+
+    .changeName {
+      margin-bottom: 80px;
     }
   }
 }

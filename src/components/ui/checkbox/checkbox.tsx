@@ -15,6 +15,7 @@ export type CheckboxProps = {
   label?: string
   id?: string
 }
+
 export const Checkbox = (props: CheckboxProps) => {
   const { checked, onChange, id, label, required, disabled, className } = props
 

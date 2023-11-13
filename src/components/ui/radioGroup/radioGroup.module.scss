@@ -15,17 +15,17 @@ button {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin: 20px;
+  margin: 20px 0;
 }
 
 .RadioGroupItem {
-  cursor: pointer;
+  display: flex;
 
   width: 16px;
   height: 16px;
-  margin: 10px;
+  margin: 5px 0;
 
-  background-color: var(--color-dark-900);
+  background-color: inherit;
   border: 2px solid var(--color-accent-500);
   border-radius: 100%;
 
@@ -95,8 +95,17 @@ button {
 }
 
 .Label {
+  cursor: pointer;
+
   padding-left: 15px;
+
   font-size: 15px;
   line-height: 1;
   color: var(--color-light-100);
+}
+
+.RadioGroupItemWrapper {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
 }

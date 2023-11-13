@@ -6,6 +6,7 @@ import {
   RouterProvider,
 } from 'react-router-dom'
 
+import { EditProfile } from '@/components/auth/editProfile'
 import { Layout } from '@/components/ui/layout/Layout.tsx'
 import { CardPage } from '@/pages/decks/deck/card/card.tsx'
 import { Deck } from '@/pages/decks/deck/deck.tsx'
@@ -14,7 +15,6 @@ import { NotFound } from '@/pages/not-found/not-found.tsx'
 import { SignInPage } from '@/pages/sign-in.tsx'
 import { SignUpPage } from '@/pages/sign-up.tsx'
 import { useGetMeQuery } from '@/services/auth/auth.ts'
-import { useGetDecksQuery } from '@/services/decks/decks.ts'
 
 const publicRoutes: RouteObject[] = [
   {
@@ -25,13 +25,11 @@ const publicRoutes: RouteObject[] = [
     path: '/sign-up',
     element: <SignUpPage />,
   },
+  {
+    path: '*',
+    element: <NotFound />,
+  },
 ]
-
-const Component = () => {
-  const { data } = useGetDecksQuery()
-
-  return <div>{data ? data.maxCardsCount : 2}</div>
-}
 
 const router = createBrowserRouter([
   {
@@ -46,20 +44,16 @@ const router = createBrowserRouter([
             element: <Decks />,
           },
           {
-            path: '/decks/:deckId/cards',
+            path: '/decks/:deckId',
             element: <Deck />,
           },
           {
-            path: '/v1/decks/:deckId/learn',
+            path: '/decks/:deckId/learn',
             element: <CardPage />,
           },
           {
-            path: '/2',
-            element: <Component />,
-          },
-          {
-            path: '/*',
-            element: <NotFound />,
+            path: '/my-profile',
+            element: <EditProfile />,
           },
         ],
       },

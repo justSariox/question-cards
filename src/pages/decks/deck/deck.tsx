@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { z } from 'zod'
 
 import s from './deck.module.css'
@@ -19,8 +19,12 @@ import { Typography } from '@/components/ui/typography'
 import { TableRowCard } from '@/pages/decks/deck/table-row-card/table-row-card.tsx'
 import { ModalForCards } from '@/pages/decks/modals/modal-for-cards/modal-for-cards.tsx'
 import { useGetMeQuery } from '@/services/auth/auth.ts'
-import { useGetDeckByIdQuery, useGetDeckCardsQuery } from '@/services/decks/decks.ts'
-import { CardType } from '@/services/decks/types.ts'
+import { Card } from '@/services/cards/types.ts'
+import {
+  useGetCardForLearnQuery,
+  useGetDeckByIdQuery,
+  useGetDeckCardsQuery,
+} from '@/services/decks/decks.ts'
 
 export type FormValues = z.infer<typeof cardSchema>
 const cardSchema = z.object({
@@ -33,7 +37,7 @@ const cardSchema = z.object({
 })
 
 export const Deck = () => {
-  const { data: user } = useGetMeQuery()
+  const { data: user, isLoading: getMeIsLoading, isError: getMeIsError } = useGetMeQuery()
   const { deckId } = useParams()
   const [sort, setSort] = useState<Sort | null>({ key: 'updated', direction: 'desc' })
   const sortString = sort ? `${sort.key}-${sort.direction}` : undefined
@@ -41,14 +45,16 @@ export const Deck = () => {
   const { data: deck, isLoading, isError } = useGetDeckByIdQuery({ id: deckId || '' })
   const [page, setPage] = useState<number>(1)
   const [perPage, setPerPage] = useState<number>(10)
+  const navigate = useNavigate()
   const { data: deckCards, isLoading: getDeckCardsLoading } = useGetDeckCardsQuery({
     id: deckId || '',
     question: search,
-    answer: search,
     orderBy: sortString,
     currentPage: page,
     itemsPerPage: perPage,
   })
+
+  const {} = useGetCardForLearnQuery({ id: deckId || '' })
 
   const columns: Column[] = [
     { title: 'Question', key: 'name', sortable: true },
@@ -66,29 +72,35 @@ export const Deck = () => {
     resolver: zodResolver(cardSchema),
   })
 
-  if (isLoading) return <Loader />
-  if (isError) return <div>Error</div>
-  if (getDeckCardsLoading) return <Loader />
+  if (isLoading || getMeIsLoading || getDeckCardsLoading) return <Loader />
+  if (isError || getMeIsError) return <div>Error</div>
+
+  const goBack = () => navigate(-1)
+
+  console.log(deck)
 
   return (
     <div className={s.mainContainer}>
       <div className={s.backToDecksList}>
-        <Link to={'/'} className={s.linkBackPacks}>
+        <div onClick={goBack} className={s.linkBackPacks}>
           <img src={arrowBack} alt="arrow back" className={s.arrowBackIcon} />
           Back to Packs List
-        </Link>
+        </div>
       </div>
       <div className={s.deckInfo}>
-        <div className={s.typographyAndDropdown}>
-          <Typography variant={'large'} className={s.titleDeck}>
-            {deck?.name}
-          </Typography>
-          {user?.id === deck?.userId && <DropDown />}
+        <div className={s.nameAndImage}>
+          <div className={s.typographyAndDropdown}>
+            <Typography variant={'large'} className={s.titleDeck}>
+              {deck?.name}
+            </Typography>
+            {user?.id === deck?.userId && <DropDown deckId={deckId} />}
+          </div>
+          {deck?.cover && <img src={deck?.cover} alt="deck cover" className={s.coverDeck} />}
         </div>
 
-        {deck && deck.cardsCount > 0 && user?.id !== deck?.userId ? (
+        {user?.id !== deck?.userId ? (
           <div className={s.learnToPackWrapper}>
-            <Link to={`/v1/decks/${deck.id}/learn`} className={s.linkBackPacks}>
+            <Link to={`/decks/${deckId}/learn`} className={s.linkBackPacks}>
               <Button>Learn to Deck</Button>
             </Link>
           </div>
@@ -131,7 +143,7 @@ export const Deck = () => {
           <Table.TableRoot width={'100%'} style={{ textAlign: 'left' }}>
             <Table.TableHeader columns={columns} sort={sort} onSort={setSort} />
             <Table.TableBody>
-              {deckCards.items.map((card: CardType) => {
+              {deckCards?.items.map((card: Card) => {
                 return (
                   <TableRowCard
                     key={card.id}
@@ -147,7 +159,7 @@ export const Deck = () => {
             </Table.TableBody>
           </Table.TableRoot>
           <Pagination
-            count={deckCards?.pagination?.totalPages || 1}
+            count={deckCards?.pagination.totalPages || 1}
             page={page}
             onChange={setPage}
             perPage={perPage}

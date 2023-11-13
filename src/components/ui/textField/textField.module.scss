@@ -14,6 +14,7 @@
 
   .inputContainer {
     position: relative;
+    min-width: 284px;
 
     .searchIcon {
       position: absolute;
@@ -27,9 +28,11 @@
     }
 
     .input {
-      min-width: 284px;
+      all: unset;
+
+      width: 97%;
       height: 24px;
-      padding: 6px 10px;
+      padding: 6px 0 6px 10px;
 
       border: var(--color-dark-100) solid 1px;
       border-radius: 2px;
@@ -92,7 +95,7 @@
 
       position: absolute;
       top: 7px;
-      left: 290px;
+      right: 10px;
 
       display: inline-block;
 

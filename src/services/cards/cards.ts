@@ -1,17 +1,17 @@
-import { CardType, EditCardRequestType } from './types.ts'
+import { Card, EditCardRequestType } from './types.ts'
 
 import { baseApi } from '@/services/base-api.ts'
 
 export const cardsApi = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
-      getCard: builder.query<CardType, { id: string }>({
+      getCard: builder.query<Card, { id: string }>({
         query: ({ id }) => ({
           url: `v1/cards/${id}`,
         }),
         providesTags: ['Cards'],
       }),
-      editCard: builder.mutation<CardType, EditCardRequestType>({
+      editCard: builder.mutation<Card, EditCardRequestType>({
         query: ({ id, ...restProps }) => ({
           url: `v1/cards/${id}`,
           method: 'PATCH',

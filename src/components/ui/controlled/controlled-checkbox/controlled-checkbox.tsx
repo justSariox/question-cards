@@ -10,7 +10,6 @@ export const ControlledCheckbox = <TFieldValues extends FieldValues>({
   rules,
   shouldUnregister,
   control,
-  defaultValue,
   ...checkboxProps
 }: ControlledCheckboxProps<TFieldValues>) => {
   const {
@@ -20,7 +19,6 @@ export const ControlledCheckbox = <TFieldValues extends FieldValues>({
     rules,
     shouldUnregister,
     control,
-    defaultValue,
   })
 
   return (

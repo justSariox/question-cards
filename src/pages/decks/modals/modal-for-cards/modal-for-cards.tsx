@@ -7,8 +7,9 @@ import { ControlledSelect } from '@/components/ui/controlled/controlled-select/c
 import { Modal } from '@/components/ui/modal'
 import { ModalButtons } from '@/components/ui/modal/modal-buttons.tsx'
 import { useEditCardMutation, useRemoveCardMutation } from '@/services/cards/cards.ts'
+import { Card, EditCardRequestType } from '@/services/cards/types.ts'
 import { useCreateCardMutation } from '@/services/decks/decks.ts'
-import { CardType, DeckResponseType } from '@/services/decks/types.ts'
+import { CreateCardParams, Deck } from '@/services/decks/types.ts'
 
 type PropsType = {
   handleSubmit: any
@@ -16,8 +17,8 @@ type PropsType = {
   errors: any
   children: ReactNode
   variant: 'add' | 'edit' | 'delete'
-  card?: CardType
-  deck?: DeckResponseType
+  card?: Card
+  deck?: Deck
 }
 
 export const ModalForCards = ({
@@ -39,35 +40,23 @@ export const ModalForCards = ({
 
   const deleteCardHandler = () => {
     if (card)
-      deleteCard({ id: card.id })
-        .then(() => {
-          setOpen(false)
-        })
-        .catch((e: any) => {
-          console.log(e)
-        })
+      deleteCard({ id: card.id }).then(() => {
+        setOpen(false)
+      })
   }
 
-  const createCardHandler = (arg: { question: string; answer: string }) => {
+  const createCardHandler = (arg: CreateCardParams) => {
     if (deck)
-      addCard({ id: deck.id, ...arg })
-        .then(() => {
-          setOpen(false)
-        })
-        .catch((e: any) => {
-          console.log(e)
-        })
+      addCard({ ...arg, id: deck.id }).then(() => {
+        setOpen(false)
+      })
   }
 
-  const editCardHandler = (arg: any) => {
+  const editCardHandler = (arg: EditCardRequestType) => {
     if (card)
-      editCard({ id: card.id, ...arg })
-        .then(() => {
-          setOpen(false)
-        })
-        .catch((e: any) => {
-          console.log(e)
-        })
+      editCard({ ...arg, id: card.id }).then(() => {
+        setOpen(false)
+      })
   }
 
   const variantsHandler = (arg: { id: string; question: string; answer: string }) => {

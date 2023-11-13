@@ -116,11 +116,13 @@ export const WithSort = {
   render: () => {
     const [sort, setSort] = useState<Sort | null>(null)
 
-    const sortedString = useMemo(() => {
-      if (!sort) return null
+    /*
+        const sortedString = useMemo(() => {
+          if (!sort) return null
 
-      return `${sort.key}-${sort.direction}`
-    }, [sort])
+          return `${sort.key}-${sort.direction}`
+        }, [sort])
+    */
 
     const sortedData = useMemo(() => {
       if (!sort) return data
