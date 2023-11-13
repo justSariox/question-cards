@@ -71,7 +71,7 @@ export const RegisterForm = () => {
       <Typography variant={'large'} className={s.title}>
         Sign Up
       </Typography>
-      <form onSubmit={onSubmitHandler} className={s.loginForm}>
+      <form onSubmit={onSubmitHandler} className={s.registerForm}>
         <ControlledTextField name={'email'} control={control} label={'Email'} />
         <ControlledTextField
           name={'password'}

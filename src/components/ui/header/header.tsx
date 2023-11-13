@@ -1,36 +1,23 @@
 import { ComponentPropsWithoutRef } from 'react'
 
+import { Avatar } from './avatar.tsx'
 import s from './header.module.scss'
 
-import AvatarIcon from '@/assets/avatar.png'
+// import AvatarIcon from '@/assets/avatar.png'
 import Logo from '@/assets/logo.png'
 import { Button } from '@/components/ui/button'
 import { DropDown } from '@/components/ui/dropDown'
-import { useGetMeQuery } from '@/services/auth/auth.ts'
+import { User } from '@/services/auth/types.ts'
+// import { useGetMeQuery } from '@/services/auth/auth.ts'
 
 export type HeaderProps = {
   className?: string
   isLoggedIn: boolean
+  user: User | undefined
 } & ComponentPropsWithoutRef<'div'>
 
-export const Avatar = () => {
-  const { data } = useGetMeQuery()
-
-  return (
-    <div className={s.block}>
-      <div className={s.editName}>{data?.name}</div>
-
-      <div>
-        <img alt={'Avatar'} src={AvatarIcon} className={s.avatar} />
-      </div>
-    </div>
-  )
-}
-
 export const Header = (props: HeaderProps) => {
-  const { className, isLoggedIn, ...rest } = props
-
-  // const isLoggedIn = useState<boolean | undefined>(onLogin)
+  const { className, isLoggedIn, user, ...rest } = props
 
   return (
     <div className={`${s.header} ${className}`} {...rest}>
@@ -38,7 +25,7 @@ export const Header = (props: HeaderProps) => {
         <img alt={'Logo'} src={Logo} />
       </a>
       {isLoggedIn ? (
-        <DropDown isProfile={true}>
+        <DropDown isProfile={true} user={user}>
           <Avatar />
         </DropDown>
       ) : (

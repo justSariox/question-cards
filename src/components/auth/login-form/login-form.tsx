@@ -25,6 +25,10 @@ type FormValues = z.infer<typeof loginSchema>
 export const LoginForm = () => {
   const [login] = useLoginMutation()
 
+  const loginHandler = (data: any) => {
+    login({ email: data.email, password: data.password, rememberMe: data.rememberMe })
+  }
+
   const {
     handleSubmit,
     control,
@@ -36,25 +40,12 @@ export const LoginForm = () => {
     },
   })
 
-  // if (error) {
-  //   if (
-  //     'status' in error &&
-  //     typeof error.data === 'object' &&
-  //     error.data &&
-  //     'message' in error.data
-  //   )
-  //     setError('password', {
-  //       type: 'custom',
-  //       message: error.data.message as string,
-  //     })
-  // }
-
   return (
     <Card className={s.card}>
       <Typography variant={'large'} className={s.title}>
         Sign In
       </Typography>
-      <form onSubmit={handleSubmit(login)} className={s.loginForm}>
+      <form onSubmit={handleSubmit(loginHandler)} className={s.loginForm}>
         <DevTool control={control} />
         <ControlledTextField
           name={'email'}
@@ -68,6 +59,7 @@ export const LoginForm = () => {
           label={'Password'}
           type={'password'}
           error={errors.password?.message}
+          className={s.textfield}
         />
         <div className={s.checkboxAndLinkWrapper}>
           <div className={s.checkboxWrapper}>

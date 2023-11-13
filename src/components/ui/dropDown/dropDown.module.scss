@@ -179,10 +179,12 @@ button {
 .avatarIcon {
   width: 36px;
   height: 36px;
+  border-radius: 50px;
 }
 
 .profileInfo {
   display: flex;
+  align-items: center;
 }
 
 .profileName {

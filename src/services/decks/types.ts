@@ -74,6 +74,25 @@ export type CreateCardParams = {
   answerVideo?: string
 }
 
+export type CreateCardResponse = {
+  id: string
+  deckId: string
+  userId: string
+  question: string
+  answer: string
+  shots: number
+  questionImg?: string | null
+  answerImg?: string | null
+  answerVideo?: string | null
+  questionVideo?: string | null
+  comments?: string | null
+  type?: string | null
+  rating: number
+  moreId?: string | null
+  created: string
+  updated: string
+}
+
 export type EditDeckParamsType = {
   id: string
   cover?: string

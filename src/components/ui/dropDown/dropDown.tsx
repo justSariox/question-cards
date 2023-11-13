@@ -1,21 +1,40 @@
 import { ReactNode } from 'react'
 
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
+import { useNavigate } from 'react-router-dom'
 
 import s from './dropDown.module.scss'
 
-import avatar from '@/components/auth/assets/svg/avatar.svg'
+import AvatarIcon from '@/assets/avatar.png'
 import { LogOut, More, Person, Trash } from '@/components/ui/assets/svg'
 import Edit from '@/components/ui/assets/svg/edit.tsx'
 import PlayCircle from '@/components/ui/assets/svg/play-circle.tsx'
+import { User } from '@/services/auth/types.ts'
 
 export type DropDownProps = {
   className?: string
   onChange?: () => void
   isProfile?: boolean
   children?: ReactNode
+  user?: User
+  deckId: string | undefined
 }
-export const DropDown = ({ isProfile = false, onChange, children }: DropDownProps) => {
+export const DropDown = ({
+  isProfile = false,
+  onChange,
+  children,
+  user,
+  deckId,
+}: DropDownProps) => {
+  const navigate = useNavigate()
+
+  const goLearnCards = () => {
+    navigate(`/decks/${deckId}/learn`)
+  }
+  const goToMyProfile = () => {
+    navigate(`/my-profile`)
+  }
+
   return (
     <div className={s.mainContainer}>
       <DropdownMenu.Root>
@@ -28,15 +47,23 @@ export const DropDown = ({ isProfile = false, onChange, children }: DropDownProp
             {isProfile ? (
               <DropdownMenu.Label className={s.DropdownMenuLabel}>
                 <div className={s.profileInfo}>
-                  <img src={avatar} alt="avatar" className={s.avatarIcon} />
+                  <img
+                    alt={'Avatar'}
+                    src={user?.avatar ? user.avatar : AvatarIcon}
+                    className={s.avatarIcon}
+                  />
                   <div className={s.profileNameAndMailWrapper}>
-                    <div className={s.profileName}>Ivan</div>
-                    <div className={s.profileMail}>j&johnson@gmail.com</div>
+                    <div className={s.profileName}>{user?.name ? user.name : 'No name'}</div>
+                    <div className={s.profileMail}>{user?.email ? user.email : 'No email'}</div>
                   </div>
                 </div>
               </DropdownMenu.Label>
             ) : (
-              <DropdownMenu.Item className={s.DropdownMenuItem} onChange={onChange}>
+              <DropdownMenu.Item
+                className={s.DropdownMenuItem}
+                onChange={onChange}
+                onClick={goLearnCards}
+              >
                 <div className={s.optionSetting}>
                   <PlayCircle />
                   <span className={s.optionName}>Learn</span>
@@ -44,7 +71,11 @@ export const DropDown = ({ isProfile = false, onChange, children }: DropDownProp
               </DropdownMenu.Item>
             )}
             <DropdownMenu.Separator className={s.DropdownMenuSeparator} />
-            <DropdownMenu.Item className={s.DropdownMenuItem} onChange={onChange}>
+            <DropdownMenu.Item
+              className={s.DropdownMenuItem}
+              onChange={onChange}
+              onClick={goToMyProfile}
+            >
               <div>
                 {isProfile ? (
                   <div className={s.optionSetting}>

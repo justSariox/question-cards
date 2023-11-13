@@ -1,7 +1,9 @@
 import { baseApi } from '@/services/base-api.ts'
+import { CardsResponseType } from '@/services/cards/types.ts'
 import {
   CardsParams,
   CreateCardParams,
+  CreateCardResponse,
   CreateDeckParamsType,
   Deck,
   DecksParams,
@@ -52,14 +54,14 @@ export const decksApi = baseApi.injectEndpoints({
         }),
         providesTags: ['Decks'],
       }),
-      getDeckCards: builder.query<DecksResponseType, CardsParams>({
+      getDeckCards: builder.query<CardsResponseType, CardsParams>({
         query: ({ id, ...restProps }) => ({
           url: `v1/decks/${id}/cards`,
           params: restProps,
         }),
         providesTags: ['Decks'],
       }),
-      createCard: builder.mutation<any, CreateCardParams>({
+      createCard: builder.mutation<CreateCardResponse, CreateCardParams>({
         query: ({ id, ...restProps }) => ({
           url: `v1/decks/${id}/cards`,
           method: 'POST',

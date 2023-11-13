@@ -12,11 +12,10 @@
   margin-bottom: 27px;
 }
 
-.loginForm {
+.registerForm {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  align-items: center;
   justify-content: center;
 
   width: 325px;
@@ -50,4 +49,5 @@
 
 .buttonSignIn {
   margin-bottom: 29px;
+  text-decoration: underline;
 }

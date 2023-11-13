@@ -14,8 +14,10 @@
 
 .decksWrapper {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
+
   margin-bottom: 36px;
 }
 
@@ -65,10 +67,21 @@
   width: 300px;
 }
 
+.tableCellNameContainer {
+  display: flex;
+  align-items: center;
+}
+
 .tableCellAuthorName {
   width: 200px;
 }
 
 .inputWidth {
   width: 1000px;
+}
+
+.coverDeck {
+  width: 120px;
+  height: 50px;
+  margin-right: 10px;
 }

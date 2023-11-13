@@ -1,10 +1,10 @@
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { Edit, PlayCircle, Trash } from '@/components/ui/assets/svg'
 import { Button } from '@/components/ui/button'
 import s from '@/pages/decks/decks.module.css'
 import { ModalForDecks } from '@/pages/decks/modals/modal-for-decks/modal-for-decks.tsx'
-import { User } from '@/services/auth/auth.ts'
+import { User } from '@/services/auth/types.ts'
 import { Deck } from '@/services/decks/types.ts'
 
 type PropsType = {
@@ -19,7 +19,7 @@ export const Actions = ({ deck, handleSubmit, control, errors, user }: PropsType
   const navigate = useNavigate()
 
   const deckInfoHandler = (deckId: string) => {
-    navigate(`/decks/${deckId}/cards`)
+    navigate(`/decks/${deckId}`)
   }
 
   return (

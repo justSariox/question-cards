@@ -4,13 +4,14 @@ import { Grade } from '@/components/ui/grade/grade.tsx'
 import { Table } from '@/components/ui/table'
 import s from '@/pages/decks/deck/deck.module.css'
 import { ModalForCards } from '@/pages/decks/modals/modal-for-cards/modal-for-cards.tsx'
-import { User } from '@/services/auth/auth.ts'
-import { CardType, Deck } from '@/services/decks/types.ts'
+import { User } from '@/services/auth/types.ts'
+import { Card } from '@/services/cards/types.ts'
+import { Deck } from '@/services/decks/types.ts'
 
 type PropsType = {
-  card: CardType
+  card: Card
   user: User | undefined
-  deck: Deck
+  deck: Deck | undefined
   handleSubmit: any
   errors: any
   control: any
@@ -20,7 +21,21 @@ export const TableRowCard = ({ card, user, deck, handleSubmit, errors, control }
   return (
     <Table.TableRow key={card.id}>
       <Table.TableCell as={'td'} className={s.tableCellQuestion}>
-        {card.question}
+        <div className={s.questionContainer}>
+          {card.questionImg && (
+            <div className={s.questionVideo}>
+              <img src={card.questionImg} alt="image question" className={s.questionImage} />
+            </div>
+          )}
+
+          {card.questionVideo && (
+            <div className={s.questionVideo}>
+              <video src={card.questionVideo} />
+            </div>
+          )}
+
+          {card.question}
+        </div>
       </Table.TableCell>
       <Table.TableCell as={'td'} className={s.tableCellAnswer}>
         {card.answer}
@@ -49,7 +64,7 @@ export const TableRowCard = ({ card, user, deck, handleSubmit, errors, control }
             variant={'delete'}
             card={card}
           >
-            <Button disabled={false} variant={'link'} onClick={() => {}} className={s.trashButton}>
+            <Button disabled={false} variant={'link'} className={s.trashButton}>
               <Trash />
             </Button>
           </ModalForCards>

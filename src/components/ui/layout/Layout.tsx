@@ -8,7 +8,7 @@ export const Layout = () => {
 
   return (
     <div>
-      <Header isLoggedIn={!!data} />
+      <Header isLoggedIn={!!data} user={data} />
       <Outlet />
     </div>
   )

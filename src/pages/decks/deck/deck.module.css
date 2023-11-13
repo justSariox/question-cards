@@ -47,11 +47,18 @@
   margin-bottom: 24px;
 }
 
+.nameAndImage {
+  display: flex;
+  flex-direction: column;
+}
+
 .typographyAndDropdown {
   display: flex;
 }
 
 .titleDeck {
+  display: flex;
+  flex-direction: column;
   padding: 0 10px 2px 0;
 }
 
@@ -88,6 +95,23 @@
   word-break: break-all;
 }
 
+.questionContainer {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  text-align: left;
+}
+
+.questionImage {
+  width: 120px;
+  height: 50px;
+}
+
+.questionVideo {
+  width: 120px;
+  height: 50px;
+}
+
 .tableCellDate,
 .tableCellGrade {
   width: 200px;
@@ -95,4 +119,9 @@
 
 .inputWidth {
   width: 96%;
+}
+
+.coverDeck {
+  width: 170px;
+  height: 110px;
 }

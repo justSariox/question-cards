@@ -1,7 +1,5 @@
 import { FC, ReactNode } from 'react'
 
-// import axios from 'axios'
-
 import s from './pagination.module.scss'
 
 import { MainPaginationButtons } from '@/components/ui/pagination/mainPaginationButtons.tsx'
@@ -44,29 +42,6 @@ export const Pagination: FC<PaginationProps> = ({
     onChange,
     siblings,
   })
-
-  // const [cards, setCards] = useState([])
-  // const [loading, setLoading] = useState(false)
-  // const [cardsPerPage, setCardsPerPage] = useState(10)
-
-  // const indexOfLastCard = page * cardsPerPage
-  // const indexOfFirstCard = indexOfLastCard - cardsPerPage
-  // const currentCards = cards.slice(indexOfFirstCard, indexOfLastCard)
-
-  // useEffect(() => {
-  //   const fetchPosts = async () => {
-  //     const res = await axios.get('https://jsonplaceholder.typicode.com/posts')
-  //
-  //     setCards(res.data)
-  //     setLoading(false)
-  //   }
-  //
-  //   fetchPosts()
-  // }, [])
-
-  // if (loading) {
-  //   return <h2>Loading...</h2>
-  // }
 
   const onPerPageChangeHandler = (value: string) => {
     onPerPageChange(+value)

@@ -5,7 +5,7 @@ import s from './modal.module.scss'
 import { Button } from '@/components/ui/button'
 
 type PropsType = {
-  className?: ReactNode
+  className?: string
   children?: ReactNode
   onClose: () => void
   ConfirmButtonTitle: string
