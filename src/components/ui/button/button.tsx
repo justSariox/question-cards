@@ -6,7 +6,6 @@ export type ButtonProps<T extends ElementType = 'button'> = {
   as?: T
   children?: ReactNode
   variant?: 'primary' | 'secondary' | 'tertiary' | 'link'
-  fullWidth?: boolean
   className?: string
   disabled?: boolean
   logout?: boolean
@@ -18,7 +17,6 @@ export const Button = <T extends ElementType = 'button'>(
 ) => {
   const {
     variant = 'primary',
-    fullWidth,
     className,
     as: Component = 'button',
     logout,
@@ -29,7 +27,7 @@ export const Button = <T extends ElementType = 'button'>(
 
   return (
     <Component
-      className={`${s[variant]} ${fullWidth ? s.fullWidth : ''} 
+      className={`${s[variant]}
       ${logout ? s.logout : ''} ${remove ? s.remove : ''} ${className}`}
       {...rest}
     >

@@ -1,7 +1,7 @@
-import s from '../decks.module.css'
+import s from '../../decks.module.css'
 
 import { Table } from '@/components/ui/table'
-import { Actions } from '@/pages/decks/actions/actions.tsx'
+import { Actions } from '@/pages/decks/table-for-decks/table-row-deck/actions/actions.tsx'
 import { User } from '@/services/auth/types.ts'
 import { Deck } from '@/services/decks/types.ts'
 

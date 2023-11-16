@@ -7,13 +7,14 @@ import {
 } from 'react-router-dom'
 
 import { EditProfile } from '@/components/auth/editProfile'
+import { ForgotPasswordForm } from '@/components/auth/forgot-password'
 import { Layout } from '@/components/ui/layout/Layout.tsx'
+import { SignInPage } from '@/pages/auth/sign-in.tsx'
+import { SignUpPage } from '@/pages/auth/sign-up.tsx'
 import { CardPage } from '@/pages/decks/deck/card/card.tsx'
 import { Deck } from '@/pages/decks/deck/deck.tsx'
 import { Decks } from '@/pages/decks/decks.tsx'
 import { NotFound } from '@/pages/not-found/not-found.tsx'
-import { SignInPage } from '@/pages/sign-in.tsx'
-import { SignUpPage } from '@/pages/sign-up.tsx'
 import { useGetMeQuery } from '@/services/auth/auth.ts'
 
 const publicRoutes: RouteObject[] = [
@@ -24,6 +25,10 @@ const publicRoutes: RouteObject[] = [
   {
     path: '/sign-up',
     element: <SignUpPage />,
+  },
+  {
+    path: '/recover-password',
+    element: <ForgotPasswordForm />,
   },
   {
     path: '*',

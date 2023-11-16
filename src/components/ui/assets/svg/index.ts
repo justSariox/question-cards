@@ -8,4 +8,4 @@ export { default as ArrowRight } from './arrow-right.tsx'
 export { default as More } from './more.tsx'
 export { default as LogOut } from './logout.tsx'
 export { default as Person } from './person.tsx'
-
+export { default as ImageIcon } from './image-icon.tsx'

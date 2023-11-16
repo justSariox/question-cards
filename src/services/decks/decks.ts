@@ -65,7 +65,7 @@ export const decksApi = baseApi.injectEndpoints({
         query: ({ id, ...restProps }) => ({
           url: `v1/decks/${id}/cards`,
           method: 'POST',
-          body: { question: restProps.question, answer: restProps.answer },
+          body: restProps,
         }),
         invalidatesTags: ['Decks'],
       }),

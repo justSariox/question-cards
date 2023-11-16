@@ -48,6 +48,7 @@ export const LoginForm = () => {
       <form onSubmit={handleSubmit(loginHandler)} className={s.loginForm}>
         <DevTool control={control} />
         <ControlledTextField
+          type={'email'}
           name={'email'}
           control={control}
           label={'Email'}

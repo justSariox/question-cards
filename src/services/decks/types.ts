@@ -66,8 +66,8 @@ export type CardsParams = {
 
 export type CreateCardParams = {
   id: string
-  question: string
-  answer: string
+  question?: string
+  answer?: string
   questionImg?: string
   answerImg?: string
   questionVideo?: string

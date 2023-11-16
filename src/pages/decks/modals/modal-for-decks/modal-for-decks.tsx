@@ -53,8 +53,7 @@ export const ModalForDecks = ({
 
   const editDeckHandler = (arg: { name: string; isPrivate: boolean }) => {
     if (deck)
-      editDeck({ ...arg, id: deck.id }).then(res => {
-        console.log(res)
+      editDeck({ ...arg, id: deck.id }).then(() => {
         setOpen(false)
       })
   }

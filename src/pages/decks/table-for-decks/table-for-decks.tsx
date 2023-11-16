@@ -1,6 +1,6 @@
 import { Column, Table } from '@/components/ui/table'
 import { Sort } from '@/components/ui/table/table.stories.tsx'
-import { TableRowDeck } from '@/pages/decks/table-row-deck/table-row-deck.tsx'
+import { TableRowDeck } from '@/pages/decks/table-for-decks/table-row-deck/table-row-deck.tsx'
 import { User } from '@/services/auth/types.ts'
 import { Deck, DecksResponseType } from '@/services/decks/types.ts'
 
