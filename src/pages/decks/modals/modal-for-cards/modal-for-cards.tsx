@@ -2,10 +2,12 @@ import { ReactNode, useState } from 'react'
 
 import s from './modal-for-cards.module.css'
 
-import { ControlledTextField } from '@/components/ui/controlled/controlled-input/controlled-input.tsx'
 import { ControlledSelect } from '@/components/ui/controlled/controlled-select/controlled-select.tsx'
 import { Modal } from '@/components/ui/modal'
 import { ModalButtons } from '@/components/ui/modal/modal-buttons.tsx'
+import { DeleteContent } from '@/pages/decks/modals/modal-for-cards/content-for-modals/delete-content.tsx'
+import { ImageContent } from '@/pages/decks/modals/modal-for-cards/content-for-modals/image-content.tsx'
+import { TextContent } from '@/pages/decks/modals/modal-for-cards/content-for-modals/text-content.tsx'
 import { useEditCardMutation, useRemoveCardMutation } from '@/services/cards/cards.ts'
 import { Card, EditCardRequestType } from '@/services/cards/types.ts'
 import { useCreateCardMutation } from '@/services/decks/decks.ts'
@@ -59,7 +61,7 @@ export const ModalForCards = ({
       })
   }
 
-  const variantsHandler = (arg: { id: string; question: string; answer: string }) => {
+  const variantsHandler = (arg: CreateCardParams | EditCardRequestType) => {
     if (variant === 'add') createCardHandler(arg)
     if (variant === 'edit') editCardHandler(arg)
   }
@@ -81,7 +83,11 @@ export const ModalForCards = ({
   return (
     <div>
       <Modal open={open} onClose={onCancelButtonClick} title={variantsTitle}>
-        <form onSubmit={handleSubmit(variantsHandler)}>
+        <form
+          method={'post'}
+          encType={'multipart/form-data'}
+          onSubmit={handleSubmit(variantsHandler)}
+        >
           <ModalButtons
             ConfirmButtonTitle={variantsButtonTitle}
             onClose={onCancelButtonClick}
@@ -90,15 +96,7 @@ export const ModalForCards = ({
           >
             <div className={s.infoContainer}>
               {variant === 'delete' ? (
-                <div className={s.descriptionForDeleteDeck}>
-                  <div className={s.description}>
-                    Do you really want to remove{' '}
-                    <strong>
-                      <i>{card && card.question}</i>
-                    </strong>
-                    ? Card will be permanently deleted.
-                  </div>
-                </div>
+                <DeleteContent card={card} />
               ) : (
                 <div className={s.fieldsForCard}>
                   <ControlledSelect
@@ -108,22 +106,12 @@ export const ModalForCards = ({
                     defaultValue={questionFormats[0].value}
                     label={'Choose a question format'}
                   />
-                  <ControlledTextField
-                    name={'question'}
-                    control={control}
-                    error={errors.question}
-                    label={'Question'}
-                    className={s.inputWidth}
-                    defaultValue={card?.question}
-                  />
-                  <ControlledTextField
-                    name={'answer'}
-                    control={control}
-                    error={errors.answer}
-                    label={'Answer'}
-                    className={s.inputWidth}
-                    defaultValue={card?.answer}
-                  />
+                  {/*нужно сделать отображение в зависимости от селекта */}
+                  {!open ? (
+                    <TextContent control={control} card={card} errors={errors} />
+                  ) : (
+                    <ImageContent control={control} card={card} />
+                  )}
                 </div>
               )}
             </div>

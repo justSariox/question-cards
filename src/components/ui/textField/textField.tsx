@@ -9,7 +9,7 @@ export type TextFieldProps = {
   error?: any
   disabled?: boolean
   label?: string
-  type?: 'text' | 'password' | 'search'
+  type?: 'text' | 'password' | 'search' | 'email'
   className?: string
   value?: string
   defaultValue?: string

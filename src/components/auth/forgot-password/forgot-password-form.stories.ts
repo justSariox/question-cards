@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { ForgotPasswordForm } from './forgot-password-form.tsx'
 
 const meta = {
-  title: 'Auth/forgotPasswordForm',
+  title: 'Auth/ForgotPasswordForm',
   component: ForgotPasswordForm,
   tags: ['autodocs'],
 } satisfies Meta<typeof ForgotPasswordForm>
