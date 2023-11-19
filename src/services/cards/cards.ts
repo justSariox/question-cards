@@ -9,7 +9,7 @@ export const cardsApi = baseApi.injectEndpoints({
         query: ({ id }) => ({
           url: `v1/cards/${id}`,
         }),
-        providesTags: ['Cards'],
+        providesTags: ['Decks'],
       }),
       editCard: builder.mutation<Card, EditCardRequestType>({
         query: ({ id, ...restProps }) => ({
@@ -17,14 +17,14 @@ export const cardsApi = baseApi.injectEndpoints({
           method: 'PATCH',
           body: restProps,
         }),
-        invalidatesTags: ['Cards'],
+        invalidatesTags: ['Decks'],
       }),
       removeCard: builder.mutation<{}, { id: string }>({
         query: ({ id }) => ({
           url: `v1/cards/${id}`,
           method: 'DELETE',
         }),
-        invalidatesTags: ['Cards'],
+        invalidatesTags: ['Decks'],
       }),
     }
   },

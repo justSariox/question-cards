@@ -17,7 +17,7 @@ export type DropDownProps = {
   isProfile?: boolean
   children?: ReactNode
   user?: User
-  deckId: string | undefined
+  deckId?: string | undefined
 }
 export const DropDown = ({
   isProfile = false,

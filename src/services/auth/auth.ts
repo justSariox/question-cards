@@ -19,6 +19,7 @@ const authApi = baseApi.injectEndpoints({
         query: () => ({
           url: `v1/auth/me`,
         }),
+        providesTags: ['Decks'],
       }),
       updateProfile: builder.mutation<EditProfileResponse, EditProfileParams>({
         query: params => ({
@@ -26,6 +27,7 @@ const authApi = baseApi.injectEndpoints({
           method: 'PATCH',
           body: params,
         }),
+        invalidatesTags: ['Decks'],
       }),
       login: builder.mutation<{ accessToken: string }, Login>({
         query: params => ({

@@ -21,7 +21,7 @@ export const Header = (props: HeaderProps) => {
 
   return (
     <div className={`${s.header} ${className}`} {...rest}>
-      <a href={'/'}>
+      <a href={'/'} className={s.linkLogo}>
         <img alt={'Logo'} src={Logo} />
       </a>
       {isLoggedIn ? (

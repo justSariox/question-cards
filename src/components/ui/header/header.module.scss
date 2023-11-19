@@ -37,3 +37,9 @@ img {
   line-height: var(--line-height-m);
   border-bottom: 1px dashed var(--color-light-100);
 }
+
+.linkLogo {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}

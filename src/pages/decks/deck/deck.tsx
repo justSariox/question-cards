@@ -77,8 +77,6 @@ export const Deck = () => {
 
   const goBack = () => navigate(-1)
 
-  console.log(deck)
-
   return (
     <div className={s.mainContainer}>
       <div className={s.backToDecksList}>
