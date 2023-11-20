@@ -20,11 +20,29 @@ type Story = StoryObj<typeof meta>
 export const HeaderBtn: Story = {
   args: {
     isLoggedIn: false,
+    user: {
+      name: 'John',
+      avatar: '',
+      updated: '',
+      email: '',
+      isEmailVerified: true,
+      created: '',
+      id: '',
+    },
   },
 }
 
 export const HeaderAvatar: Story = {
   args: {
     isLoggedIn: true,
+    user: {
+      name: 'John',
+      avatar: '',
+      updated: '',
+      email: '',
+      isEmailVerified: true,
+      created: '',
+      id: '',
+    },
   },
 }

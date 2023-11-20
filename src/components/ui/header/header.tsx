@@ -25,7 +25,7 @@ export const Header = (props: HeaderProps) => {
         <img alt={'Logo'} src={Logo} />
       </a>
       {isLoggedIn ? (
-        <DropDown isProfile={true} user={user}>
+        <DropDown isProfile={true} user={user} deckId={''}>
           <Avatar />
         </DropDown>
       ) : (

@@ -8,10 +8,10 @@ const meta = {
   tags: ['autodocs'],
 
   argTypes: {
-    isDisabled: {
-      options: [true, false],
-      control: { type: 'radio' },
-    },
+    // isDisabled: {
+    //   options: [true, false],
+    //   control: { type: 'radio' },
+    // },
   },
 } satisfies Meta<typeof Tabs>
 
@@ -20,6 +20,8 @@ type Story = StoryObj<typeof meta>
 
 export const Primary: Story = {
   args: {
-    isDisabled: false,
+    children: [],
+    value: '',
+    tabs: [],
   },
 }

@@ -1,8 +1,8 @@
 import { useController } from 'react-hook-form'
 
-import s from './inputFile.module.css'
+// import s from './inputFile.module.scss'
 
-import { ImageIcon } from '@/components/ui/assets/svg'
+// import { ImageIcon } from '@/components/ui/assets/svg'
 
 type PropsType = {
   inputName: string
@@ -20,7 +20,7 @@ export const InputFile = ({ inputName, control, defaultValue }: PropsType) => {
   })
 
   return (
-    <div className={s.fileUpload}>
+    <div className={`s.fileUpload`}>
       <label>
         <input
           type={'file'}
@@ -30,8 +30,8 @@ export const InputFile = ({ inputName, control, defaultValue }: PropsType) => {
           onChange={onChange}
           value={value}
         />
-        <div className={s.iconUpload}>
-          <ImageIcon />
+        <div className={`s.iconUpload`}>
+          {/*<ImageIcon /> */}
           <span>Change Cover</span>
         </div>
       </label>

@@ -29,5 +29,6 @@ export const RadioDisabled: Story = {
   args: {
     disabled: false,
     options: options,
+    value: '',
   },
 }

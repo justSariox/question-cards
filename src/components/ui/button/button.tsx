@@ -10,6 +10,7 @@ export type ButtonProps<T extends ElementType = 'button'> = {
   disabled?: boolean
   logout?: boolean
   remove?: boolean
+  fullWidth?: boolean
 } & ComponentPropsWithoutRef<T>
 
 export const Button = <T extends ElementType = 'button'>(
