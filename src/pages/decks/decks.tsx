@@ -48,7 +48,6 @@ export const Decks = () => {
     data: decks,
     isLoading,
     isError,
-    refetch,
   } = useGetDecksQuery({
     name: search,
     orderBy: sortString,
@@ -58,8 +57,6 @@ export const Decks = () => {
     itemsPerPage: perPage,
     currentPage: page,
   })
-
-  refetch()
 
   if (isLoading || getMeIsLoading) return <Loader />
   if (isError || getMeIsError) return <div>Error</div>
